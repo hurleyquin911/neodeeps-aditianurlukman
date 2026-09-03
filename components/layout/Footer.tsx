@@ -3,64 +3,49 @@
 import { useRef } from "react";
 import { site } from "@/lib/data";
 import { gsap, useGSAP } from "@/lib/gsap";
+import { finePointer, reducedMotion } from "@/lib/motion";
 
 export function Footer() {
   const rootRef = useRef<HTMLElement>(null);
 
   useGSAP(
     () => {
-      gsap.from(".footer-word", {
-        yPercent: 30,
-        autoAlpha: 0.4,
-        ease: "none",
-        scrollTrigger: {
-          trigger: rootRef.current,
-          start: "top 90%",
-          end: "bottom bottom",
-          scrub: true,
-        },
+      if (reducedMotion() || !finePointer()) return;
+      gsap.utils.toArray<HTMLAnchorElement>(".footer-link").forEach((el) => {
+        const enter = () => gsap.to(el, { y: -3, color: "#d4ff3f", duration: 0.25 });
+        const leave = () => gsap.to(el, { y: 0, color: "#f6f4ef", duration: 0.3 });
+        el.addEventListener("mouseenter", enter);
+        el.addEventListener("mouseleave", leave);
       });
     },
-    { scope: rootRef, dependencies: [] },
+    { scope: rootRef },
   );
 
   return (
-    <footer
-      ref={rootRef}
-      className="overflow-hidden border-t border-line px-5 pt-16 pb-8 md:px-10"
-    >
-      <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
+    <footer ref={rootRef} className="border-t border-line">
+      <div className="mx-auto flex max-w-6xl flex-col gap-6 px-5 py-10 md:flex-row md:items-center md:justify-between md:px-8">
         <div>
-          <p className="text-[11px] tracking-[0.24em] text-stone uppercase">
-            {site.name}
-          </p>
-          <p className="mt-2 max-w-sm text-sm text-stone">
-            {site.role} · {site.location}
+          <p className="font-display text-lg font-bold">{site.brand}</p>
+          <p className="mt-1 text-sm text-stone">
+            {site.name} · {site.location}
           </p>
         </div>
-        <div className="flex flex-wrap gap-6">
+        <div className="flex flex-wrap gap-5">
           {site.socials.map((social) => (
             <a
               key={social.label}
               href={social.href}
               target={social.href.startsWith("http") ? "_blank" : undefined}
               rel="noreferrer"
-              data-cursor="Open"
-              className="text-[12px] tracking-[0.18em] text-cream uppercase transition-colors hover:text-acid"
+              className="footer-link inline-block text-sm text-cream underline-offset-4 hover:underline"
             >
               {social.label}
             </a>
           ))}
         </div>
-      </div>
-
-      <p className="footer-word font-display mt-16 text-[clamp(3.4rem,16vw,14rem)] leading-[0.8] font-extrabold tracking-[-0.07em]">
-        {site.brand}
-      </p>
-
-      <div className="mt-10 flex flex-col gap-3 text-[11px] tracking-[0.16em] text-stone uppercase sm:flex-row sm:justify-between">
-        <p>© {new Date().getFullYear()} {site.brand}</p>
-        <p>{site.tagline}</p>
+        <p className="text-sm text-stone">
+          © {new Date().getFullYear()} {site.brand}
+        </p>
       </div>
     </footer>
   );

@@ -3,7 +3,6 @@
 import { useEffect } from "react";
 import Lenis from "lenis";
 import { registerGsap, gsap, ScrollTrigger } from "@/lib/gsap";
-import { useIntro } from "@/lib/intro-context";
 
 declare global {
   interface Window {
@@ -12,8 +11,6 @@ declare global {
 }
 
 export function SmoothScroll() {
-  const { ready } = useIntro();
-
   useEffect(() => {
     registerGsap();
 
@@ -22,8 +19,7 @@ export function SmoothScroll() {
 
     const lenis = new Lenis({
       autoRaf: false,
-      duration: 1.15,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      duration: 0.85,
     });
 
     window.__lenis = lenis;
@@ -35,18 +31,16 @@ export function SmoothScroll() {
     gsap.ticker.add(ticker);
     gsap.ticker.lagSmoothing(0);
 
+    const onLoad = () => ScrollTrigger.refresh();
+    window.addEventListener("load", onLoad);
+
     return () => {
+      window.removeEventListener("load", onLoad);
       window.__lenis = undefined;
       gsap.ticker.remove(ticker);
       lenis.destroy();
     };
   }, []);
-
-  useEffect(() => {
-    if (!ready) return;
-    const id = window.setTimeout(() => ScrollTrigger.refresh(), 80);
-    return () => window.clearTimeout(id);
-  }, [ready]);
 
   return null;
 }

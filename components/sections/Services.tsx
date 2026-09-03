@@ -1,67 +1,100 @@
 "use client";
 
 import { useRef } from "react";
+import Link from "next/link";
 import { services } from "@/lib/data";
-import { gsap, useGSAP } from "@/lib/gsap";
+import { useLiftHover, useReveal } from "@/lib/motion";
+import { Magnetic } from "@/components/ui/Magnetic";
+import { ServiceCycle } from "@/components/sections/ServiceCycle";
 
 export function Services() {
   const rootRef = useRef<HTMLElement>(null);
-
-  useGSAP(
-    () => {
-      gsap.from(".service-card", {
-        y: 40,
-        autoAlpha: 0,
-        duration: 1,
-        stagger: 0.12,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: rootRef.current,
-          start: "top 75%",
-          once: true,
-        },
-      });
-    },
-    { scope: rootRef, dependencies: [] },
-  );
+  useReveal(rootRef);
+  useLiftHover(rootRef);
 
   return (
-    <section
+    <article
       ref={rootRef}
       id="services"
-      className="px-5 py-24 md:px-10 md:py-32"
+      className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24"
     >
-      <div className="mb-14 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-        <div>
-          <p className="text-[11px] tracking-[0.28em] text-stone uppercase">
-            Services
-          </p>
-          <h2 className="font-display mt-3 text-4xl font-extrabold tracking-tight md:text-6xl">
-            Yang saya kerjakan
-          </h2>
-        </div>
-        <p className="max-w-sm text-sm leading-relaxed text-stone">
-          Satu orang, satu alur. Desain dan development tidak dipisah supaya
-          hasilnya utuh.
-        </p>
-      </div>
+      <p className="reveal text-sm font-medium text-acid">Layanan</p>
+      <h1 className="reveal font-display mt-3 text-[clamp(1.8rem,4vw,3rem)] font-extrabold tracking-[-0.03em]">
+        Yang saya kerjakan
+      </h1>
+      <p className="reveal mt-4 max-w-2xl text-base leading-relaxed text-stone md:text-lg">
+        Fullstack dari desain sampai backend, aplikasi Android, dan perawatan
+        setelah rilis. Paket di bawah ini bisa berdiri sendiri, atau digabung
+        jika proyeknya butuh dari konsep sampai pembaruan berkelanjutan.
+      </p>
+      <p className="reveal mt-4 max-w-2xl text-sm leading-relaxed text-stone">
+        Yang tidak saya tawarkan: template cepat tanpa alur, aplikasi yang
+        ditinggal setelah publish, atau janji yang belum ada fondasinya.
+      </p>
 
-      <div className="divide-y divide-line border-y border-line">
+      <ServiceCycle />
+
+      <div className="mt-12 space-y-6">
         {services.map((service) => (
           <article
             key={service.id}
-            className="service-card group grid gap-4 py-10 md:grid-cols-[5rem_1fr_1.2fr] md:items-start md:gap-10"
+            className="js-lift reveal rounded-3xl border border-line bg-ink p-6 md:p-8"
           >
             <p className="font-mono text-sm text-acid">{service.id}</p>
-            <h3 className="font-display text-3xl font-bold tracking-tight transition-colors group-hover:text-acid md:text-4xl">
+            <h2 className="font-display mt-2 text-2xl font-bold">
               {service.title}
-            </h3>
-            <p className="max-w-xl text-sm leading-relaxed text-stone md:text-base">
+            </h2>
+            <p className="mt-3 max-w-3xl text-base leading-relaxed text-stone">
               {service.body}
             </p>
+            <div className="mt-8 grid gap-8 md:grid-cols-2">
+              <div>
+                <h3 className="text-sm font-medium text-cream">Yang diserahkan</h3>
+                <ul className="mt-3 space-y-2 text-sm leading-relaxed text-stone">
+                  {service.deliverables.map((item) => (
+                    <li key={item} className="flex gap-3">
+                      <span className="mt-2 size-1.5 shrink-0 rounded-full bg-acid" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-sm font-medium text-cream">Urutan kerja</h3>
+                <ol className="mt-3 space-y-2 text-sm leading-relaxed text-stone">
+                  {service.process.map((item, index) => (
+                    <li key={item} className="flex gap-3">
+                      <span className="font-mono text-acid">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            </div>
           </article>
         ))}
       </div>
-    </section>
+
+      <div className="reveal mt-12 rounded-3xl border border-line p-6 md:p-8">
+        <h2 className="font-display text-xl font-bold">Cocok untuk siapa</h2>
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-stone md:text-base">
+          Tim atau founder yang butuh seseorang memegang produk digital sampai
+          ke implementasi, rilis, dan perawatannya. Jika yang dicari hanya slide
+          tanpa kode, atau rilis sekali lalu ditinggal, biasanya bukan saya.
+        </p>
+        <div className="mt-6">
+          <Magnetic>
+            <Link
+              href="/kontak"
+              className="inline-flex rounded-full bg-acid px-6 py-3 text-sm font-semibold text-void"
+            >
+              Ceritakan proyeknya
+            </Link>
+          </Magnetic>
+        </div>
+      </div>
+    </article>
   );
 }

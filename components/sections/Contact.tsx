@@ -1,49 +1,14 @@
 "use client";
 
 import { FormEvent, useRef, useState } from "react";
-import { site } from "@/lib/data";
-import { gsap, useGSAP } from "@/lib/gsap";
-
-const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-
-function scrambleTo(el: HTMLElement, finalText: string) {
-  let frame = 0;
-  const total = finalText.length;
-  const id = window.setInterval(() => {
-    el.textContent = finalText
-      .split("")
-      .map((char, index) => {
-        if (char === " " || index < frame) return char;
-        return chars[Math.floor(Math.random() * chars.length)];
-      })
-      .join("");
-    frame += 1;
-    if (frame > total) window.clearInterval(id);
-  }, 28);
-}
+import { briefPoints, contactFaq, contactTopics, site } from "@/lib/data";
+import { useReveal } from "@/lib/motion";
+import { Magnetic } from "@/components/ui/Magnetic";
 
 export function Contact() {
   const rootRef = useRef<HTMLElement>(null);
-  const titleRef = useRef<HTMLAnchorElement>(null);
   const [status, setStatus] = useState("");
-
-  useGSAP(
-    () => {
-      gsap.from(".contact-reveal", {
-        y: 40,
-        autoAlpha: 0,
-        duration: 1,
-        stagger: 0.1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: rootRef.current,
-          start: "top 75%",
-          once: true,
-        },
-      });
-    },
-    { scope: rootRef, dependencies: [] },
-  );
+  useReveal(rootRef);
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -62,90 +27,123 @@ export function Contact() {
     if (!opened) {
       window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     }
-    setStatus("Gmail terbuka. Kalau tidak, kirim manual ke email di atas.");
+    setStatus("Gmail terbuka. Jika tidak, kirim manual ke email di atas.");
     event.currentTarget.reset();
   };
 
   return (
-    <section
+    <article
       ref={rootRef}
       id="contact"
-      className="px-5 py-24 md:px-10 md:py-32"
+      className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24"
     >
-      <p className="contact-reveal text-[11px] tracking-[0.28em] text-stone uppercase">
-        Contact
+      <p className="reveal text-sm font-medium text-acid">Kontak</p>
+      <h1 className="reveal font-display mt-3 text-[clamp(1.8rem,4vw,3rem)] font-extrabold tracking-[-0.03em]">
+        Mulai diskusikan proyek digital Anda
+      </h1>
+      <p className="reveal mt-3 text-sm text-stone">{site.availability}</p>
+      <Magnetic>
+        <a
+          href={`mailto:${site.email}`}
+          className="reveal mt-4 inline-block text-lg text-acid underline-offset-4 transition-transform hover:underline md:text-xl"
+        >
+          {site.email}
+        </a>
+      </Magnetic>
+      <p className="reveal mt-4 max-w-2xl text-base leading-relaxed text-stone md:text-lg">
+        Ceritakan website, dashboard, aplikasi, atau desain yang ingin dibuat.
+        Saya membalas dengan jelas: apakah cocok, apa yang masih kabur, dan usulan
+        langkah pertama - bukan template otomatis.
       </p>
-      <h2 className="contact-reveal font-display mt-4 text-[clamp(3rem,10vw,8rem)] leading-[0.85] font-extrabold tracking-[-0.06em]">
-        Punya ide?
-      </h2>
 
-      <a
-        ref={titleRef}
-        href={`mailto:${site.email}`}
-        data-cursor="Email"
-        className="contact-reveal mt-6 inline-block text-2xl text-acid md:text-4xl"
-        onMouseEnter={() => {
-          if (titleRef.current) scrambleTo(titleRef.current, site.email);
-        }}
-      >
-        {site.email}
-      </a>
-
-      <div className="mt-16 grid gap-16 lg:grid-cols-[0.9fr_1.1fr]">
-        <p className="contact-reveal max-w-md text-base leading-relaxed text-stone md:text-lg">
-          Ceritakan proyekmu — website, dashboard, aplikasi, atau eksperimen
-          interaksi. Saya baca setiap pesan dan merespons dengan jelas.
-        </p>
-
-        <form className="contact-reveal space-y-8" onSubmit={onSubmit}>
+      <div className="mt-12 grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)]">
+        <form className="reveal space-y-6" onSubmit={onSubmit}>
           <label className="block">
-            <span className="text-[11px] tracking-[0.2em] text-stone uppercase">
-              Nama
-            </span>
+            <span className="text-sm text-stone">Nama</span>
             <input
               required
               name="name"
               autoComplete="name"
-              className="mt-2 w-full border-b border-line bg-transparent py-3 text-lg outline-none transition-colors focus:border-acid"
+              className="mt-2 w-full rounded-xl border border-line bg-ink px-4 py-3 text-base outline-none transition-colors focus:border-acid"
             />
           </label>
           <label className="block">
-            <span className="text-[11px] tracking-[0.2em] text-stone uppercase">
-              Email
-            </span>
+            <span className="text-sm text-stone">Email</span>
             <input
               required
               type="email"
               name="email"
               autoComplete="email"
-              className="mt-2 w-full border-b border-line bg-transparent py-3 text-lg outline-none transition-colors focus:border-acid"
+              className="mt-2 w-full rounded-xl border border-line bg-ink px-4 py-3 text-base outline-none transition-colors focus:border-acid"
             />
           </label>
           <label className="block">
-            <span className="text-[11px] tracking-[0.2em] text-stone uppercase">
-              Cerita proyek
-            </span>
+            <span className="text-sm text-stone">Cerita proyek</span>
             <textarea
               required
               name="message"
-              rows={4}
-              className="mt-2 w-full resize-none border-b border-line bg-transparent py-3 text-lg outline-none transition-colors focus:border-acid"
+              rows={7}
+              placeholder="Siapa penggunanya, apa yang sudah ada, dan kapan dibutuhkan."
+              className="mt-2 w-full resize-y rounded-xl border border-line bg-ink px-4 py-3 text-base outline-none transition-colors focus:border-acid"
             />
           </label>
-          <button
-            type="submit"
-            data-cursor="Send"
-            className="rounded-full bg-cream px-8 py-4 text-[12px] font-semibold tracking-[0.2em] text-void uppercase transition-colors hover:bg-acid"
-          >
-            Kirim pesan
-          </button>
+          <Magnetic>
+            <button
+              type="submit"
+              className="rounded-full bg-acid px-6 py-3 text-sm font-semibold text-void"
+            >
+              Kirim pesan
+            </button>
+          </Magnetic>
           {status ? (
             <p className="text-sm text-stone" role="status">
               {status}
             </p>
           ) : null}
         </form>
+
+        <div className="space-y-8">
+          <section className="reveal rounded-2xl border border-line bg-ink p-6">
+            <h2 className="font-display text-lg font-bold">Topik yang biasa masuk</h2>
+            <ul className="mt-4 space-y-2 text-sm leading-relaxed text-stone">
+              {contactTopics.map((topic) => (
+                <li key={topic} className="flex gap-3">
+                  <span className="mt-2 size-1.5 shrink-0 rounded-full bg-acid" />
+                  <span>{topic}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+          <section className="reveal rounded-2xl border border-line p-6">
+            <h2 className="font-display text-lg font-bold">
+              Yang membantu di pesan pertama
+            </h2>
+            <ul className="mt-4 space-y-2 text-sm leading-relaxed text-stone">
+              {briefPoints.map((point) => (
+                <li key={point} className="flex gap-3">
+                  <span className="mt-2 size-1.5 shrink-0 rounded-full bg-acid" />
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        </div>
       </div>
-    </section>
+
+      <section className="mt-16">
+        <h2 className="reveal font-display text-2xl font-bold">Pertanyaan singkat</h2>
+        <div className="mt-8 grid gap-4 md:grid-cols-3">
+          {contactFaq.map((item) => (
+            <article
+              key={item.q}
+              className="reveal rounded-2xl border border-line p-5"
+            >
+              <h3 className="font-display text-lg font-bold">{item.q}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-stone">{item.a}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+    </article>
   );
 }

@@ -1,147 +1,107 @@
 "use client";
 
 import { useRef } from "react";
+import Link from "next/link";
 import { site } from "@/lib/data";
 import { gsap, useGSAP } from "@/lib/gsap";
-import { useIntro } from "@/lib/intro-context";
+import { reducedMotion } from "@/lib/motion";
 import { Magnetic } from "@/components/ui/Magnetic";
 
 export function Hero() {
   const rootRef = useRef<HTMLElement>(null);
-  const orbRef = useRef<HTMLDivElement>(null);
-  const { ready } = useIntro();
 
   useGSAP(
     () => {
-      const reduced = window.matchMedia(
-        "(prefers-reduced-motion: reduce)",
-      ).matches;
+      if (reducedMotion()) return;
 
-      if (reduced) {
-        gsap.set(".hero-line", { yPercent: 0 });
-        gsap.set(".hero-kicker, .hero-copy", { autoAlpha: 1, y: 0 });
-        return;
-      }
-
-      if (!ready) {
-        gsap.set(".hero-line", { yPercent: 110 });
-        gsap.set(".hero-kicker, .hero-copy", { autoAlpha: 0, y: 24 });
-        return;
-      }
-
-      gsap.fromTo(
-        ".hero-line",
-        { yPercent: 110 },
-        {
-          yPercent: 0,
-          duration: 1.25,
-          stagger: 0.08,
-          ease: "power4.out",
-        },
-      );
-      gsap.fromTo(
-        ".hero-kicker, .hero-copy",
-        { autoAlpha: 0, y: 24 },
-        {
-          autoAlpha: 1,
-          y: 0,
-          duration: 0.95,
-          stagger: 0.08,
-          delay: 0.2,
-          ease: "power3.out",
-        },
-      );
+      gsap.from(".hero-kicker", {
+        y: 12,
+        duration: 0.6,
+        ease: "power3.out",
+      });
+      gsap.from(".hero-word", {
+        yPercent: 70,
+        duration: 0.85,
+        stagger: 0.08,
+        ease: "power4.out",
+        delay: 0.08,
+      });
+      gsap.from(".hero-copy", {
+        y: 18,
+        duration: 0.7,
+        stagger: 0.08,
+        delay: 0.28,
+        ease: "power3.out",
+      });
+      gsap.from(".hero-node", {
+        scale: 0,
+        transformOrigin: "center",
+        duration: 0.5,
+        stagger: 0.08,
+        delay: 0.35,
+        ease: "back.out(1.7)",
+      });
     },
-    { scope: rootRef, dependencies: [ready], revertOnUpdate: false },
-  );
-
-  useGSAP(
-    () => {
-      if (!ready) return;
-      const orb = orbRef.current;
-      if (!orb) return;
-
-      const onMove = (event: MouseEvent) => {
-        gsap.to(orb, {
-          x: event.clientX,
-          y: event.clientY,
-          duration: 1.6,
-          ease: "power3.out",
-        });
-      };
-
-      window.addEventListener("mousemove", onMove);
-      return () => window.removeEventListener("mousemove", onMove);
-    },
-    { dependencies: [ready] },
+    { scope: rootRef },
   );
 
   return (
     <section
       ref={rootRef}
       id="top"
-      className="relative flex min-h-[100svh] flex-col justify-end overflow-hidden px-5 pt-28 pb-8 md:px-10 md:pb-10"
+      className="relative mx-auto flex max-w-6xl flex-col justify-center overflow-hidden px-5 py-20 md:px-8 md:py-28"
     >
-      <div
-        ref={orbRef}
-        className="pointer-events-none absolute top-0 left-0 z-0 size-[42vw] max-h-[520px] max-w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-acid/25 blur-[90px]"
+      <svg
+        className="pointer-events-none absolute top-6 right-0 -z-10 hidden h-[22rem] w-[22rem] opacity-80 md:block"
+        viewBox="0 0 320 320"
         aria-hidden
-      />
-
-      <div className="hero-kicker relative z-10 mb-8 flex flex-wrap items-center justify-between gap-4 md:mb-10">
-        <p className="text-[11px] tracking-[0.28em] text-stone uppercase">
-          {site.role}
-        </p>
-        <span className="rounded-full border border-line px-3 py-1 text-[11px] tracking-[0.18em] text-acid uppercase">
-          {site.availability}
-        </span>
-      </div>
-
-      <h1 className="relative z-10">
-        <span className="block overflow-hidden">
-          <span className="hero-line font-display block text-[clamp(4.6rem,22vw,17rem)] leading-[0.78] font-extrabold tracking-[-0.07em]">
-            NEO
+      >
+        <circle cx="210" cy="110" r="88" fill="none" stroke="rgba(212,255,63,0.14)" />
+        <circle cx="210" cy="110" r="52" fill="none" stroke="rgba(246,244,239,0.1)" />
+        <circle className="hero-node" cx="210" cy="22" r="4" fill="#d4ff3f" />
+        <circle className="hero-node" cx="298" cy="110" r="3.5" fill="#7dd3fc" />
+        <circle className="hero-node" cx="210" cy="198" r="3" fill="#f6f4ef" />
+        <circle className="hero-node" cx="122" cy="110" r="3.5" fill="#d4ff3f" />
+        <line x1="210" y1="110" x2="210" y2="22" stroke="rgba(212,255,63,0.35)" />
+        <line x1="210" y1="110" x2="298" y2="110" stroke="rgba(125,211,252,0.3)" />
+        <line x1="210" y1="110" x2="210" y2="198" stroke="rgba(246,244,239,0.18)" />
+        <line x1="210" y1="110" x2="122" y2="110" stroke="rgba(212,255,63,0.22)" />
+        <circle cx="210" cy="110" r="6" fill="#0c0c0e" stroke="#d4ff3f" strokeWidth="1.5" />
+      </svg>
+      <p className="hero-kicker text-sm font-medium text-acid">
+        <span className="mr-2 inline-block size-1.5 animate-pulse rounded-full bg-acid" />
+        {site.role}
+      </p>
+      <h1 className="font-display mt-4 text-[clamp(2.4rem,6vw,4.4rem)] leading-[1.08] font-extrabold tracking-[-0.04em]">
+        {site.name.split(" ").map((word) => (
+          <span key={word} className="inline-block overflow-hidden pr-[0.28em]">
+            <span className="hero-word inline-block">{word}</span>
           </span>
-        </span>
-        <span className="block overflow-hidden">
-          <span className="hero-line outline-text font-display block text-[clamp(4.6rem,22vw,17rem)] leading-[0.78] font-extrabold tracking-[-0.07em]">
-            DEEPS
-          </span>
-        </span>
+        ))}
       </h1>
-
-      <div className="relative z-10 mt-8 flex flex-col gap-8 md:mt-10 md:flex-row md:items-end md:justify-between">
-        <div className="hero-copy max-w-md">
-          <p className="text-lg leading-relaxed text-cream/90 md:text-xl">
-            {site.tagline}.
-          </p>
-          <p className="mt-3 text-sm leading-relaxed text-stone md:text-base">
-            {site.bio}
-          </p>
-        </div>
-
-        <div className="hero-copy flex items-center justify-between gap-6 md:justify-end">
-          <p className="text-[11px] tracking-[0.22em] text-stone uppercase">
-            {site.location}
-          </p>
-          <Magnetic>
-            <a
-              href="#work"
-              data-cursor="Scroll"
-              className="inline-flex size-16 items-center justify-center rounded-full border border-line text-[10px] tracking-[0.16em] uppercase transition-colors hover:border-acid hover:bg-acid hover:text-void"
-              onClick={(event) => {
-                event.preventDefault();
-                const el = document.getElementById("work");
-                if (el) {
-                  if (window.__lenis) window.__lenis.scrollTo(el, { offset: -20 });
-                  else el.scrollIntoView({ behavior: "smooth" });
-                }
-              }}
-            >
-              Scroll
-            </a>
-          </Magnetic>
-        </div>
+      <p className="hero-copy mt-2 text-lg text-stone md:text-xl">
+        {site.brand} - {site.tagline}
+      </p>
+      <p className="hero-copy mt-6 max-w-2xl text-base leading-relaxed text-cream/85 md:text-lg">
+        {site.bio}
+      </p>
+      <div className="hero-copy mt-8 flex flex-wrap gap-3">
+        <Magnetic>
+          <Link
+            href="/portofolio"
+            className="inline-flex rounded-full bg-acid px-6 py-3 text-sm font-semibold text-void"
+          >
+            Lihat karya
+          </Link>
+        </Magnetic>
+        <Magnetic strength={0.22}>
+          <Link
+            href="/kontak"
+            className="inline-flex rounded-full border border-line px-6 py-3 text-sm font-semibold text-cream"
+          >
+            Hubungi saya
+          </Link>
+        </Magnetic>
       </div>
     </section>
   );

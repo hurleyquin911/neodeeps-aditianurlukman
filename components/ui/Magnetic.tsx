@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { gsap } from "@/lib/gsap";
+import { finePointer, reducedMotion } from "@/lib/motion";
 
 type MagneticProps = {
   children: React.ReactNode;
@@ -12,20 +13,18 @@ type MagneticProps = {
 export function Magnetic({
   children,
   className,
-  strength = 0.35,
+  strength = 0.28,
 }: MagneticProps) {
   const ref = useRef<HTMLDivElement>(null);
 
   const onMove = (event: React.MouseEvent<HTMLDivElement>) => {
     const el = ref.current;
-    if (!el || window.matchMedia("(pointer: coarse)").matches) return;
+    if (!el || reducedMotion() || !finePointer()) return;
     const rect = el.getBoundingClientRect();
-    const x = event.clientX - rect.left - rect.width / 2;
-    const y = event.clientY - rect.top - rect.height / 2;
     gsap.to(el, {
-      x: x * strength,
-      y: y * strength,
-      duration: 0.45,
+      x: (event.clientX - rect.left - rect.width / 2) * strength,
+      y: (event.clientY - rect.top - rect.height / 2) * strength,
+      duration: 0.35,
       ease: "power3.out",
     });
   };
@@ -34,7 +33,7 @@ export function Magnetic({
     gsap.to(ref.current, {
       x: 0,
       y: 0,
-      duration: 0.8,
+      duration: 0.7,
       ease: "elastic.out(1, 0.45)",
     });
   };
@@ -42,7 +41,7 @@ export function Magnetic({
   return (
     <div
       ref={ref}
-      className={className}
+      className={className ?? "inline-block"}
       onMouseMove={onMove}
       onMouseLeave={onLeave}
     >

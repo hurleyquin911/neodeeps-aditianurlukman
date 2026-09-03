@@ -2,14 +2,14 @@
 @import "lenis/dist/lenis.css";
 
 :root {
-  --background: #070708;
-  --foreground: #f3efe6;
-  --void: #070708;
-  --ink: #101012;
-  --cream: #f3efe6;
-  --stone: #9b968c;
+  --background: #0c0c0e;
+  --foreground: #f6f4ef;
+  --void: #0c0c0e;
+  --ink: #161618;
+  --cream: #f6f4ef;
+  --stone: #c5c0b6;
   --acid: #d4ff3f;
-  --line: rgba(243, 239, 230, 0.1);
+  --line: rgba(246, 244, 239, 0.14);
 }
 
 @theme inline {
@@ -56,84 +56,7 @@ body {
   font-family: var(--font-display), var(--font-sans), sans-serif;
 }
 
-.outline-text {
-  color: transparent;
-  -webkit-text-stroke: 1.5px var(--cream);
-}
-
-.grain,
-.grain::after {
-  pointer-events: none;
-}
-
-.grain {
-  position: fixed;
-  inset: 0;
-  z-index: 80;
-  opacity: 0.09;
-  mix-blend-mode: overlay;
-}
-
-.grain::after {
-  content: "";
-  position: absolute;
-  inset: -50%;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  animation: grain-shift 1.2s steps(2) infinite;
-}
-
-@keyframes grain-shift {
-  0% {
-    transform: translate(0);
-  }
-  100% {
-    transform: translate(-4%, 3%);
-  }
-}
-
-.has-custom-cursor,
-.has-custom-cursor * {
-  cursor: none !important;
-}
-
-.custom-cursor {
-  transition:
-    width 0.28s ease,
-    height 0.28s ease,
-    background 0.28s ease;
-}
-
-.custom-cursor[data-state="hover"] {
-  width: 5.5rem;
-  height: 5.5rem;
-  background: var(--acid);
-  mix-blend-mode: normal;
-}
-
-.custom-cursor span {
-  opacity: 0;
-}
-
-.custom-cursor[data-state="hover"] span {
-  opacity: 1;
-}
-
-@media (hover: none), (pointer: coarse) {
-  .has-custom-cursor,
-  .has-custom-cursor * {
-    cursor: auto !important;
-  }
-
-  .custom-cursor {
-    display: none !important;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .grain::after {
-    animation: none;
-  }
-
   html {
     scroll-behavior: auto;
   }
@@ -145,26 +68,46 @@ button {
   font: inherit;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+.flow-grid {
+  background-color: #07080b;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+  background-size: 18px 18px;
+  scrollbar-width: none;
 }
 
-.marquee-track {
-  animation: marquee 32s linear infinite;
+.flow-grid::-webkit-scrollbar {
+  display: none;
 }
 
-@keyframes marquee {
-  from {
-    transform: translateX(0);
+.skill-chip,
+.js-lift {
+  will-change: transform;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  html.cursor-senter,
+  html.cursor-senter * {
+    cursor: none !important;
   }
-  to {
-    transform: translateX(-50%);
+
+  html.cursor-senter input,
+  html.cursor-senter textarea,
+  html.cursor-senter select,
+  html.cursor-senter [contenteditable="true"] {
+    cursor: text !important;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .marquee-track {
-    animation: none;
+  html.cursor-senter,
+  html.cursor-senter * {
+    cursor: auto !important;
+  }
+
+  html.cursor-senter input,
+  html.cursor-senter textarea,
+  html.cursor-senter select,
+  html.cursor-senter [contenteditable="true"] {
+    cursor: text !important;
   }
 }

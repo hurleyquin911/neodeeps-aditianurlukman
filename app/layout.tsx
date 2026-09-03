@@ -21,19 +21,20 @@ const syne = Syne({
 export const metadata: Metadata = {
   metadataBase: new URL("https://neodeeps.com"),
   title: {
-    default: "NEODEEPS — Aditia Nur Lukman",
-    template: "%s — NEODEEPS",
+    default: "NEODEEPS - Aditia Nur Lukman",
+    template: "%s - NEODEEPS",
   },
   description:
     "Portofolio Aditia Nur Lukman. Creative developer & UI designer di Jakarta. Make Better than Visual.",
   keywords: [
     "NEODEEPS",
     "Aditia Nur Lukman",
-    "Creative Developer",
+    "Fullstack Developer",
     "UI Designer",
+    "Android",
     "Jakarta",
     "Next.js",
-    "GSAP",
+    "React Native",
   ],
   authors: [{ name: "Aditia Nur Lukman" }],
   openGraph: {
