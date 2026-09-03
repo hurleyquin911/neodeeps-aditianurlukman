@@ -4,94 +4,108 @@ import { useRef, useState } from "react";
 import { serviceCycle } from "@/lib/data";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { finePointer, reducedMotion } from "@/lib/motion";
+import { CycleRocketModal } from "@/components/ui/CycleRocketModal";
 
-const PLACES = serviceCycle.map((_, index) => {
-  const angle = (index / serviceCycle.length) * Math.PI * 2 - Math.PI / 2;
-  return {
-    left: `${50 + Math.cos(angle) * 38}%`,
-    top: `${50 + Math.sin(angle) * 36}%`,
-  };
-});
+function CycleCard({
+  step,
+  current,
+  onHold,
+  onRelease,
+  onOpen,
+}: {
+  step: (typeof serviceCycle)[number];
+  current: boolean;
+  onHold: () => void;
+  onRelease: () => void;
+  onOpen: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onOpen}
+      onMouseEnter={onHold}
+      onMouseLeave={onRelease}
+      onFocus={onHold}
+      onBlur={onRelease}
+      className="cycle-node flex h-full min-h-44 w-full cursor-pointer flex-col rounded-2xl border bg-void/90 p-4 text-left"
+      style={{
+        borderColor: current ? "rgba(212,255,63,0.75)" : "rgba(246,244,239,0.14)",
+        boxShadow: current
+          ? "0 0 0 1px rgba(212,255,63,0.22), 0 14px 36px rgba(0,0,0,0.32)"
+          : "none",
+      }}
+    >
+      <p className="font-mono text-xs text-acid">{step.id}</p>
+      <h3 className="font-display mt-1 text-lg font-bold">{step.title}</h3>
+      <p className="mt-2 text-sm leading-relaxed text-stone">{step.body}</p>
+      <p className="mt-auto pt-3 text-xs font-medium text-acid">Detail →</p>
+    </button>
+  );
+}
+
+function Mark({
+  dir,
+  lit,
+}: {
+  dir: "right" | "left" | "down" | "up";
+  lit: boolean;
+}) {
+  const symbol = { right: "→", left: "←", down: "↓", up: "↑" }[dir];
+  return (
+    <span
+      className={`cycle-mark flex items-center justify-center font-mono text-lg ${
+        lit ? "text-acid" : "text-stone/45"
+      }`}
+    >
+      {symbol}
+    </span>
+  );
+}
 
 export function ServiceCycle() {
   const rootRef = useRef<HTMLElement>(null);
-  const pathRef = useRef<SVGEllipseElement>(null);
-  const armRef = useRef<HTMLDivElement>(null);
   const pulseRef = useRef<gsap.core.Timeline | null>(null);
-  const spinRef = useRef<gsap.core.Tween | null>(null);
+  const detailOpenRef = useRef(false);
   const [active, setActive] = useState(0);
+  const [detail, setDetail] = useState<number | null>(null);
 
   useGSAP(
     () => {
       if (reducedMotion()) return;
 
-      const nodes = gsap.utils.toArray<HTMLElement>(".cycle-node");
-      const rails = gsap.utils.toArray<HTMLElement>(".cycle-rail");
-      const path = pathRef.current;
-
       gsap.from(".cycle-board", {
-        y: 28,
+        y: 24,
         opacity: 0,
-        duration: 0.7,
+        duration: 0.65,
         ease: "power3.out",
         immediateRender: false,
         scrollTrigger: { trigger: rootRef.current, start: "top 78%", once: true },
       });
 
-      gsap.from(nodes, {
-        scale: 0.86,
-        y: 22,
+      gsap.from(".cycle-node", {
+        y: 20,
         opacity: 0,
-        duration: 0.7,
-        stagger: 0.1,
+        duration: 0.6,
+        stagger: 0.08,
         ease: "power3.out",
         immediateRender: false,
         scrollTrigger: { trigger: rootRef.current, start: "top 78%", once: true },
       });
 
-      gsap.from(rails, {
-        scaleY: 0,
-        duration: 0.8,
-        stagger: 0.12,
+      gsap.from(".cycle-mark", {
+        opacity: 0,
+        duration: 0.45,
+        stagger: 0.06,
+        delay: 0.25,
         ease: "power2.out",
-        transformOrigin: "top center",
         immediateRender: false,
         scrollTrigger: { trigger: rootRef.current, start: "top 78%", once: true },
       });
 
-      if (path) {
-        const length = path.getTotalLength();
-        gsap.fromTo(
-          path,
-          { strokeDasharray: length, strokeDashoffset: length },
-          {
-            strokeDashoffset: 0,
-            duration: 1.6,
-            ease: "power2.inOut",
-            immediateRender: false,
-            scrollTrigger: {
-              trigger: rootRef.current,
-              start: "top 78%",
-              once: true,
-            },
-          },
-        );
-      }
-
-      if (armRef.current) {
-        spinRef.current = gsap.to(armRef.current, {
-          rotation: 360,
-          duration: 14,
-          ease: "none",
-          repeat: -1,
-          transformOrigin: "center center",
-        });
-      }
-
-      const pulse = gsap.timeline({ repeat: -1, delay: 0.4 });
+      const pulse = gsap.timeline({ repeat: -1, delay: 0.5 });
       serviceCycle.forEach((_, index) => {
         pulse.call(() => setActive(index));
-        pulse.to({}, { duration: 2.8 });
+        pulse.to({}, { duration: 2.6 });
       });
       pulseRef.current = pulse;
     },
@@ -99,19 +113,29 @@ export function ServiceCycle() {
   );
 
   const hold = (index: number) => {
-    if (!finePointer()) {
-      setActive(index);
-      return;
-    }
-    pulseRef.current?.pause();
-    spinRef.current?.pause();
+    if (finePointer()) pulseRef.current?.pause();
     setActive(index);
   };
 
   const release = () => {
+    if (detailOpenRef.current) return;
     pulseRef.current?.resume();
-    spinRef.current?.resume();
   };
+
+  const openDetail = (index: number) => {
+    detailOpenRef.current = true;
+    pulseRef.current?.pause();
+    setActive(index);
+    setDetail(index);
+  };
+
+  const closeDetail = () => {
+    detailOpenRef.current = false;
+    setDetail(null);
+    pulseRef.current?.resume();
+  };
+
+  const step = (index: number) => serviceCycle[index];
 
   return (
     <section ref={rootRef} className="mt-12">
@@ -120,63 +144,63 @@ export function ServiceCycle() {
       </h2>
       <p className="reveal mt-2 max-w-2xl text-sm leading-relaxed text-stone">
         Rilis pertama bukan titik akhir. Renewal memutar ulang ke pemahaman,
-        bukan menutup proyek.
+        bukan menutup proyek. Klik kartu untuk melihat detail langkahnya.
       </p>
 
-      <div className="cycle-board relative mt-8 overflow-hidden rounded-[1.6rem] border border-line bg-ink">
+      <div className="cycle-board relative mt-8 rounded-[1.6rem] border border-line bg-ink p-5 md:p-7">
         <div
-          className="pointer-events-none absolute inset-0 opacity-30"
+          className="pointer-events-none absolute inset-0 rounded-[1.6rem] opacity-25"
           style={{
             backgroundImage:
               "radial-gradient(rgba(246,244,239,0.14) 1px, transparent 1px)",
             backgroundSize: "18px 18px",
           }}
         />
-        <div
-          className="pointer-events-none absolute top-1/2 left-1/2 size-72 -translate-x-1/2 -translate-y-1/2 rounded-full opacity-40"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(212,255,63,0.16), transparent 68%)",
-          }}
-        />
 
-        <div className="relative hidden min-h-[38rem] lg:block">
-          <svg
-            className="pointer-events-none absolute inset-[12%]"
-            viewBox="0 0 100 100"
-            preserveAspectRatio="none"
-            aria-hidden
+        <div className="relative hidden lg:grid lg:grid-cols-[minmax(0,1fr)_2rem_minmax(0,1fr)_2rem_minmax(0,1fr)] lg:grid-rows-[minmax(11.5rem,auto)_2.5rem_minmax(11.5rem,auto)] lg:items-stretch lg:gap-x-2 lg:gap-y-1">
+          <CycleCard
+            step={step(0)}
+            current={active === 0}
+            onHold={() => hold(0)}
+            onRelease={release}
+            onOpen={() => openDetail(0)}
+          />
+          <Mark dir="right" lit={active === 1} />
+          <CycleCard
+            step={step(1)}
+            current={active === 1}
+            onHold={() => hold(1)}
+            onRelease={release}
+            onOpen={() => openDetail(1)}
+          />
+          <Mark dir="right" lit={active === 2} />
+          <CycleCard
+            step={step(2)}
+            current={active === 2}
+            onHold={() => hold(2)}
+            onRelease={release}
+            onOpen={() => openDetail(2)}
+          />
+
+          <Mark dir="up" lit={active === 0} />
+          <span />
+          <span />
+          <span />
+          <Mark dir="down" lit={active === 3} />
+
+          <CycleCard
+            step={step(4)}
+            current={active === 4}
+            onHold={() => hold(4)}
+            onRelease={release}
+            onOpen={() => openDetail(4)}
+          />
+          <Mark dir="left" lit={active === 4} />
+          <button
+            type="button"
+            onClick={() => openDetail(active)}
+            className="flex h-full min-h-44 cursor-pointer flex-col items-center justify-center rounded-2xl border border-acid/30 bg-void/70 px-4 text-center"
           >
-            <ellipse
-              cx="50"
-              cy="50"
-              rx="49"
-              ry="49"
-              fill="none"
-              stroke="rgba(246,244,239,0.1)"
-              strokeWidth="0.4"
-            />
-            <ellipse
-              ref={pathRef}
-              cx="50"
-              cy="50"
-              rx="49"
-              ry="49"
-              fill="none"
-              stroke="#d4ff3f"
-              strokeWidth="0.5"
-              strokeLinecap="round"
-            />
-          </svg>
-
-          <div
-            ref={armRef}
-            className="pointer-events-none absolute top-1/2 left-1/2 z-20 h-[72%] w-[76%] -translate-x-1/2 -translate-y-1/2"
-          >
-            <span className="absolute top-0 left-1/2 size-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-acid shadow-[0_0_16px_#d4ff3f]" />
-          </div>
-
-          <div className="absolute top-1/2 left-1/2 z-10 w-44 -translate-x-1/2 -translate-y-1/2 text-center">
             <p className="font-mono text-xs tracking-[0.2em] text-acid uppercase">
               Siklus
             </p>
@@ -186,45 +210,23 @@ export function ServiceCycle() {
             <p className="mt-1 font-mono text-xs text-stone">
               {serviceCycle[active].id} / 05
             </p>
-          </div>
-
-          {serviceCycle.map((step, index) => {
-            const current = active === index;
-            return (
-              <button
-                key={step.id}
-                type="button"
-                onMouseEnter={() => hold(index)}
-                onMouseLeave={release}
-                onFocus={() => hold(index)}
-                onBlur={release}
-                className="cycle-node absolute z-10 w-52 -translate-x-1/2 -translate-y-1/2 rounded-2xl border bg-void/92 p-4 text-left backdrop-blur-sm"
-                style={{
-                  left: PLACES[index].left,
-                  top: PLACES[index].top,
-                  borderColor: current
-                    ? "rgba(212,255,63,0.7)"
-                    : "rgba(246,244,239,0.14)",
-                  boxShadow: current
-                    ? "0 0 0 1px rgba(212,255,63,0.25), 0 16px 40px rgba(0,0,0,0.35)"
-                    : "none",
-                }}
-              >
-                <p className="font-mono text-xs text-acid">{step.id}</p>
-                <h3 className="font-display mt-1 text-lg font-bold">{step.title}</h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-stone">
-                  {step.body}
-                </p>
-              </button>
-            );
-          })}
+            <p className="mt-3 text-xs text-acid">Buka detail →</p>
+          </button>
+          <Mark dir="left" lit={active === 4} />
+          <CycleCard
+            step={step(3)}
+            current={active === 3}
+            onHold={() => hold(3)}
+            onRelease={release}
+            onOpen={() => openDetail(3)}
+          />
         </div>
 
-        <ol className="relative space-y-4 p-5 lg:hidden">
-          {serviceCycle.map((step, index) => {
+        <ol className="relative space-y-4 lg:hidden">
+          {serviceCycle.map((item, index) => {
             const current = active === index;
             return (
-              <li key={step.id} className="flex gap-4">
+              <li key={item.id} className="flex gap-4">
                 <div className="flex w-6 flex-col items-center">
                   <span
                     className={`size-3 rounded-full ${
@@ -232,14 +234,14 @@ export function ServiceCycle() {
                     }`}
                   />
                   {index < serviceCycle.length - 1 ? (
-                    <span className="cycle-rail mt-1 w-px flex-1 bg-line" />
+                    <span className="mt-1 w-px flex-1 bg-line" />
                   ) : (
-                    <span className="cycle-rail mt-1 h-8 w-px bg-acid/50" />
+                    <span className="mt-1 h-8 w-px bg-acid/50" />
                   )}
                 </div>
                 <button
                   type="button"
-                  onClick={() => setActive(index)}
+                  onClick={() => openDetail(index)}
                   className="cycle-node flex-1 rounded-2xl border p-4 text-left"
                   style={{
                     borderColor: current
@@ -250,12 +252,12 @@ export function ServiceCycle() {
                       : "transparent",
                   }}
                 >
-                  <p className="font-mono text-xs text-acid">{step.id}</p>
+                  <p className="font-mono text-xs text-acid">{item.id}</p>
                   <h3 className="font-display mt-1 text-lg font-bold">
-                    {step.title}
+                    {item.title}
                   </h3>
                   <p className="mt-1.5 text-sm leading-relaxed text-stone">
-                    {step.body}
+                    {item.body}
                   </p>
                 </button>
               </li>
@@ -264,6 +266,15 @@ export function ServiceCycle() {
           <li className="pl-10 text-sm text-acid">Kembali ke Pahami →</li>
         </ol>
       </div>
+
+      <CycleRocketModal
+        index={detail}
+        onClose={closeDetail}
+        onChange={(next) => {
+          setDetail(next);
+          setActive(next);
+        }}
+      />
     </section>
   );
 }

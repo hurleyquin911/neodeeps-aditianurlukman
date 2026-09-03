@@ -96,26 +96,71 @@ export const serviceCycle = [
     id: "01",
     title: "Pahami",
     body: "Tujuan, pengguna, dan batasan ditulis dulu. Tanpa ini, kode hanya menebak.",
+    detail:
+      "Sebelum desain atau repo dibuka, saya merapikan masalahnya. Siapa yang memakai, di situasi apa, apa yang sudah ada, dan apa yang memang tidak dikerjakan. Kalau ini kabur, fullstack dan Android hanya menebak.",
+    points: [
+      "Tujuan produk ditulis dalam bahasa orang yang memakainya",
+      "Batasan waktu, platform, dan data disepakati di awal",
+      "Aset lama (desain, API, akun toko) diinventaris, bukan diabaikan",
+      "Yang di luar lingkup dicatat supaya tidak merambat diam-diam",
+    ],
+    output: "Brief singkat yang bisa dipakai merancang tanpa bolak-balik menebak.",
   },
   {
     id: "02",
     title: "Rancang",
     body: "Alur, arsitektur, dan UI disusun supaya frontend, backend, dan mobile saling nyambung.",
+    detail:
+      "Di sini alur, kontrak data, dan hierarki layar disusun bersamaan. Frontend tidak menunggu spek yang belum ada, backend tidak merancang API yang tidak terpakai, dan Android tidak dapat alur yang hanya nyaman di desktop.",
+    points: [
+      "Peta alur: masuk, keputusan, error, dan titik selesai",
+      "Arsitektur: pecahan UI, API, auth, dan penyimpanan",
+      "Sistem visual ringan yang bisa diwariskan ke web dan app",
+      "Prototype atau wireframe yang bisa dikritik sebelum dikode",
+    ],
+    output: "Rencana bangun yang sudah nyambung antarlapis, bukan tiga dokumen terpisah.",
   },
   {
     id: "03",
     title: "Bangun",
     body: "Implementasi end-to-end: antarmuka, API, data, dan uji di perangkat nyata.",
+    detail:
+      "Implementasi dipegang ujung ke ujung. Yang dijanjikan di rancangan dibangun, diuji di browser dan perangkat Android, lalu yang belum selesai tidak disamarkan seolah sudah produksi.",
+    points: [
+      "Fondasi dulu: routing, environment, kontrak API",
+      "UI dan data diisi mengikuti alur, bukan halaman acak",
+      "Uji alur utama, kasus error, dan perangkat sungguhan",
+      "Catatan keputusan ikut di repo, bukan hanya di kepala",
+    ],
+    output: "Versi yang bisa dipakai dan dikritik, siap masuk persiapan rilis.",
   },
   {
     id: "04",
     title: "Rilis",
     body: "Deploy, listing toko jika perlu, lalu serah terima yang bisa dilanjutkan orang lain.",
+    detail:
+      "Rilis adalah serah terima, bukan sekadar tombol deploy. Web naik ke produksi, aplikasi Android masuk Play Store jika itu bagian kerja, dan akses serta catatan cukup agar orang lain bisa melanjutkan.",
+    points: [
+      "Deploy web dan cek alur di lingkungan produksi",
+      "Listing, aset, dan persyaratan toko jika ada aplikasi",
+      "Akses repo, environment, dan akun yang relevan diserahkan",
+      "Catatan rilis: apa yang sudah, apa yang sengaja ditunda",
+    ],
+    output: "Produk yang sudah di tangan pengguna, plus bekal untuk merawatnya.",
   },
   {
     id: "05",
     title: "Renewal",
     body: "Perawatan, perbaikan, dan pembaruan sistem. Produk tidak berhenti di hari peluncuran.",
+    detail:
+      "Setelah dipakai orang lain, yang muncul adalah bug sungguhan, permintaan baru, dan utang teknis. Renewal memutar kembali ke pemahaman: apa yang berubah, apa yang harus tetap, lalu merancang dan membangun lagi dalam ritme yang disepakati.",
+    points: [
+      "Pantau yang rusak, lambat, atau berisiko",
+      "Rilis kecil yang rutin lebih aman daripada overhaul mendadak",
+      "Pembaruan dependensi, kompatibilitas, dan keamanan",
+      "Fitur baru hanya jika arsitektur masih menampung",
+    ],
+    output: "Sistem yang tetap hidup: diperbaiki, diperbarui, lalu dipahami ulang.",
   },
 ] as const;
 
