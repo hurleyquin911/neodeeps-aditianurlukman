@@ -162,7 +162,9 @@ export function ProjectDetail({ project }: { project: Project }) {
                 rel="noreferrer"
                 className="inline-flex rounded-full border border-line px-5 py-3 text-sm font-medium text-cream transition-colors hover:border-acid hover:text-acid"
               >
-                Lihat di GitHub
+                {project.href.includes("github.com")
+                  ? "Lihat di GitHub"
+                  : "Buka situs"}
               </a>
             </Magnetic>
           </div>

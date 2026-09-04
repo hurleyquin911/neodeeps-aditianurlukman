@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import type { Project } from "@/lib/projects";
 import { gsap } from "@/lib/gsap";
 import { finePointer, reducedMotion } from "@/lib/motion";
@@ -156,6 +157,8 @@ export function TampilanGallery({ project }: { project: Project }) {
     if (!overlay || !panel) return;
 
     document.body.style.overflow = "hidden";
+    document.documentElement.classList.add("dialog-open");
+    window.__lenis?.stop();
 
     if (reducedMotion()) {
       gsap.set([overlay, panel], { opacity: 1, y: 0, scale: 1 });
@@ -163,8 +166,8 @@ export function TampilanGallery({ project }: { project: Project }) {
       gsap.fromTo(overlay, { opacity: 0 }, { opacity: 1, duration: 0.32, ease: "power2.out" });
       gsap.fromTo(
         panel,
-        { y: 48, scale: 0.88, opacity: 0 },
-        { y: 0, scale: 1, opacity: 1, duration: 0.55, ease: "power4.out" },
+        { y: 36, scale: 0.96, opacity: 0 },
+        { y: 0, scale: 1, opacity: 1, duration: 0.45, ease: "power4.out" },
       );
     }
 
@@ -174,6 +177,8 @@ export function TampilanGallery({ project }: { project: Project }) {
     window.addEventListener("keydown", onKey);
     return () => {
       document.body.style.overflow = "";
+      document.documentElement.classList.remove("dialog-open");
+      window.__lenis?.start();
       window.removeEventListener("keydown", onKey);
     };
   }, [active, close]);
@@ -212,46 +217,49 @@ export function TampilanGallery({ project }: { project: Project }) {
         ))}
       </div>
 
-      {active ? (
-        <div
-          ref={overlayRef}
-          className="fixed inset-0 z-[80] flex items-center justify-center bg-black/70 px-4 py-8 backdrop-blur-sm"
-          onClick={close}
-          role="presentation"
-        >
-          <div
-            ref={panelRef}
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="tampilan-popup-title"
-            className="w-full max-w-2xl overflow-hidden rounded-[1.6rem] border border-line bg-ink shadow-2xl"
-            onClick={(event) => event.stopPropagation()}
-          >
-            <div className="relative h-56 md:h-72">
-              <TileArt project={project} mood={active.mood} large />
-            </div>
-            <div className="px-6 py-5 md:px-8 md:py-6">
-              <p className="text-sm font-medium text-acid">{project.title}</p>
-              <h3
-                id="tampilan-popup-title"
-                className="font-display mt-1 text-2xl font-bold"
+      {active
+        ? createPortal(
+            <div
+              ref={overlayRef}
+              className="fixed inset-0 z-[130] flex items-center justify-center bg-black/88 px-4 py-6 backdrop-blur-xl md:px-8 md:py-10"
+              onClick={close}
+              role="presentation"
+            >
+              <div
+                ref={panelRef}
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="tampilan-popup-title"
+                className="flex max-h-[min(88dvh,42rem)] w-full max-w-2xl flex-col overflow-hidden rounded-[1.6rem] border border-line bg-ink shadow-[0_32px_80px_rgba(0,0,0,0.65)]"
+                onClick={(event) => event.stopPropagation()}
               >
-                {active.title}
-              </h3>
-              <p className="mt-3 text-base leading-relaxed text-stone">
-                {active.note}
-              </p>
-              <button
-                type="button"
-                onClick={close}
-                className="mt-6 rounded-full border border-line px-5 py-2 text-sm text-cream transition-colors hover:border-acid hover:text-acid"
-              >
-                Tutup
-              </button>
-            </div>
-          </div>
-        </div>
-      ) : null}
+                <div className="relative h-48 shrink-0 md:h-64">
+                  <TileArt project={project} mood={active.mood} large />
+                </div>
+                <div className="min-h-0 overflow-y-auto px-6 py-5 md:px-8 md:py-6">
+                  <p className="text-sm font-medium text-acid">{project.title}</p>
+                  <h3
+                    id="tampilan-popup-title"
+                    className="font-display mt-1 text-2xl font-bold"
+                  >
+                    {active.title}
+                  </h3>
+                  <p className="mt-3 text-base leading-relaxed text-stone">
+                    {active.note}
+                  </p>
+                  <button
+                    type="button"
+                    onClick={close}
+                    className="mt-6 rounded-full border border-line px-5 py-2 text-sm text-cream transition-colors hover:border-acid hover:text-acid"
+                  >
+                    Tutup
+                  </button>
+                </div>
+              </div>
+            </div>,
+            document.body,
+          )
+        : null}
     </>
   );
 }

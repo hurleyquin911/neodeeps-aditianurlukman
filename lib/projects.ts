@@ -51,6 +51,134 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    slug: "aruna",
+    id: "08",
+    title: "ARUNA",
+    year: "2026",
+    category: "Ecommerce",
+    featured: true,
+    description:
+      "Toko fashion kontemporer untuk iklim tropis: koleksi, etalase, tas, dan checkout yang tetap tenang dari beranda sampai bayar.",
+    tags: ["Next.js", "Ecommerce", "UI"],
+    href: "https://ecommerce.neodeeps.com/",
+    palette: {
+      from: "#1a1612",
+      via: "#4a3b2a",
+      to: "#e8d5b5",
+      accent: "#c4a574",
+    },
+    tampilan: {
+      headline:
+        "Etalase yang editorial: tipografi besar, kartu produk yang mudah dipindai, dan ruang napas seperti lookbook - bukan katalog yang berisik.",
+      points: [
+        "Beranda membuka janji merek dulu, baru kategori dan pilihan editor.",
+        "Kartu produk menampilkan diskon, status baru, dan harga tanpa teka-teki.",
+        "Tas, ongkir, dan retur dijelaskan dengan bahasa toko, bukan bahasa sistem.",
+      ],
+      screens: [
+        { name: "Beranda musim", note: "Koleksi transisi, janji merek, dan jalur ke etalase." },
+        { name: "Belanja menurut bentuk", note: "Atasan, bawahan, outerwear, dress, aksesori, sepatu." },
+        { name: "Kartu produk", note: "Harga, diskon, dan status baru dalam satu pandangan." },
+        { name: "Tas belanja", note: "Ambang gratis ongkir dan ajakan jika tas masih kosong." },
+      ],
+    },
+    flow: [
+      {
+        step: "01",
+        title: "Datang ke beranda",
+        body: "Pengunjung melihat janji merek dan koleksi musim. Arahnya jelas: belanja, lookbook, atau kategori.",
+        column: 1,
+        lane: 1,
+        from: [{ id: "start" }],
+        inner: [{ title: "Beranda", note: "Janji + musim" }],
+      },
+      {
+        step: "02",
+        title: "Sudah tahu barangnya?",
+        body: "Sebagian datang untuk potongan tertentu. Sebagian masih melihat-lihat. Toko menampung keduanya tanpa memaksa.",
+        kind: "decision",
+        column: 2,
+        lane: 1,
+        from: [{ id: "01" }],
+      },
+      {
+        step: "03",
+        title: "Buka kategori",
+        body: "Belanja menurut bentuk: atasan, bawahan, outer, dress, aksesori, atau sepatu.",
+        column: 3,
+        lane: 0,
+        from: [{ id: "02", label: "Ya" }],
+        inner: [{ title: "Kategori", note: "Enam bentuk" }],
+      },
+      {
+        step: "04",
+        title: "Jelajah etalase",
+        body: "Pilihan editor, baru tiba, atau workwear. Kartu produk yang tenang, bukan banner yang berteriak.",
+        column: 3,
+        lane: 2,
+        from: [{ id: "02", label: "Belum" }],
+        inner: [{ title: "Etalase", note: "Kurasi" }],
+      },
+      {
+        step: "05",
+        title: "Lihat produk",
+        body: "Harga, bahan, dan status (baru atau diskon) terbaca sebelum masuk ke detail yang lebih dalam.",
+        column: 4,
+        lane: 1,
+        from: [{ id: "03" }, { id: "04" }],
+        inner: [{ title: "Produk", note: "Harga + status" }],
+      },
+      {
+        step: "06",
+        title: "Masuk tas?",
+        body: "Keputusan belanja. Tas menampilkan ambang gratis ongkir. Yang belum siap bisa kembali ke etalase.",
+        kind: "decision",
+        column: 5,
+        lane: 1,
+        from: [{ id: "05" }],
+      },
+      {
+        step: "07",
+        title: "Checkout",
+        body: "Bayar lewat QRIS, transfer, kartu, atau cicilan. Pengiriman dalam dan luar negeri dijelaskan sebelum konfirmasi.",
+        column: 6,
+        lane: 0,
+        from: [{ id: "06", label: "Ya" }],
+        inner: [{ title: "Bayar", note: "Metode aman" }],
+      },
+      {
+        step: "08",
+        title: "Lanjut melihat",
+        body: "Tidak ada hukuman untuk belum membeli. Etalase tetap terbuka.",
+        kind: "end",
+        column: 6,
+        lane: 2,
+        from: [{ id: "06", label: "Tidak" }],
+      },
+      {
+        step: "09",
+        title: "Pesanan tercatat",
+        body: "Siklus toko tertutup: dari musim di beranda sampai barang yang siap dikirim.",
+        kind: "end",
+        column: 7,
+        lane: 0,
+        from: [{ id: "07" }],
+      },
+    ],
+    deskripsi: {
+      pitch:
+        "ARUNA adalah toko fashion kontemporer: pakaian untuk iklim tropis, etalase yang tenang, dan alur belanja yang tidak membuat orang merasa sedang mengisi formulir.",
+      masalah:
+        "Banyak toko daring menumpuk diskon, banner, dan popup sampai produknya sendiri sulit dilihat. Untuk merek yang ingin terasa editorial, itu merusak kepercayaan sebelum harga sempat dibaca.",
+      solusi:
+        "Saya merancang toko sebagai lookbook yang bisa dibeli. Hierarki musim, kategori, dan kartu produk disusun dulu. Tas, ongkir, retur, dan pembayaran masuk sebagai kelanjutan - bukan gangguan.",
+      peran:
+        "Saya merancang dan membangun pengalaman fullstack: beranda, etalase, detail produk, tas, dan fondasi checkout sampai situs bisa dipakai di ecommerce.neodeeps.com.",
+      hasil:
+        "Sebuah toko hidup yang bisa dibuka publik: koleksi transisi 2026, belanja menurut bentuk, dan jalur dari lihat ke bayar tanpa kehilangan nada merek.",
+    },
+  },
+  {
     slug: "pulse",
     id: "01",
     title: "Pulse",

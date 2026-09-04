@@ -84,10 +84,20 @@ button {
   will-change: transform;
 }
 
+html.dialog-open [data-cursor-glow] {
+  opacity: 0 !important;
+  visibility: hidden;
+}
+
 @media (hover: hover) and (pointer: fine) {
   html.cursor-senter,
   html.cursor-senter * {
     cursor: none !important;
+  }
+
+  html.dialog-open,
+  html.dialog-open * {
+    cursor: auto !important;
   }
 
   html.cursor-senter input,

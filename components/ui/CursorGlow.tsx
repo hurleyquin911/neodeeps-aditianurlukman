@@ -156,6 +156,7 @@ export function CursorGlow() {
   return (
     <div
       ref={rootRef}
+      data-cursor-glow
       className="pointer-events-none fixed top-0 left-0 z-[120] hidden overflow-visible md:block"
       aria-hidden
     >

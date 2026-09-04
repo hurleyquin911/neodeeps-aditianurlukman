@@ -66,6 +66,28 @@ function BannerMock() {
   );
 }
 
+function ShopMock() {
+  return (
+    <div className="space-y-3 p-6">
+      <div className="flex items-center justify-between">
+        <div className="h-3 w-28 rounded-full bg-white/40" />
+        <div className="h-3 w-12 rounded-full bg-white/20" />
+      </div>
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+        {["Senja", "Nara", "Pleat", "Slip", "Midi", "Pima"].map((label) => (
+          <div key={label} className="rounded-xl bg-black/25 p-3">
+            <div className="h-16 rounded-lg bg-white/12" />
+            <p className="mt-2 text-[10px] tracking-wide text-white/55 uppercase">
+              {label}
+            </p>
+            <div className="mt-1 h-2 w-2/3 rounded-full bg-white/25" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function SiteMock() {
   return (
     <div className="space-y-3 p-6">
@@ -101,6 +123,8 @@ export function ProjectVisual({ project }: { project: Project }) {
         <BannerMock />
       ) : kind === "Product Dashboard" ? (
         <DashboardMock />
+      ) : kind === "Ecommerce" ? (
+        <ShopMock />
       ) : (
         <SiteMock />
       )}

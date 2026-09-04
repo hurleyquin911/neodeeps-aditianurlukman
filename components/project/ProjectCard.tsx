@@ -64,6 +64,26 @@ function CoverScene({ project }: { project: Project }) {
     );
   }
 
+  if (kind === "Ecommerce") {
+    return (
+      <div className="cover-mock w-full space-y-2 px-5">
+        <div className="flex items-center justify-between">
+          <div className="h-2 w-16 rounded-full bg-white/45" />
+          <div className="h-2 w-8 rounded-full bg-white/25" />
+        </div>
+        <div className="grid grid-cols-2 gap-2">
+          {[1, 2, 3, 4].map((tile) => (
+            <div key={tile} className="rounded-lg bg-black/30 p-2">
+              <div className="h-10 rounded-md bg-white/12" />
+              <div className="mt-1.5 h-1.5 w-3/4 rounded-full bg-white/35" />
+              <div className="mt-1 h-1.5 w-1/2 rounded-full bg-white/20" />
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="cover-mock w-full space-y-3 px-6">
       <div className="flex items-center gap-1.5 rounded-t-lg bg-black/30 px-2.5 py-1.5">
