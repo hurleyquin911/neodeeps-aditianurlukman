@@ -84,6 +84,25 @@ function CoverScene({ project }: { project: Project }) {
     );
   }
 
+  if (kind === "3D Studio") {
+    return (
+      <div className="cover-mock flex w-full items-center justify-center gap-3 px-5">
+        <div className="w-[38%] max-w-[7rem]">
+          <div className="rounded-xl border border-white/20 bg-black/35 px-3 pt-2 pb-3">
+            <div className="mx-auto h-16 w-14 rounded-b-2xl rounded-t-md bg-white/18" />
+            <div className="mx-auto mt-1 h-2 w-10 rounded-full bg-white/25" />
+          </div>
+        </div>
+        <div className="flex-1 space-y-1.5">
+          <div className="h-2 w-2/3 rounded-full bg-white/40" />
+          <div className="h-8 rounded-lg bg-black/30" />
+          <div className="h-8 rounded-lg bg-black/25" />
+          <div className="h-2 w-1/2 rounded-full bg-white/20" />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="cover-mock w-full space-y-3 px-6">
       <div className="flex items-center gap-1.5 rounded-t-lg bg-black/30 px-2.5 py-1.5">

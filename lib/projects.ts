@@ -179,6 +179,116 @@ export const projects: Project[] = [
     },
   },
   {
+    slug: "studio-kaos",
+    id: "09",
+    title: "Studio Kaos",
+    year: "2026",
+    category: "3D Studio",
+    featured: true,
+    description:
+      "Editor desain kaos dari kanvas 2D ke mockup 3D: jenis baju, ukuran fisik, layer, dan pratinjau sisi depan sampai lengan.",
+    tags: ["3D", "Editor", "Product"],
+    href: "https://mockup.neodeeps.com/",
+    palette: {
+      from: "#0b1220",
+      via: "#1e3a5f",
+      to: "#7dd3fc",
+      accent: "#38bdf8",
+    },
+    tampilan: {
+      headline:
+        "Studio kerja, bukan landing page: kanvas di tengah, produk dan layer di sisi, ukuran dalam centimeter yang sama dengan baju sungguhan.",
+      points: [
+        "Jenis baju, warna kain, dan size S sampai 3XL diatur sebelum desain diisi.",
+        "Desain bisa teks, unggahan, bentuk, gambar, atau template - lalu diedit per layer.",
+        "Generate 3D memakai ukuran fisik 1:1, jadi grafis terasa lebih kecil di size yang lebih besar.",
+      ],
+      screens: [
+        { name: "Kanvas 2D", note: "Bidang baju dengan sisi depan, belakang, dan lengan." },
+        { name: "Panel produk", note: "Jenis baju, warna kain, size, dan tabel ukuran." },
+        { name: "Layer & properti", note: "Posisi, tipografi, warna, filter, dan efek dalam cm." },
+        { name: "Generate 3D", note: "Dari tata letak datar ke mockup tubuh baju." },
+      ],
+    },
+    flow: [
+      {
+        step: "01",
+        title: "Pilih jenis baju",
+        body: "Kaos pendek, lengan panjang, hoodie, atau tank top. Bentuk bidang mengikuti produk.",
+        column: 1,
+        lane: 1,
+        from: [{ id: "start" }],
+        inner: [{ title: "Produk", note: "Siluet" }],
+      },
+      {
+        step: "02",
+        title: "Atur kain & size",
+        body: "Warna kain dan ukuran S-3XL. Tabel dada, bahu, lengan, dan bidang baju dalam cm atau inci.",
+        column: 2,
+        lane: 1,
+        from: [{ id: "01" }],
+        inner: [{ title: "Ukuran", note: "1 unit = 1 cm" }],
+      },
+      {
+        step: "03",
+        title: "Desain di kanvas",
+        body: "Tambah teks, unggah, bentuk, gambar, atau template. Sisi bisa depan, belakang, atau lengan.",
+        column: 3,
+        lane: 1,
+        from: [{ id: "02" }],
+        inner: [{ title: "Layer", note: "Objek di bidang" }],
+      },
+      {
+        step: "04",
+        title: "Siap lihat 3D?",
+        body: "Sebagian orang merapikan layer dulu. Sebagian ingin segera melihat di badan baju.",
+        kind: "decision",
+        column: 4,
+        lane: 1,
+        from: [{ id: "03" }],
+      },
+      {
+        step: "05",
+        title: "Rapikan properti",
+        body: "Posisi, tipografi, warna, dan efek masih dalam satuan fisik. Grafis tidak 'loncat' saat size berubah.",
+        column: 5,
+        lane: 2,
+        from: [{ id: "04", label: "Belum" }],
+        inner: [{ title: "Properti", note: "cm, bukan px" }],
+      },
+      {
+        step: "06",
+        title: "Generate 3D",
+        body: "Tata letak 2D diangkat ke mockup. Size lebih besar membuat grafis terasa lebih kecil di kain, sesuai dunia nyata.",
+        column: 5,
+        lane: 0,
+        from: [{ id: "04", label: "Ya" }, { id: "05" }],
+        inner: [{ title: "Mockup", note: "Pratinjau tubuh" }],
+      },
+      {
+        step: "07",
+        title: "Tinjau sisi lain",
+        body: "Depan, belakang, lengan kiri, lengan kanan. Desain dicek di tempat yang akan dicetak.",
+        kind: "end",
+        column: 6,
+        lane: 1,
+        from: [{ id: "06" }],
+      },
+    ],
+    deskripsi: {
+      pitch:
+        "Studio Kaos adalah editor mockup baju: merancang di kanvas 2D dengan ukuran fisik, lalu melihat hasilnya di 3D tanpa kehilangan skala sungguhan.",
+      masalah:
+        "Banyak generator mockup memakai gambar baju yang sudah jadi. Desain tidak terikat size, sisi, atau centimeter. Yang terlihat bagus di layar sering tidak masuk akal di kain.",
+      solusi:
+        "Saya merancang alur kerja studio: produk dan ukuran dulu, layer di bidang baju, baru generate 3D. Satuan tetap cm, 1:1 ke model.",
+      peran:
+        "Saya merancang dan membangun pengalaman produk: kanvas, panel produk, layer, dan jembatan 2D ke 3D sampai bisa dipakai di mockup.neodeeps.com.",
+      hasil:
+        "Sebuah studio hidup yang bisa dibuka publik: pilih baju, desain di sisi yang benar, lalu lihat mockup 3D dengan skala yang jujur.",
+    },
+  },
+  {
     slug: "pulse",
     id: "01",
     title: "Pulse",

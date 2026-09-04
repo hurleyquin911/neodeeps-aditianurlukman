@@ -88,6 +88,27 @@ function ShopMock() {
   );
 }
 
+function ShirtMock() {
+  return (
+    <div className="flex flex-wrap items-start justify-center gap-4 p-6">
+      <div className="w-36 rounded-[1.4rem] border border-white/20 bg-black/30 px-4 pt-3 pb-4">
+        <div className="mx-auto h-[7.5rem] w-[5.5rem] rounded-b-[1.6rem] rounded-t-lg bg-white/18" />
+        <p className="mt-2 text-center text-[10px] tracking-wide text-white/55 uppercase">
+          Kaos M
+        </p>
+      </div>
+      <div className="min-w-[12rem] flex-1 space-y-2">
+        {["Produk", "Layer", "Generate 3D"].map((label) => (
+          <div key={label} className="rounded-xl bg-black/25 px-3 py-2.5">
+            <p className="text-[10px] text-white/50">{label}</p>
+            <div className="mt-1.5 h-2 w-3/4 rounded-full bg-white/25" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function SiteMock() {
   return (
     <div className="space-y-3 p-6">
@@ -125,6 +146,8 @@ export function ProjectVisual({ project }: { project: Project }) {
         <DashboardMock />
       ) : kind === "Ecommerce" ? (
         <ShopMock />
+      ) : kind === "3D Studio" ? (
+        <ShirtMock />
       ) : (
         <SiteMock />
       )}
