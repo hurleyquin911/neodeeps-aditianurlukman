@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800">
+  <rect width="1280" height="800" fill="#121214"/>
+  <rect width="1280" height="46" fill="#1c1c20"/>
+  <circle cx="24" cy="23" r="6" fill="#fb7185"/>
+  <circle cx="44" cy="23" r="6" fill="#fbbf24"/>
+  <circle cx="64" cy="23" r="6" fill="#34d399"/>
+  <rect x="96" y="12" width="420" height="22" rx="11" fill="#0e0e10"/>
+  <text x="112" y="27" fill="#8d887f" font-size="12" font-family="Segoe UI, system-ui, sans-serif">ecommerce.neodeeps.com/produk</text>
+  <rect y="46" width="1280" height="754" fill="#f7f3ee"/>
+  
+  <rect x="0" y="46" width="1280" height="64" fill="#f7f3ee"/>
+  <text x="48" y="86" fill="#1a1612" font-size="22" font-family="Segoe UI, system-ui, sans-serif" font-weight="700" letter-spacing="3">ARUNA</text>
+  <text x="220" y="84" fill="#6b6258" font-size="14" font-family="Segoe UI, system-ui, sans-serif" >Musim</text>
+  <text x="290" y="84" fill="#6b6258" font-size="14" font-family="Segoe UI, system-ui, sans-serif" >Bentuk</text>
+  <text x="370" y="84" fill="#6b6258" font-size="14" font-family="Segoe UI, system-ui, sans-serif" >Jurnal</text>
+  <text x="1120" y="84" fill="#1a1612" font-size="14" font-family="Segoe UI, system-ui, sans-serif" text-anchor="end">Tas  2</text>
+  <line x1="0" y1="110" x2="1280" y2="110" stroke="#e4d9c8"/>
+
+    <rect x="48" y="150" width="376" height="520" rx="24" fill="#fff"/>
+        <rect x="64" y="166" width="344" height="340" rx="18" fill="#f3eadf"/>
+        <g>
+    <ellipse cx="236" cy="460" rx="60.8" ry="10" fill="#000" opacity="0.12"/>
+    <path d="M200.8 218 Q236 229.2 271.2 218 L303.20000000000005 277.2 L280.8 291.6 L274.4 450 L197.6 450 L191.2 291.6 L168.8 277.2 Z" fill="#b08968"/>
+    <path d="M220 226 Q236 244 252 226" fill="none" stroke="#fff" stroke-opacity="0.35" stroke-width="3"/>
+  </g>
+        <rect x="76" y="430" width="72" height="26" rx="13" fill="#1a1612"/>
+        <text x="112" y="448" fill="#f7f3ee" font-size="11" font-family="Segoe UI, system-ui, sans-serif" text-anchor="middle">BARU</text>
+        <text x="72" y="540" fill="#1a1612" font-size="22" font-family="Segoe UI, system-ui, sans-serif" font-weight="700">Kemeja linen</text>
+        <text x="72" y="572" fill="#8d6e53" font-size="16" font-family="Segoe UI, system-ui, sans-serif" >Rp 489.000</text><rect x="448" y="150" width="376" height="520" rx="24" fill="#fff"/>
+        <rect x="464" y="166" width="344" height="340" rx="18" fill="#f3eadf"/>
+        <g>
+    <ellipse cx="636" cy="460" rx="60.8" ry="10" fill="#000" opacity="0.12"/>
+    <path d="M600.8 218 Q636 229.2 671.2 218 L703.2 277.2 L680.8 291.6 L674.4 450 L597.6 450 L591.2 291.6 L568.8 277.2 Z" fill="#6b4f3a"/>
+    <path d="M620 226 Q636 244 652 226" fill="none" stroke="#fff" stroke-opacity="0.35" stroke-width="3"/>
+  </g>
+        <rect x="476" y="430" width="72" height="26" rx="13" fill="#1a1612"/>
+        <text x="512" y="448" fill="#f7f3ee" font-size="11" font-family="Segoe UI, system-ui, sans-serif" text-anchor="middle">BARU</text>
+        <text x="472" y="540" fill="#1a1612" font-size="22" font-family="Segoe UI, system-ui, sans-serif" font-weight="700">Celana pasir</text>
+        <text x="472" y="572" fill="#8d6e53" font-size="16" font-family="Segoe UI, system-ui, sans-serif" >Rp 329.000</text><rect x="848" y="150" width="376" height="520" rx="24" fill="#fff"/>
+        <rect x="864" y="166" width="344" height="340" rx="18" fill="#f3eadf"/>
+        <g>
+    <ellipse cx="1036" cy="460" rx="60.8" ry="10" fill="#000" opacity="0.12"/>
+    <path d="M1000.8 218 Q1036 229.2 1071.2 218 L1103.2 277.2 L1080.8 291.6 L1074.4 450 L997.6 450 L991.2 291.6 L968.8 277.2 Z" fill="#d7b899"/>
+    <path d="M1020 226 Q1036 244 1052 226" fill="none" stroke="#fff" stroke-opacity="0.35" stroke-width="3"/>
+  </g>
+        <rect x="876" y="430" width="72" height="26" rx="13" fill="#1a1612"/>
+        <text x="912" y="448" fill="#f7f3ee" font-size="11" font-family="Segoe UI, system-ui, sans-serif" text-anchor="middle">BARU</text>
+        <text x="872" y="540" fill="#1a1612" font-size="22" font-family="Segoe UI, system-ui, sans-serif" font-weight="700">Dress senja</text>
+        <text x="872" y="572" fill="#8d6e53" font-size="16" font-family="Segoe UI, system-ui, sans-serif" >Rp 559.000</text>
+</svg>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="1500" viewBox="0 0 780 1500">
+  <rect width="780" height="1500" fill="#0b0d10"/>
+  <rect x="28" y="24" width="724" height="1452" rx="64" fill="#06211c"/>
+  <rect x="52" y="48" width="676" height="1404" rx="44" fill="#0c2420"/>
+  <rect x="290" y="64" width="200" height="26" rx="13" fill="#050607"/>
+  <text x="88" y="140" fill="#5eead4" font-size="14" font-family="Segoe UI, system-ui, sans-serif" >Detail pasien</text>
+    <text x="88" y="186" fill="#ecfeff" font-size="34" font-family="Segoe UI, system-ui, sans-serif" font-weight="700">Ayu Pratiwi</text>
+    <text x="88" y="222" fill="#99f6e4" font-size="16" font-family="Segoe UI, system-ui, sans-serif" >Ruang 2  ·  prioritas tinggi</text>
+    <rect x="80" y="270" width="620" height="130" rx="22" fill="#14332e"/>
+        <text x="108" y="318" fill="#5eead4" font-size="14" font-family="Segoe UI, system-ui, sans-serif" >Tekanan</text>
+        <text x="108" y="362" fill="#ecfeff" font-size="24" font-family="Segoe UI, system-ui, sans-serif" font-weight="700">128/82</text><rect x="80" y="420" width="620" height="130" rx="22" fill="#14332e"/>
+        <text x="108" y="468" fill="#5eead4" font-size="14" font-family="Segoe UI, system-ui, sans-serif" >Nadi</text>
+        <text x="108" y="512" fill="#ecfeff" font-size="24" font-family="Segoe UI, system-ui, sans-serif" font-weight="700">88 bpm</text><rect x="80" y="570" width="620" height="130" rx="22" fill="#14332e"/>
+        <text x="108" y="618" fill="#5eead4" font-size="14" font-family="Segoe UI, system-ui, sans-serif" >Catatan</text>
+        <text x="108" y="662" fill="#ecfeff" font-size="24" font-family="Segoe UI, system-ui, sans-serif" font-weight="700">Cek ulang 30 menit</text>
+</svg>

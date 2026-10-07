@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800">
+  <rect width="1280" height="800" fill="#121214"/>
+  <rect width="1280" height="46" fill="#1c1c20"/>
+  <circle cx="24" cy="23" r="6" fill="#fb7185"/>
+  <circle cx="44" cy="23" r="6" fill="#fbbf24"/>
+  <circle cx="64" cy="23" r="6" fill="#34d399"/>
+  <rect x="96" y="12" width="420" height="22" rx="11" fill="#0e0e10"/>
+  <text x="112" y="27" fill="#8d887f" font-size="12" font-family="Segoe UI, system-ui, sans-serif">neodeeps.com/komunitas</text>
+  <rect y="46" width="1280" height="754" fill="#10140a"/>
+  <rect y="46" width="1280" height="754" fill="#10140a"/>
+    <text x="48" y="110" fill="#f7fee7" font-size="32" font-family="Segoe UI, system-ui, sans-serif" font-weight="700">Jelajah komunitas</text>
+    <rect x="48" y="160" width="376" height="230" rx="20" fill="#1a240f"/>
+        <circle cx="96" cy="216" r="16" fill="#d4ff3f"/>
+        <text x="76" y="300" fill="#f7fee7" font-size="24" font-family="Segoe UI, system-ui, sans-serif" font-weight="700">Jakarta</text>
+        <text x="76" y="336" fill="#d4ff3f" font-size="16" font-family="Segoe UI, system-ui, sans-serif" >desain</text><rect x="448" y="160" width="376" height="230" rx="20" fill="#1a240f"/>
+        <circle cx="496" cy="216" r="16" fill="#d4ff3f"/>
+        <text x="476" y="300" fill="#f7fee7" font-size="24" font-family="Segoe UI, system-ui, sans-serif" font-weight="700">Bandung</text>
+        <text x="476" y="336" fill="#d4ff3f" font-size="16" font-family="Segoe UI, system-ui, sans-serif" >android</text><rect x="848" y="160" width="376" height="230" rx="20" fill="#1a240f"/>
+        <circle cx="896" cy="216" r="16" fill="#d4ff3f"/>
+        <text x="876" y="300" fill="#f7fee7" font-size="24" font-family="Segoe UI, system-ui, sans-serif" font-weight="700">Surabaya</text>
+        <text x="876" y="336" fill="#d4ff3f" font-size="16" font-family="Segoe UI, system-ui, sans-serif" >web</text><rect x="48" y="420" width="376" height="230" rx="20" fill="#1a240f"/>
+        <circle cx="96" cy="476" r="16" fill="#d4ff3f"/>
+        <text x="76" y="560" fill="#f7fee7" font-size="24" font-family="Segoe UI, system-ui, sans-serif" font-weight="700">Yogya</text>
+        <text x="76" y="596" fill="#d4ff3f" font-size="16" font-family="Segoe UI, system-ui, sans-serif" >motion</text><rect x="448" y="420" width="376" height="230" rx="20" fill="#1a240f"/>
+        <circle cx="496" cy="476" r="16" fill="#d4ff3f"/>
+        <text x="476" y="560" fill="#f7fee7" font-size="24" font-family="Segoe UI, system-ui, sans-serif" font-weight="700">Medan</text>
+        <text x="476" y="596" fill="#d4ff3f" font-size="16" font-family="Segoe UI, system-ui, sans-serif" >produk</text><rect x="848" y="420" width="376" height="230" rx="20" fill="#1a240f"/>
+        <circle cx="896" cy="476" r="16" fill="#d4ff3f"/>
+        <text x="876" y="560" fill="#f7fee7" font-size="24" font-family="Segoe UI, system-ui, sans-serif" font-weight="700">Bali</text>
+        <text x="876" y="596" fill="#d4ff3f" font-size="16" font-family="Segoe UI, system-ui, sans-serif" >komunitas</text>
+</svg>

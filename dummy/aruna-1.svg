@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800">
+  <rect width="1280" height="800" fill="#121214"/>
+  <rect width="1280" height="46" fill="#1c1c20"/>
+  <circle cx="24" cy="23" r="6" fill="#fb7185"/>
+  <circle cx="44" cy="23" r="6" fill="#fbbf24"/>
+  <circle cx="64" cy="23" r="6" fill="#34d399"/>
+  <rect x="96" y="12" width="420" height="22" rx="11" fill="#0e0e10"/>
+  <text x="112" y="27" fill="#8d887f" font-size="12" font-family="Segoe UI, system-ui, sans-serif">ecommerce.neodeeps.com/bentuk</text>
+  <rect y="46" width="1280" height="754" fill="#f7f3ee"/>
+  
+  <rect x="0" y="46" width="1280" height="64" fill="#f7f3ee"/>
+  <text x="48" y="86" fill="#1a1612" font-size="22" font-family="Segoe UI, system-ui, sans-serif" font-weight="700" letter-spacing="3">ARUNA</text>
+  <text x="220" y="84" fill="#6b6258" font-size="14" font-family="Segoe UI, system-ui, sans-serif" >Musim</text>
+  <text x="290" y="84" fill="#6b6258" font-size="14" font-family="Segoe UI, system-ui, sans-serif" >Bentuk</text>
+  <text x="370" y="84" fill="#6b6258" font-size="14" font-family="Segoe UI, system-ui, sans-serif" >Jurnal</text>
+  <text x="1120" y="84" fill="#1a1612" font-size="14" font-family="Segoe UI, system-ui, sans-serif" text-anchor="end">Tas  2</text>
+  <line x1="0" y1="110" x2="1280" y2="110" stroke="#e4d9c8"/>
+
+    <text x="48" y="168" fill="#1a1612" font-size="36" font-family="Segoe UI, system-ui, sans-serif" font-weight="700">Belanja menurut bentuk</text>
+    <text x="48" y="202" fill="#6b6258" font-size="16" font-family="Segoe UI, system-ui, sans-serif" >Enam jalur, satu etalase.</text>
+    <rect x="48" y="240" width="376" height="230" rx="24" fill="#fff"/>
+          <g>
+    <ellipse cx="236" cy="404" rx="45.6" ry="10" fill="#000" opacity="0.12"/>
+    <path d="M209.6 272 Q236 274.4 262.4 272 L286.4 300.4 L269.6 308.2 L264.8 394 L207.2 394 L202.4 308.2 L185.6 300.4 Z" fill="#c4a574"/>
+    <path d="M224 280 Q236 298 248 280" fill="none" stroke="#fff" stroke-opacity="0.35" stroke-width="3"/>
+  </g>
+          <text x="236" y="440" fill="#1a1612" font-size="18" font-family="Segoe UI, system-ui, sans-serif" text-anchor="middle" font-weight="650">Atasan</text><rect x="448" y="240" width="376" height="230" rx="24" fill="#fff"/>
+          <g>
+    <ellipse cx="636" cy="404" rx="45.6" ry="10" fill="#000" opacity="0.12"/>
+    <path d="M609.6 272 Q636 274.4 662.4 272 L686.4 300.4 L669.6 308.2 L664.8 394 L607.2 394 L602.4 308.2 L585.6 300.4 Z" fill="#8d6e53"/>
+    <path d="M624 280 Q636 298 648 280" fill="none" stroke="#fff" stroke-opacity="0.35" stroke-width="3"/>
+  </g>
+          <text x="636" y="440" fill="#1a1612" font-size="18" font-family="Segoe UI, system-ui, sans-serif" text-anchor="middle" font-weight="650">Bawahan</text><rect x="848" y="240" width="376" height="230" rx="24" fill="#fff"/>
+          <g>
+    <ellipse cx="1036" cy="404" rx="45.6" ry="10" fill="#000" opacity="0.12"/>
+    <path d="M1009.6 272 Q1036 274.4 1062.4 272 L1086.4 300.4 L1069.6 308.2 L1064.8 394 L1007.2 394 L1002.4 308.2 L985.6 300.4 Z" fill="#6b4f3a"/>
+    <path d="M1024 280 Q1036 298 1048 280" fill="none" stroke="#fff" stroke-opacity="0.35" stroke-width="3"/>
+  </g>
+          <text x="1036" y="440" fill="#1a1612" font-size="18" font-family="Segoe UI, system-ui, sans-serif" text-anchor="middle" font-weight="650">Outerwear</text><rect x="48" y="490" width="376" height="230" rx="24" fill="#fff"/>
+          <g>
+    <ellipse cx="236" cy="654" rx="45.6" ry="10" fill="#000" opacity="0.12"/>
+    <path d="M209.6 522 Q236 524.4 262.4 522 L286.4 550.4 L269.6 558.2 L264.8 644 L207.2 644 L202.4 558.2 L185.6 550.4 Z" fill="#d7b899"/>
+    <path d="M224 530 Q236 548 248 530" fill="none" stroke="#fff" stroke-opacity="0.35" stroke-width="3"/>
+  </g>
+          <text x="236" y="690" fill="#1a1612" font-size="18" font-family="Segoe UI, system-ui, sans-serif" text-anchor="middle" font-weight="650">Dress</text><rect x="448" y="490" width="376" height="230" rx="24" fill="#fff"/>
+          <g>
+    <ellipse cx="636" cy="654" rx="45.6" ry="10" fill="#000" opacity="0.12"/>
+    <path d="M609.6 522 Q636 524.4 662.4 522 L686.4 550.4 L669.6 558.2 L664.8 644 L607.2 644 L602.4 558.2 L585.6 550.4 Z" fill="#a68462"/>
+    <path d="M624 530 Q636 548 648 530" fill="none" stroke="#fff" stroke-opacity="0.35" stroke-width="3"/>
+  </g>
+          <text x="636" y="690" fill="#1a1612" font-size="18" font-family="Segoe UI, system-ui, sans-serif" text-anchor="middle" font-weight="650">Aksesori</text><rect x="848" y="490" width="376" height="230" rx="24" fill="#fff"/>
+          <g>
+    <ellipse cx="1036" cy="654" rx="45.6" ry="10" fill="#000" opacity="0.12"/>
+    <path d="M1009.6 522 Q1036 524.4 1062.4 522 L1086.4 550.4 L1069.6 558.2 L1064.8 644 L1007.2 644 L1002.4 558.2 L985.6 550.4 Z" fill="#4a3b2a"/>
+    <path d="M1024 530 Q1036 548 1048 530" fill="none" stroke="#fff" stroke-opacity="0.35" stroke-width="3"/>
+  </g>
+          <text x="1036" y="690" fill="#1a1612" font-size="18" font-family="Segoe UI, system-ui, sans-serif" text-anchor="middle" font-weight="650">Sepatu</text>
+</svg>

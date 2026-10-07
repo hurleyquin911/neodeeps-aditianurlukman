@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800">
+  <rect width="1280" height="800" fill="#121214"/>
+  <rect width="1280" height="46" fill="#1c1c20"/>
+  <circle cx="24" cy="23" r="6" fill="#fb7185"/>
+  <circle cx="44" cy="23" r="6" fill="#fbbf24"/>
+  <circle cx="64" cy="23" r="6" fill="#34d399"/>
+  <rect x="96" y="12" width="420" height="22" rx="11" fill="#0e0e10"/>
+  <text x="112" y="27" fill="#8d887f" font-size="12" font-family="Segoe UI, system-ui, sans-serif">ecommerce.neodeeps.com</text>
+  <rect y="46" width="1280" height="754" fill="#f7f3ee"/>
+  
+  <rect x="0" y="46" width="1280" height="64" fill="#f7f3ee"/>
+  <text x="48" y="86" fill="#1a1612" font-size="22" font-family="Segoe UI, system-ui, sans-serif" font-weight="700" letter-spacing="3">ARUNA</text>
+  <text x="220" y="84" fill="#6b6258" font-size="14" font-family="Segoe UI, system-ui, sans-serif" >Musim</text>
+  <text x="290" y="84" fill="#6b6258" font-size="14" font-family="Segoe UI, system-ui, sans-serif" >Bentuk</text>
+  <text x="370" y="84" fill="#6b6258" font-size="14" font-family="Segoe UI, system-ui, sans-serif" >Jurnal</text>
+  <text x="1120" y="84" fill="#1a1612" font-size="14" font-family="Segoe UI, system-ui, sans-serif" text-anchor="end">Tas  2</text>
+  <line x1="0" y1="110" x2="1280" y2="110" stroke="#e4d9c8"/>
+
+    <rect x="48" y="134" width="760" height="390" rx="28" fill="url(#hero)"/>
+    <defs>
+      <linearGradient id="hero" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#efe2cf"/>
+        <stop offset="1" stop-color="#b08968"/>
+      </linearGradient>
+    </defs>
+    <text x="84" y="250" fill="#6b5344" font-size="14" font-family="Segoe UI, system-ui, sans-serif" letter-spacing="3">MUSIM TRANSISI</text>
+    <text x="84" y="300" fill="#1a1612" font-size="42" font-family="Segoe UI, system-ui, sans-serif" font-weight="700">Tenang untuk</text>
+    <text x="84" y="348" fill="#1a1612" font-size="42" font-family="Segoe UI, system-ui, sans-serif" font-weight="700">iklim tropis.</text>
+    <rect x="84" y="380" width="180" height="44" rx="22" fill="#1a1612"/>
+    <text x="174" y="408" fill="#f7f3ee" font-size="14" font-family="Segoe UI, system-ui, sans-serif" text-anchor="middle">Lihat etalase</text>
+    <g>
+    <ellipse cx="650" cy="480" rx="68.4" ry="10" fill="#000" opacity="0.12"/>
+    <path d="M610.4 198 Q650 212.4 689.6 198 L725.6 268.4 L700.4 285.2 L693.2 470 L606.8 470 L599.6 285.2 L574.4 268.4 Z" fill="#6b4f3a"/>
+    <path d="M632 206 Q650 224 668 206" fill="none" stroke="#fff" stroke-opacity="0.35" stroke-width="3"/>
+  </g>
+    <rect x="836" y="134" width="396" height="186" rx="24" fill="#efe6da"/>
+    <g>
+    <ellipse cx="955" cy="310" rx="41.8" ry="10" fill="#000" opacity="0.12"/>
+    <path d="M930.8 168 Q955 171.2 979.2 168 L1001.2 199.2 L985.8 207.6 L981.4 300 L928.6 300 L924.2 207.6 L908.8 199.2 Z" fill="#c4a574"/>
+    <path d="M944 176 Q955 194 966 176" fill="none" stroke="#fff" stroke-opacity="0.35" stroke-width="3"/>
+  </g>
+    <text x="980" y="292" fill="#1a1612" font-size="16" font-family="Segoe UI, system-ui, sans-serif" font-weight="650">Linen sore</text>
+    <rect x="836" y="338" width="396" height="186" rx="24" fill="#e7d3be"/>
+    <g>
+    <ellipse cx="955" cy="514" rx="41.8" ry="10" fill="#000" opacity="0.12"/>
+    <path d="M930.8 372 Q955 375.2 979.2 372 L1001.2 403.2 L985.8 411.6 L981.4 504 L928.6 504 L924.2 411.6 L908.8 403.2 Z" fill="#8d6e53"/>
+    <path d="M944 380 Q955 398 966 380" fill="none" stroke="#fff" stroke-opacity="0.35" stroke-width="3"/>
+  </g>
+    <text x="980" y="496" fill="#1a1612" font-size="16" font-family="Segoe UI, system-ui, sans-serif" font-weight="650">Outer pasir</text>
+</svg>

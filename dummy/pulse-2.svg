@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="1500" viewBox="0 0 780 1500">
+  <rect width="780" height="1500" fill="#0b0d10"/>
+  <rect x="28" y="24" width="724" height="1452" rx="64" fill="#06211c"/>
+  <rect x="52" y="48" width="676" height="1404" rx="44" fill="#0c2420"/>
+  <rect x="290" y="64" width="200" height="26" rx="13" fill="#050607"/>
+  <text x="88" y="150" fill="#ecfeff" font-size="32" font-family="Segoe UI, system-ui, sans-serif" font-weight="700">Aksi cepat</text>
+    <text x="88" y="190" fill="#99f6e4" font-size="16" font-family="Segoe UI, system-ui, sans-serif" >Tanpa masuk menu dalam.</text>
+    <rect x="80" y="240" width="300" height="250" rx="28" fill="#14332e"/>
+        <text x="230" y="380" fill="#ecfeff" font-size="26" font-family="Segoe UI, system-ui, sans-serif" text-anchor="middle" font-weight="700">Catat</text><rect x="400" y="240" width="300" height="250" rx="28" fill="#5eead4"/>
+        <text x="550" y="380" fill="#06211c" font-size="26" font-family="Segoe UI, system-ui, sans-serif" text-anchor="middle" font-weight="700">Eskalasi</text><rect x="80" y="520" width="300" height="250" rx="28" fill="#14332e"/>
+        <text x="230" y="660" fill="#ecfeff" font-size="26" font-family="Segoe UI, system-ui, sans-serif" text-anchor="middle" font-weight="700">Selesai</text><rect x="400" y="520" width="300" height="250" rx="28" fill="#14332e"/>
+        <text x="550" y="660" fill="#ecfeff" font-size="26" font-family="Segoe UI, system-ui, sans-serif" text-anchor="middle" font-weight="700">Jadwal</text>
+</svg>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800">
+  <rect width="1280" height="800" fill="#121214"/>
+  <rect width="1280" height="46" fill="#1c1c20"/>
+  <circle cx="24" cy="23" r="6" fill="#fb7185"/>
+  <circle cx="44" cy="23" r="6" fill="#fbbf24"/>
+  <circle cx="64" cy="23" r="6" fill="#34d399"/>
+  <rect x="96" y="12" width="420" height="22" rx="11" fill="#0e0e10"/>
+  <text x="112" y="27" fill="#8d887f" font-size="12" font-family="Segoe UI, system-ui, sans-serif">neodeeps.com/aplikasi</text>
+  <rect y="46" width="1280" height="754" fill="#10140a"/>
+  <rect y="46" width="1280" height="754" fill="#10140a"/>
+    <text x="80" y="180" fill="#f7fee7" font-size="48" font-family="Segoe UI, system-ui, sans-serif" font-weight="700">Aplikasi sedang</text>
+    <text x="80" y="244" fill="#d4ff3f" font-size="48" font-family="Segoe UI, system-ui, sans-serif" font-weight="700">dibangun.</text>
+    <text x="80" y="310" fill="#ecfccb" font-size="18" font-family="Segoe UI, system-ui, sans-serif" >Belum tayang. Ini statusnya, bukan janji palsu.</text>
+    <rect x="760" y="140" width="360" height="560" rx="36" fill="#1a240f"/>
+    <rect x="788" y="168" width="304" height="500" rx="24" fill="#10140a"/>
+    <text x="940" y="400" fill="#d4ff3f" font-size="22" font-family="Segoe UI, system-ui, sans-serif" text-anchor="middle" font-weight="700">Segera</text>
+</svg>
