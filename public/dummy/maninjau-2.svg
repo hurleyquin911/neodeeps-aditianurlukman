@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800">
+  <rect width="1280" height="800" fill="#121214"/>
+  <rect width="1280" height="46" fill="#1c1c20"/>
+  <circle cx="24" cy="23" r="6" fill="#fb7185"/>
+  <circle cx="44" cy="23" r="6" fill="#fbbf24"/>
+  <circle cx="64" cy="23" r="6" fill="#34d399"/>
+  <rect x="96" y="12" width="420" height="22" rx="11" fill="#0e0e10"/>
+  <text x="112" y="27" fill="#8d887f" font-size="12" font-family="Segoe UI, system-ui, sans-serif">maninjau.neodeeps.com</text>
+  <rect y="46" width="1280" height="754" fill="#0f2418"/>
+  <rect y="46" width="1280" height="754" fill="#0f2418"/>
+    <rect x="280" y="70" width="720" height="700" rx="24" fill="#143022"/>
+    <text x="320" y="120" fill="#ecfdf5" font-size="22" font-family="Segoe UI, system-ui, sans-serif" font-weight="700">Klarifikasi</text>
+    <text x="320" y="150" fill="#86efac" font-size="14" font-family="Segoe UI, system-ui, sans-serif" >Danau Maninjau</text>
+    <rect x="560" y="190" width="400" height="86" rx="20" fill="#86efac"/>
+          <text x="584" y="240" fill="#052e16" font-size="16" font-family="Segoe UI, system-ui, sans-serif" >Bagaimana cuacanya?</text><rect x="310" y="300" width="400" height="86" rx="20" fill="#0f2418"/>
+          <text x="334" y="350" fill="#ecfdf5" font-size="16" font-family="Segoe UI, system-ui, sans-serif" >Pagi atau sore yang kamu maksud?</text>
+</svg>

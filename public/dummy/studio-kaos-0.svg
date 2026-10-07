@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800">
+  <rect width="1280" height="800" fill="#121214"/>
+  <rect width="1280" height="46" fill="#1c1c20"/>
+  <circle cx="24" cy="23" r="6" fill="#fb7185"/>
+  <circle cx="44" cy="23" r="6" fill="#fbbf24"/>
+  <circle cx="64" cy="23" r="6" fill="#34d399"/>
+  <rect x="96" y="12" width="420" height="22" rx="11" fill="#0e0e10"/>
+  <text x="112" y="27" fill="#8d887f" font-size="12" font-family="Segoe UI, system-ui, sans-serif">studio.neodeeps.com</text>
+  <rect y="46" width="1280" height="754" fill="#0e1626"/>
+  <rect y="46" width="1280" height="754" fill="#0e1626"/>
+    <rect x="24" y="70" width="220" height="700" rx="16" fill="#152033"/>
+    <text x="44" y="108" fill="#7dd3fc" font-size="13" font-family="Segoe UI, system-ui, sans-serif" >Jenis baju</text>
+    <rect x="40" y="128" width="188" height="44" rx="10" fill="#1e3a5f"/><text x="134" y="156" fill="#e8f4ff" font-size="15" font-family="Segoe UI, system-ui, sans-serif" text-anchor="middle">Kaos</text><rect x="40" y="184" width="188" height="44" rx="10" fill="#0e1626"/><text x="134" y="212" fill="#e8f4ff" font-size="15" font-family="Segoe UI, system-ui, sans-serif" text-anchor="middle">Polo</text><rect x="40" y="240" width="188" height="44" rx="10" fill="#0e1626"/><text x="134" y="268" fill="#e8f4ff" font-size="15" font-family="Segoe UI, system-ui, sans-serif" text-anchor="middle">Hoodie</text><rect x="40" y="296" width="188" height="44" rx="10" fill="#0e1626"/><text x="134" y="324" fill="#e8f4ff" font-size="15" font-family="Segoe UI, system-ui, sans-serif" text-anchor="middle">Kemeja</text>
+    <rect x="264" y="70" width="720" height="700" rx="16" fill="#10192b"/>
+    <path d="M520 180 L470 230 L500 250 L500 520 L700 520 L700 250 L730 230 L680 180 Q620 210 520 180 Z" fill="#38bdf8" opacity="0.85"/>
+    <text x="624" y="640" fill="#93c5fd" font-size="14" font-family="Segoe UI, system-ui, sans-serif" text-anchor="middle">Depan  ·  1 unit = 1 cm</text>
+    <rect x="1004" y="70" width="252" height="700" rx="16" fill="#152033"/>
+    <text x="1024" y="108" fill="#7dd3fc" font-size="13" font-family="Segoe UI, system-ui, sans-serif" >Layer</text>
+    <rect x="1020" y="128" width="220" height="40" rx="8" fill="#0e1626"/><text x="1036" y="154" fill="#e8f4ff" font-size="14" font-family="Segoe UI, system-ui, sans-serif" >Badan</text><rect x="1020" y="180" width="220" height="40" rx="8" fill="#0e1626"/><text x="1036" y="206" fill="#e8f4ff" font-size="14" font-family="Segoe UI, system-ui, sans-serif" >Teks</text><rect x="1020" y="232" width="220" height="40" rx="8" fill="#0e1626"/><text x="1036" y="258" fill="#e8f4ff" font-size="14" font-family="Segoe UI, system-ui, sans-serif" >Logo</text>
+</svg>

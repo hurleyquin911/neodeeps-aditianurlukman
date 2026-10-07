@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800">
+  <rect width="1280" height="800" fill="#121214"/>
+  <rect width="1280" height="46" fill="#1c1c20"/>
+  <circle cx="24" cy="23" r="6" fill="#fb7185"/>
+  <circle cx="44" cy="23" r="6" fill="#fbbf24"/>
+  <circle cx="64" cy="23" r="6" fill="#34d399"/>
+  <rect x="96" y="12" width="420" height="22" rx="11" fill="#0e0e10"/>
+  <text x="112" y="27" fill="#8d887f" font-size="12" font-family="Segoe UI, system-ui, sans-serif">studio.neodeeps.com/3d</text>
+  <rect y="46" width="1280" height="754" fill="#0e1626"/>
+  <rect y="46" width="1280" height="754" fill="#0e1626"/>
+    <text x="48" y="110" fill="#f0f9ff" font-size="32" font-family="Segoe UI, system-ui, sans-serif" font-weight="700">Generate 3D</text>
+    <rect x="48" y="140" width="760" height="580" rx="24" fill="#10192b"/>
+    <ellipse cx="428" cy="250" rx="70" ry="78" fill="#1e3a5f"/>
+    <path d="M300 340 Q428 300 556 340 L520 640 L336 640 Z" fill="#16324f"/>
+    <path d="M336 360 L300 430 L360 450 L390 360 Z" fill="#38bdf8"/>
+    <path d="M520 360 L556 430 L496 450 L466 360 Z" fill="#38bdf8"/>
+    <path d="M360 360 L496 360 L480 620 L376 620 Z" fill="#7dd3fc"/>
+    <text x="428" y="690" fill="#93c5fd" font-size="16" font-family="Segoe UI, system-ui, sans-serif" text-anchor="middle">Pratinjau tubuh baju</text>
+    <rect x="840" y="140" width="392" height="580" rx="24" fill="#152033"/>
+    <text x="872" y="196" fill="#f0f9ff" font-size="20" font-family="Segoe UI, system-ui, sans-serif" font-weight="700">Siap digenerate</text>
+    <text x="872" y="236" fill="#93c5fd" font-size="15" font-family="Segoe UI, system-ui, sans-serif" >Depan, belakang, lengan.</text>
+    <rect x="872" y="600" width="328" height="56" rx="28" fill="#38bdf8"/>
+    <text x="1036" y="634" fill="#0b1220" font-size="16" font-family="Segoe UI, system-ui, sans-serif" text-anchor="middle" font-weight="700">Generate</text>
+</svg>

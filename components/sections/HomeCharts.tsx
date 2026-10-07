@@ -3,9 +3,9 @@
 import { useRef } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { reducedMotion } from "@/lib/motion";
-import { playStoreApps } from "@/lib/data";
 import { projects } from "@/lib/projects";
-import { AppBadge } from "@/components/sections/AppBadge";
+import { accentStyle } from "@/lib/accents";
+import { PlayStoreShowcase } from "@/components/sections/PlayStoreShowcase";
 
 function bucket(category: string) {
   if (category.includes("Mobile")) return "Mobile";
@@ -16,12 +16,13 @@ function bucket(category: string) {
 }
 
 const COLORS: Record<string, string> = {
-  Mobile: "#5eead4",
+  Mobile: "#34d399",
   AI: "#d4ff3f",
-  Motion: "#fdba74",
-  Web: "#93c5fd",
-  Komunitas: "#f6f4ef",
+  Motion: "#fbbf24",
+  Web: "#38bdf8",
+  Komunitas: "#fb7185",
 };
+
 
 const mix = Object.entries(
   projects.reduce<Record<string, number>>((acc, project) => {
@@ -130,11 +131,14 @@ export function HomeCharts() {
   return (
     <div
       ref={rootRef}
-      className="mt-4 grid gap-4 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.7fr)]"
+      className="mt-8 grid gap-4 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.7fr)]"
     >
       <div className="flex flex-col gap-4">
-        <article className="reveal rounded-2xl border border-line bg-ink p-5">
-          <p className="text-sm text-acid">Komposisi karya</p>
+        <article
+          className="reveal tint tint-static rounded-2xl p-5"
+          style={accentStyle(1)}
+        >
+          <p className="accent-text text-sm font-semibold">Komposisi karya</p>
           <p className="mt-1 text-sm text-stone">
             Pembagian dari {total} studi kasus di portofolio.
           </p>
@@ -159,18 +163,40 @@ export function HomeCharts() {
           </ul>
         </article>
 
-        <article className="reveal rounded-2xl border border-line bg-ink p-5">
-          <p className="text-sm text-acid">Ritme eksplorasi</p>
+        <article
+          className="reveal tint tint-static rounded-2xl p-5"
+          style={accentStyle(2)}
+        >
+          <p className="accent-text text-sm font-semibold">Ritme eksplorasi</p>
           <p className="mt-1 text-sm text-stone">
             Intensitas percobaan, bukan metrik produksi.
           </p>
           <svg viewBox="0 0 240 120" className="mt-6 w-full" aria-hidden>
+            <defs>
+              <linearGradient id="spark-stroke" x1="0" x2="1" y1="0" y2="0">
+                <stop offset="0%" stopColor="#38bdf8" />
+                <stop offset="50%" stopColor="#a78bfa" />
+                <stop offset="100%" stopColor="#fb7185" />
+              </linearGradient>
+              <linearGradient id="spark-fill" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stopColor="#a78bfa" stopOpacity="0.35" />
+                <stop offset="100%" stopColor="#a78bfa" stopOpacity="0" />
+              </linearGradient>
+            </defs>
             <line x1="8" y1="100" x2="232" y2="100" stroke="rgba(246,244,239,0.12)" />
+            <polygon
+              fill="url(#spark-fill)"
+              points={`16,100 ${spark
+                .map((y, i) => `${16 + i * 30},${100 - y}`)
+                .join(" ")} ${16 + (spark.length - 1) * 30},100`}
+            />
             <polyline
               className="chart-line"
               fill="none"
-              stroke="#d4ff3f"
-              strokeWidth="2"
+              stroke="url(#spark-stroke)"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               strokeDasharray="400"
               strokeDashoffset="0"
               points={spark
@@ -185,8 +211,8 @@ export function HomeCharts() {
                 cy={100 - y}
                 r="3.5"
                 fill="#0c0c0e"
-                stroke="#d4ff3f"
-                strokeWidth="1.6"
+                stroke={i < spark.length / 2 ? "#38bdf8" : "#fb7185"}
+                strokeWidth="1.8"
               />
             ))}
           </svg>
@@ -197,49 +223,7 @@ export function HomeCharts() {
         </article>
       </div>
 
-      <article className="reveal rounded-2xl border border-line bg-ink p-5 md:p-6">
-        <p className="text-sm text-acid">Play Store</p>
-        <p className="mt-1 text-sm text-stone">
-          Aplikasi yang pernah tayang di Google Play.
-        </p>
-
-        <ul className="relative mt-6">
-          <span
-            aria-hidden
-            className="absolute top-3 bottom-6 left-[3.3rem] w-px bg-[#c4b8a4]/70 md:left-[3.55rem]"
-          />
-          {playStoreApps.map((app) => (
-            <li key={app.packageId} className="play-app">
-              <a
-                href={`https://play.google.com/store/apps/details?id=${app.packageId}`}
-                target="_blank"
-                rel="noreferrer"
-                className="grid grid-cols-[2.75rem_1.1rem_minmax(0,1fr)] items-start gap-x-2 rounded-xl py-2.5 pr-1 transition-colors hover:bg-cream/5 md:grid-cols-[3rem_1.1rem_minmax(0,1fr)] md:gap-x-3"
-              >
-                <AppBadge mark={app.id} />
-                <span className="relative mt-3 flex justify-center">
-                  <span className="size-2.5 rounded-full bg-[#c4b8a4] ring-4 ring-ink" />
-                </span>
-                <span className="min-w-0 pt-0.5">
-                  <span className="block font-serif text-[1.05rem] leading-snug font-bold text-cream md:text-lg">
-                    {app.name}{" "}
-                    <span className="font-normal text-stone">({app.packageId})</span>
-                  </span>
-                  <span className="mt-1 block pl-3 text-sm leading-relaxed text-stone">
-                    <span className="mr-1.5 text-cream/70">•</span>
-                    {app.blurb}
-                  </span>
-                </span>
-              </a>
-            </li>
-          ))}
-        </ul>
-
-        <p className="mt-5 text-sm leading-relaxed text-stone">
-          Lima produk mobile yang sudah pernah diunggah ke Play Store. Klik
-          untuk membuka listing masing-masing.
-        </p>
-      </article>
+      <PlayStoreShowcase />
     </div>
   );
 }

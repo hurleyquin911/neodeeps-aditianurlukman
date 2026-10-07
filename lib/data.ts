@@ -56,6 +56,7 @@ export const stats = [
 export const playStoreApps = [
   {
     id: "finote",
+    logo: "/img/finote.png",
     name: "FiNote",
     packageId: "com.guru1.catatan_keuangan",
     blurb:
@@ -63,6 +64,7 @@ export const playStoreApps = [
   },
   {
     id: "muslim",
+    logo: "/img/muslim%2B.png",
     name: "Muslim+",
     packageId: "com.guru1.pengingatsholat",
     blurb:
@@ -70,6 +72,7 @@ export const playStoreApps = [
   },
   {
     id: "arisan",
+    logo: "/img/arisankuy.png",
     name: "Arisan Kuy",
     packageId: "com.guru1.arisankuy",
     blurb:
@@ -77,6 +80,7 @@ export const playStoreApps = [
   },
   {
     id: "libur",
+    logo: "/img/liburcheck.png",
     name: "Libur Check",
     packageId: "com.travelchecklist.app",
     blurb:
@@ -84,6 +88,7 @@ export const playStoreApps = [
   },
   {
     id: "pay",
+    logo: "/img/payontime.png",
     name: "Pay On Time",
     packageId: "com.guru1.catatutang",
     blurb:

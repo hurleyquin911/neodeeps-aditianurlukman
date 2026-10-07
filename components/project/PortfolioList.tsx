@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { projects } from "@/lib/projects";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { reducedMotion } from "@/lib/motion";
+import { accentStyle } from "@/lib/accents";
 import { ProjectCard } from "@/components/project/ProjectCard";
 
 export function PortfolioList() {
@@ -49,12 +50,14 @@ export function PortfolioList() {
       ref={rootRef}
       className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-20"
     >
-      <p className="folio-kicker text-sm font-medium text-acid">Portofolio</p>
-      <div className="mt-3 flex flex-wrap items-end justify-between gap-4">
-        <h1 className="folio-title font-display text-[clamp(2rem,5vw,3.4rem)] font-extrabold tracking-[-0.04em]">
-          Semua proyek
+      <p className="folio-kicker kicker" style={accentStyle(1)}>
+        Portofolio
+      </p>
+      <div className="mt-5 flex flex-wrap items-end justify-between gap-4">
+        <h1 className="folio-title font-display text-[clamp(2.2rem,5.4vw,3.8rem)] font-extrabold tracking-[-0.04em]">
+          Semua <span className="text-spectrum">proyek</span>
         </h1>
-        <p className="folio-copy font-mono text-sm text-stone">
+        <p className="folio-copy chip rounded-full px-3 py-1 font-mono text-sm" style={accentStyle(2)}>
           {String(projects.length).padStart(2, "0")} karya
         </p>
       </div>
@@ -62,7 +65,7 @@ export function PortfolioList() {
         Daftar lengkap studi kasus. Buka salah satu proyek untuk melihat
         tampilan, alur pemakaian, dan deskripsi presentasi.
       </p>
-      <div className="folio-rule mt-8 h-px origin-left bg-line" />
+      <div className="folio-rule bg-spectrum mt-8 h-0.5 origin-left rounded-full opacity-70" />
 
       <div className="mt-10 grid gap-5 md:grid-cols-2 md:gap-6">
         {projects.map((project, index) => (

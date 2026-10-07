@@ -3,6 +3,7 @@
 import { FormEvent, useRef, useState } from "react";
 import { briefPoints, contactFaq, contactTopics, site } from "@/lib/data";
 import { useReveal } from "@/lib/motion";
+import { accentStyle } from "@/lib/accents";
 import { Magnetic } from "@/components/ui/Magnetic";
 
 export function Contact() {
@@ -37,15 +38,16 @@ export function Contact() {
       id="contact"
       className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24"
     >
-      <p className="reveal text-sm font-medium text-acid">Kontak</p>
-      <h1 className="reveal font-display mt-3 text-[clamp(1.8rem,4vw,3rem)] font-extrabold tracking-[-0.03em]">
-        Mulai diskusikan proyek digital Anda
+      <p className="reveal kicker" style={accentStyle(5)}>
+        {site.availability}
+      </p>
+      <h1 className="reveal font-display mt-5 max-w-4xl text-[clamp(2rem,4.6vw,3.6rem)] leading-[1.08] font-extrabold tracking-[-0.03em]">
+        Mulai diskusikan proyek <span className="text-spectrum">digital</span> Anda
       </h1>
-      <p className="reveal mt-3 text-sm text-stone">{site.availability}</p>
       <Magnetic>
         <a
           href={`mailto:${site.email}`}
-          className="reveal mt-4 inline-block text-lg text-acid underline-offset-4 transition-transform hover:underline md:text-xl"
+          className="reveal text-spectrum mt-5 inline-block text-xl font-semibold underline-offset-4 hover:underline md:text-2xl"
         >
           {site.email}
         </a>
@@ -64,7 +66,7 @@ export function Contact() {
               required
               name="name"
               autoComplete="name"
-              className="mt-2 w-full rounded-xl border border-line bg-ink px-4 py-3 text-base outline-none transition-colors focus:border-acid"
+              className="mt-2 w-full rounded-xl border border-line bg-ink/70 px-4 py-3 text-base outline-none backdrop-blur-sm transition-[border-color,box-shadow] focus:border-aqua focus:shadow-[0_0_0_4px_rgba(56,189,248,0.15)]"
             />
           </label>
           <label className="block">
@@ -74,7 +76,7 @@ export function Contact() {
               type="email"
               name="email"
               autoComplete="email"
-              className="mt-2 w-full rounded-xl border border-line bg-ink px-4 py-3 text-base outline-none transition-colors focus:border-acid"
+              className="mt-2 w-full rounded-xl border border-line bg-ink/70 px-4 py-3 text-base outline-none backdrop-blur-sm transition-[border-color,box-shadow] focus:border-aqua focus:shadow-[0_0_0_4px_rgba(56,189,248,0.15)]"
             />
           </label>
           <label className="block">
@@ -84,13 +86,13 @@ export function Contact() {
               name="message"
               rows={7}
               placeholder="Siapa penggunanya, apa yang sudah ada, dan kapan dibutuhkan."
-              className="mt-2 w-full resize-y rounded-xl border border-line bg-ink px-4 py-3 text-base outline-none transition-colors focus:border-acid"
+              className="mt-2 w-full resize-y rounded-xl border border-line bg-ink/70 px-4 py-3 text-base outline-none backdrop-blur-sm transition-[border-color,box-shadow] focus:border-grape focus:shadow-[0_0_0_4px_rgba(167,139,250,0.15)]"
             />
           </label>
           <Magnetic>
             <button
               type="submit"
-              className="rounded-full bg-acid px-6 py-3 text-sm font-semibold text-void"
+              className="bg-spectrum rounded-full px-6 py-3 text-sm font-bold text-void shadow-[0_12px_40px_-12px_rgba(167,139,250,0.9)]"
             >
               Kirim pesan
             </button>
@@ -103,25 +105,34 @@ export function Contact() {
         </form>
 
         <div className="space-y-8">
-          <section className="reveal rounded-2xl border border-line bg-ink p-6">
+          <section
+            className="reveal tint tint-static rounded-2xl p-6"
+            style={accentStyle(1)}
+          >
             <h2 className="font-display text-lg font-bold">Topik yang biasa masuk</h2>
-            <ul className="mt-4 space-y-2 text-sm leading-relaxed text-stone">
-              {contactTopics.map((topic) => (
-                <li key={topic} className="flex gap-3">
-                  <span className="mt-2 size-1.5 shrink-0 rounded-full bg-acid" />
-                  <span>{topic}</span>
+            <ul className="mt-4 flex flex-wrap gap-2 text-sm leading-relaxed">
+              {contactTopics.map((topic, index) => (
+                <li
+                  key={topic}
+                  style={accentStyle(index)}
+                  className="chip rounded-full px-3 py-1.5"
+                >
+                  {topic}
                 </li>
               ))}
             </ul>
           </section>
-          <section className="reveal rounded-2xl border border-line p-6">
+          <section
+            className="reveal tint tint-static rounded-2xl p-6"
+            style={accentStyle(3)}
+          >
             <h2 className="font-display text-lg font-bold">
               Yang membantu di pesan pertama
             </h2>
             <ul className="mt-4 space-y-2 text-sm leading-relaxed text-stone">
               {briefPoints.map((point) => (
                 <li key={point} className="flex gap-3">
-                  <span className="mt-2 size-1.5 shrink-0 rounded-full bg-acid" />
+                  <span className="accent-bg mt-2 size-1.5 shrink-0 rounded-full" />
                   <span>{point}</span>
                 </li>
               ))}
@@ -131,14 +142,21 @@ export function Contact() {
       </div>
 
       <section className="mt-16">
-        <h2 className="reveal font-display text-2xl font-bold">Pertanyaan singkat</h2>
+        <p className="reveal kicker" style={accentStyle(4)}>
+          FAQ
+        </p>
+        <h2 className="reveal font-display mt-4 text-2xl font-bold md:text-3xl">
+          Pertanyaan singkat
+        </h2>
         <div className="mt-8 grid gap-4 md:grid-cols-3">
-          {contactFaq.map((item) => (
+          {contactFaq.map((item, index) => (
             <article
               key={item.q}
-              className="reveal rounded-2xl border border-line p-5"
+              style={accentStyle(index + 2)}
+              className="reveal tint rounded-2xl p-5"
             >
-              <h3 className="font-display text-lg font-bold">{item.q}</h3>
+              <p className="accent-text font-display text-3xl font-extrabold">?</p>
+              <h3 className="font-display mt-2 text-lg font-bold">{item.q}</h3>
               <p className="mt-3 text-sm leading-relaxed text-stone">{item.a}</p>
             </article>
           ))}

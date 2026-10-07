@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="1500" viewBox="0 0 780 1500">
+  <rect width="780" height="1500" fill="#0b0d10"/>
+  <rect x="28" y="24" width="724" height="1452" rx="64" fill="#06211c"/>
+  <rect x="52" y="48" width="676" height="1404" rx="44" fill="#0c2420"/>
+  <rect x="290" y="64" width="200" height="26" rx="13" fill="#050607"/>
+  <text x="88" y="150" fill="#ecfeff" font-size="28" font-family="Segoe UI, system-ui, sans-serif" font-weight="700">Pulse</text>
+    <text x="88" y="184" fill="#99f6e4" font-size="15" font-family="Segoe UI, system-ui, sans-serif" >Perawatan hari ini</text>
+    <rect x="80" y="220" width="620" height="132" rx="22" fill="#14332e"/>
+          <circle cx="132" cy="286" r="28" fill="#fb7185"/>
+          <text x="190" y="272" fill="#ecfeff" font-size="22" font-family="Segoe UI, system-ui, sans-serif" font-weight="700">Ayu Pratiwi</text>
+          <text x="190" y="306" fill="#99f6e4" font-size="15" font-family="Segoe UI, system-ui, sans-serif" >Prioritas · ruang 2</text><rect x="80" y="370" width="620" height="132" rx="22" fill="#14332e"/>
+          <circle cx="132" cy="436" r="28" fill="#5eead4"/>
+          <text x="190" y="422" fill="#ecfeff" font-size="22" font-family="Segoe UI, system-ui, sans-serif" font-weight="700">Bima Saputra</text>
+          <text x="190" y="456" fill="#99f6e4" font-size="15" font-family="Segoe UI, system-ui, sans-serif" >Observasi · 14.20</text><rect x="80" y="520" width="620" height="132" rx="22" fill="#14332e"/>
+          <circle cx="132" cy="586" r="28" fill="#5eead4"/>
+          <text x="190" y="572" fill="#ecfeff" font-size="22" font-family="Segoe UI, system-ui, sans-serif" font-weight="700">Citra Lestari</text>
+          <text x="190" y="606" fill="#99f6e4" font-size="15" font-family="Segoe UI, system-ui, sans-serif" >Kontrol rutin</text><rect x="80" y="670" width="620" height="132" rx="22" fill="#14332e"/>
+          <circle cx="132" cy="736" r="28" fill="#5eead4"/>
+          <text x="190" y="722" fill="#ecfeff" font-size="22" font-family="Segoe UI, system-ui, sans-serif" font-weight="700">Dimas Putra</text>
+          <text x="190" y="756" fill="#99f6e4" font-size="15" font-family="Segoe UI, system-ui, sans-serif" >Menunggu hasil</text><rect x="80" y="820" width="620" height="132" rx="22" fill="#14332e"/>
+          <circle cx="132" cy="886" r="28" fill="#5eead4"/>
+          <text x="190" y="872" fill="#ecfeff" font-size="22" font-family="Segoe UI, system-ui, sans-serif" font-weight="700">Eka Nirmala</text>
+          <text x="190" y="906" fill="#99f6e4" font-size="15" font-family="Segoe UI, system-ui, sans-serif" >Jadwal sore</text>
+</svg>

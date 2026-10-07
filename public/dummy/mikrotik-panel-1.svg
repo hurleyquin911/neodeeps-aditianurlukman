@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800">
+  <rect width="1280" height="800" fill="#121214"/>
+  <rect width="1280" height="46" fill="#1c1c20"/>
+  <circle cx="24" cy="23" r="6" fill="#fb7185"/>
+  <circle cx="44" cy="23" r="6" fill="#fbbf24"/>
+  <circle cx="64" cy="23" r="6" fill="#34d399"/>
+  <rect x="96" y="12" width="420" height="22" rx="11" fill="#0e0e10"/>
+  <text x="112" y="27" fill="#8d887f" font-size="12" font-family="Segoe UI, system-ui, sans-serif">hotspot.local/status</text>
+  <rect y="46" width="1280" height="754" fill="#0b1220"/>
+  <rect y="46" width="1280" height="754" fill="#0b1220"/>
+    <rect x="340" y="180" width="600" height="420" rx="28" fill="#132033"/>
+    <circle cx="640" cy="330" r="54" fill="#34d399"/>
+    <text x="640" y="338" fill="#052e16" font-size="22" font-family="Segoe UI, system-ui, sans-serif" text-anchor="middle" font-weight="700">OK</text>
+    <text x="640" y="430" fill="#eff6ff" font-size="28" font-family="Segoe UI, system-ui, sans-serif" text-anchor="middle" font-weight="700">Kamu sudah terhubung</text>
+    <text x="640" y="470" fill="#93c5fd" font-size="16" font-family="Segoe UI, system-ui, sans-serif" text-anchor="middle">Sesi aktif sampai 16.40</text>
+</svg>

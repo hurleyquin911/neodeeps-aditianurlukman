@@ -304,7 +304,7 @@ export function FlowMap({ project }: { project: Project }) {
   };
 
   return (
-    <div ref={wrapRef} className="mt-8">
+    <div ref={wrapRef}>
       <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
         <p className="text-sm text-stone">
           Tarik peta untuk melihat cabang. Klik simpul untuk membaca langkahnya.

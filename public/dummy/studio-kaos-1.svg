@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800">
+  <rect width="1280" height="800" fill="#121214"/>
+  <rect width="1280" height="46" fill="#1c1c20"/>
+  <circle cx="24" cy="23" r="6" fill="#fb7185"/>
+  <circle cx="44" cy="23" r="6" fill="#fbbf24"/>
+  <circle cx="64" cy="23" r="6" fill="#34d399"/>
+  <rect x="96" y="12" width="420" height="22" rx="11" fill="#0e0e10"/>
+  <text x="112" y="27" fill="#8d887f" font-size="12" font-family="Segoe UI, system-ui, sans-serif">studio.neodeeps.com/produk</text>
+  <rect y="46" width="1280" height="754" fill="#0e1626"/>
+  <rect y="46" width="1280" height="754" fill="#0e1626"/>
+    <text x="48" y="110" fill="#f0f9ff" font-size="32" font-family="Segoe UI, system-ui, sans-serif" font-weight="700">Panel produk</text>
+    <rect x="48" y="150" width="280" height="250" rx="18" fill="#152033"/>
+        <path d="M158 190 L128 230 L148 246 L148 360 L228 360 L228 246 L248 230 L218 190 Q188 210 158 190 Z" fill="#38bdf8"/>
+        <text x="188" y="378" fill="#e8f4ff" font-size="16" font-family="Segoe UI, system-ui, sans-serif" text-anchor="middle">Kaos oblong</text><rect x="348" y="150" width="280" height="250" rx="18" fill="#152033"/>
+        <path d="M458 190 L428 230 L448 246 L448 360 L528 360 L528 246 L548 230 L518 190 Q488 210 458 190 Z" fill="#7dd3fc"/>
+        <text x="488" y="378" fill="#e8f4ff" font-size="16" font-family="Segoe UI, system-ui, sans-serif" text-anchor="middle">Polo</text><rect x="648" y="150" width="280" height="250" rx="18" fill="#152033"/>
+        <path d="M758 190 L728 230 L748 246 L748 360 L828 360 L828 246 L848 230 L818 190 Q788 210 758 190 Z" fill="#38bdf8"/>
+        <text x="788" y="378" fill="#e8f4ff" font-size="16" font-family="Segoe UI, system-ui, sans-serif" text-anchor="middle">Hoodie</text><rect x="948" y="150" width="280" height="250" rx="18" fill="#152033"/>
+        <path d="M1058 190 L1028 230 L1048 246 L1048 360 L1128 360 L1128 246 L1148 230 L1118 190 Q1088 210 1058 190 Z" fill="#7dd3fc"/>
+        <text x="1088" y="378" fill="#e8f4ff" font-size="16" font-family="Segoe UI, system-ui, sans-serif" text-anchor="middle">Oversize</text>
+    <rect x="48" y="430" width="1184" height="280" rx="18" fill="#152033"/>
+    <text x="76" y="478" fill="#e8f4ff" font-size="18" font-family="Segoe UI, system-ui, sans-serif" >Ukuran  ·  lebar dada 52 cm  ·  panjang 70 cm</text>
+    <rect x="76" y="510" width="72" height="72" rx="12" fill="#0e1626"/><text x="112" y="554" fill="#e8f4ff" font-size="20" font-family="Segoe UI, system-ui, sans-serif" text-anchor="middle" font-weight="700">S</text><rect x="166" y="510" width="72" height="72" rx="12" fill="#38bdf8"/><text x="202" y="554" fill="#0b1220" font-size="20" font-family="Segoe UI, system-ui, sans-serif" text-anchor="middle" font-weight="700">M</text><rect x="256" y="510" width="72" height="72" rx="12" fill="#0e1626"/><text x="292" y="554" fill="#e8f4ff" font-size="20" font-family="Segoe UI, system-ui, sans-serif" text-anchor="middle" font-weight="700">L</text><rect x="346" y="510" width="72" height="72" rx="12" fill="#0e1626"/><text x="382" y="554" fill="#e8f4ff" font-size="20" font-family="Segoe UI, system-ui, sans-serif" text-anchor="middle" font-weight="700">XL</text>
+</svg>

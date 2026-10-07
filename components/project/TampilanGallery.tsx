@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import type { Project } from "@/lib/projects";
+import { accentStyle } from "@/lib/accents";
 import { gsap } from "@/lib/gsap";
 import { finePointer, reducedMotion } from "@/lib/motion";
 
@@ -43,86 +44,22 @@ function tilesFrom(project: Project): Tile[] {
   }));
 }
 
-function TileArt({
-  project,
-  mood,
-  large,
-}: {
-  project: Project;
-  mood: number;
-  large?: boolean;
-}) {
-  const pad = large ? "p-6" : "p-3";
+const CROPS = ["center", "left center", "right center", "center top", "center bottom", "30% center"];
+
+function shotSrc(project: Project, index: number) {
+  const count = Math.max(project.tampilan.screens.length, 1);
+  return `/dummy/${project.slug}-${index % count}.svg`;
+}
+
+function Arrow({ dir }: { dir: "left" | "right" }) {
   return (
-    <div
-      className={`relative flex h-full min-h-[140px] flex-col justify-end overflow-hidden ${pad}`}
-      style={{
-        background: `linear-gradient(${120 + mood * 18}deg, ${project.palette.from}, ${project.palette.via}, ${project.palette.to})`,
-      }}
-    >
-      <div className="pointer-events-none absolute inset-0 opacity-30" style={{
-        backgroundImage:
-          "radial-gradient(rgba(255,255,255,0.18) 1px, transparent 1px)",
-        backgroundSize: "16px 16px",
-      }} />
-      {mood % 6 === 0 ? (
-        <div className="mx-auto w-[46%] max-w-[9rem] rounded-[1.4rem] border border-white/25 bg-black/35 p-2.5 shadow-lg">
-          <div className="mx-auto mb-2 h-1 w-8 rounded-full bg-white/30" />
-          <div className="space-y-1.5">
-            <div className="h-8 rounded-lg bg-white/15" />
-            <div className="h-6 rounded-lg bg-white/10" />
-            <div className="h-10 rounded-lg bg-white/12" />
-          </div>
-        </div>
-      ) : mood % 6 === 1 ? (
-        <div className="grid h-full grid-cols-2 gap-2">
-          <div className="rounded-xl bg-black/25" />
-          <div className="space-y-2">
-            <div className="h-3 w-2/3 rounded-full bg-white/35" />
-            <div className="h-2 w-full rounded-full bg-white/15" />
-            <div className="h-2 w-4/5 rounded-full bg-white/15" />
-            <div className="mt-auto h-16 rounded-xl bg-black/20" />
-          </div>
-        </div>
-      ) : mood % 6 === 2 ? (
-        <div className="space-y-2">
-          <div className="max-w-[70%] rounded-2xl rounded-bl-md bg-black/30 px-3 py-2">
-            <div className="h-2 w-24 rounded-full bg-white/35" />
-          </div>
-          <div className="ml-auto max-w-[70%] rounded-2xl rounded-br-md bg-white/15 px-3 py-2">
-            <div className="h-2 w-20 rounded-full bg-white/50" />
-          </div>
-          <div className="max-w-[60%] rounded-2xl rounded-bl-md bg-black/30 px-3 py-2">
-            <div className="h-2 w-16 rounded-full bg-white/30" />
-          </div>
-        </div>
-      ) : mood % 6 === 3 ? (
-        <div className="flex h-full items-end gap-2">
-          <div className="h-[55%] flex-1 rounded-lg bg-white/10" />
-          <div className="h-[80%] flex-1 rounded-lg bg-white/18" />
-          <div className="h-[40%] flex-1 rounded-lg bg-white/10" />
-        </div>
-      ) : mood % 6 === 4 ? (
-        <div className="grid h-full grid-cols-3 gap-2">
-          {["A", "B", "C"].map((label) => (
-            <div key={label} className="rounded-xl bg-black/25 p-2">
-              <p className="text-[10px] text-white/50">{label}</p>
-              <div className="mt-2 h-2 w-3/4 rounded-full bg-white/25" />
-              <div className="mt-1 h-8 rounded-md bg-white/10" />
-            </div>
-          ))}
-        </div>
-      ) : (
-        <div className="space-y-2">
-          <div className="h-3 w-1/3 rounded-full bg-white/40" />
-          <div className="h-2 w-2/3 rounded-full bg-white/20" />
-          <div className="mt-3 grid grid-cols-2 gap-2">
-            <div className="h-20 rounded-xl bg-black/25" />
-            <div className="h-20 rounded-xl bg-black/20" />
-          </div>
-        </div>
-      )}
-    </div>
+    <svg viewBox="0 0 20 20" className="size-5" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+      <path
+        d={dir === "left" ? "M12.5 4.5 7 10l5.5 5.5" : "M7.5 4.5 13 10l-5.5 5.5"}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 }
 
@@ -130,28 +67,50 @@ export function TampilanGallery({ project }: { project: Project }) {
   const tiles = tilesFrom(project);
   const overlayRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
-  const [active, setActive] = useState<Tile | null>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
+  const directionRef = useRef(1);
+  const [index, setIndex] = useState<number | null>(null);
+  const open = index !== null;
+  const active = index !== null ? tiles[index] : null;
+  const accent = project.palette.accent;
 
   const close = useCallback(() => {
     const overlay = overlayRef.current;
     const panel = panelRef.current;
     if (!overlay || !panel || reducedMotion()) {
-      setActive(null);
+      setIndex(null);
       return;
     }
     gsap.to(overlay, { opacity: 0, duration: 0.22, ease: "power1.in" });
     gsap.to(panel, {
       y: 28,
-      scale: 0.94,
+      scale: 0.95,
       opacity: 0,
       duration: 0.28,
       ease: "power2.in",
-      onComplete: () => setActive(null),
+      onComplete: () => setIndex(null),
     });
   }, []);
 
+  const total = tiles.length;
+  const go = useCallback(
+    (step: number) => {
+      directionRef.current = step;
+      setIndex((current) =>
+        current === null ? current : (current + step + total) % total,
+      );
+    },
+    [total],
+  );
+
+  const jump = (next: number) => {
+    if (index === null || next === index) return;
+    directionRef.current = next > index ? 1 : -1;
+    setIndex(next);
+  };
+
   useEffect(() => {
-    if (!active) return;
+    if (!open) return;
     const overlay = overlayRef.current;
     const panel = panelRef.current;
     if (!overlay || !panel) return;
@@ -166,13 +125,15 @@ export function TampilanGallery({ project }: { project: Project }) {
       gsap.fromTo(overlay, { opacity: 0 }, { opacity: 1, duration: 0.32, ease: "power2.out" });
       gsap.fromTo(
         panel,
-        { y: 36, scale: 0.96, opacity: 0 },
-        { y: 0, scale: 1, opacity: 1, duration: 0.45, ease: "power4.out" },
+        { y: 40, scale: 0.95, opacity: 0 },
+        { y: 0, scale: 1, opacity: 1, duration: 0.5, ease: "power4.out" },
       );
     }
 
     const onKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") close();
+      if (event.key === "ArrowRight") go(1);
+      if (event.key === "ArrowLeft") go(-1);
     };
     window.addEventListener("keydown", onKey);
     return () => {
@@ -181,7 +142,16 @@ export function TampilanGallery({ project }: { project: Project }) {
       window.__lenis?.start();
       window.removeEventListener("keydown", onKey);
     };
-  }, [active, close]);
+  }, [open, close, go]);
+
+  useEffect(() => {
+    if (index === null || !stageRef.current || reducedMotion()) return;
+    gsap.fromTo(
+      stageRef.current.querySelectorAll(".lb-anim"),
+      { x: 36 * directionRef.current, opacity: 0 },
+      { x: 0, opacity: 1, duration: 0.45, stagger: 0.05, ease: "power3.out" },
+    );
+  }, [index]);
 
   const onTileEnter = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (!finePointer() || reducedMotion()) return;
@@ -195,65 +165,148 @@ export function TampilanGallery({ project }: { project: Project }) {
   return (
     <>
       <div className="grid grid-cols-12 gap-3 md:gap-4">
-        {tiles.map((tile) => (
+        {tiles.map((tile, tileIndex) => (
           <button
             key={tile.id}
             type="button"
-            onClick={() => setActive(tile)}
+            onClick={() => {
+              directionRef.current = 1;
+              setIndex(tileIndex);
+            }}
             onMouseEnter={onTileEnter}
             onMouseLeave={onTileLeave}
             className={`${tile.span} group relative overflow-hidden rounded-[1.4rem] text-left shadow-[0_8px_30px_rgba(0,0,0,0.35)]`}
-            style={{
-              border: `4px solid ${project.palette.accent}`,
-            }}
+            style={{ border: `4px solid ${accent}` }}
           >
-            <TileArt project={project} mood={tile.mood} />
+            <img
+              src={shotSrc(project, tile.mood)}
+              alt=""
+              className="absolute inset-0 size-full object-cover transition-transform duration-500 group-hover:scale-105"
+              style={{ objectPosition: CROPS[tile.mood % CROPS.length] }}
+            />
             <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent px-3 pt-8 pb-3">
               <span className="font-display text-sm font-bold text-white">
                 {tile.title}
               </span>
             </span>
+            <span className="absolute top-3 right-3 grid size-8 place-items-center rounded-full bg-black/50 text-white opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100">
+              <svg viewBox="0 0 20 20" className="size-4" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                <path d="M8 3H3v5M12 3h5v5M17 12v5h-5M3 12v5h5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
           </button>
         ))}
       </div>
 
-      {active
+      {active && index !== null
         ? createPortal(
             <div
               ref={overlayRef}
-              className="fixed inset-0 z-[130] flex items-center justify-center bg-black/88 px-4 py-6 backdrop-blur-xl md:px-8 md:py-10"
+              className="fixed inset-0 z-[130] flex items-center justify-center bg-black/85 px-3 py-4 backdrop-blur-2xl md:px-8 md:py-8"
               onClick={close}
               role="presentation"
+              style={accentStyle(accent)}
             >
+              <span
+                aria-hidden
+                className="accent-bg pointer-events-none absolute top-1/2 left-1/2 size-[60vmin] -translate-1/2 rounded-full opacity-15 blur-[120px]"
+              />
               <div
                 ref={panelRef}
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby="tampilan-popup-title"
-                className="flex max-h-[min(88dvh,42rem)] w-full max-w-2xl flex-col overflow-hidden rounded-[1.6rem] border border-line bg-ink shadow-[0_32px_80px_rgba(0,0,0,0.65)]"
+                className="relative flex max-h-[94dvh] w-full max-w-5xl flex-col overflow-hidden rounded-[1.75rem] border border-[color-mix(in_oklab,var(--accent)_35%,transparent)] bg-ink/95 shadow-[0_40px_120px_-20px_rgba(0,0,0,0.8)]"
                 onClick={(event) => event.stopPropagation()}
               >
-                <div className="relative h-48 shrink-0 md:h-64">
-                  <TileArt project={project} mood={active.mood} large />
+                <div className="flex items-center justify-between gap-4 border-b border-line px-4 py-3 md:px-6">
+                  <div className="flex min-w-0 items-center gap-3">
+                    <span className="kicker shrink-0" style={accentStyle(accent)}>
+                      {project.title}
+                    </span>
+                    <span className="truncate text-sm text-stone">{project.category}</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className="font-mono text-sm text-cream">
+                      <span className="accent-text font-bold">{String(index + 1).padStart(2, "0")}</span>
+                      <span className="text-stone"> / {String(tiles.length).padStart(2, "0")}</span>
+                    </span>
+                    <button
+                      type="button"
+                      onClick={close}
+                      aria-label="Tutup"
+                      className="grid size-9 place-items-center rounded-full border border-line text-cream transition-colors hover:border-[var(--accent)] hover:bg-[var(--accent)] hover:text-void"
+                    >
+                      <svg viewBox="0 0 20 20" className="size-4" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                        <path d="M5 5l10 10M15 5 5 15" strokeLinecap="round" />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
-                <div className="min-h-0 overflow-y-auto px-6 py-5 md:px-8 md:py-6">
-                  <p className="text-sm font-medium text-acid">{project.title}</p>
-                  <h3
-                    id="tampilan-popup-title"
-                    className="font-display mt-1 text-2xl font-bold"
-                  >
-                    {active.title}
-                  </h3>
-                  <p className="mt-3 text-base leading-relaxed text-stone">
-                    {active.note}
-                  </p>
+
+                <div ref={stageRef} className="relative min-h-0 flex-1 overflow-hidden bg-black">
+                  <img
+                    src={shotSrc(project, active.mood)}
+                    alt=""
+                    aria-hidden
+                    className="absolute inset-0 size-full scale-110 object-cover opacity-40 blur-2xl"
+                  />
+                  <div className="relative flex h-[min(56dvh,34rem)] items-center justify-center p-4 md:p-8">
+                    <img
+                      src={shotSrc(project, active.mood)}
+                      alt={active.title}
+                      className="lb-anim max-h-full max-w-full rounded-xl object-contain shadow-[0_24px_60px_rgba(0,0,0,0.6)] ring-1 ring-white/10"
+                    />
+                  </div>
+
                   <button
                     type="button"
-                    onClick={close}
-                    className="mt-6 rounded-full border border-line px-5 py-2 text-sm text-cream transition-colors hover:border-acid hover:text-acid"
+                    onClick={() => go(-1)}
+                    aria-label="Gambar sebelumnya"
+                    className="absolute top-1/2 left-3 grid size-11 -translate-y-1/2 place-items-center rounded-full border border-white/15 bg-black/50 text-white backdrop-blur-md transition-all hover:scale-110 hover:border-transparent hover:bg-[var(--accent)] hover:text-void md:left-5 md:size-12"
                   >
-                    Tutup
+                    <Arrow dir="left" />
                   </button>
+                  <button
+                    type="button"
+                    onClick={() => go(1)}
+                    aria-label="Gambar berikutnya"
+                    className="absolute top-1/2 right-3 grid size-11 -translate-y-1/2 place-items-center rounded-full border border-white/15 bg-black/50 text-white backdrop-blur-md transition-all hover:scale-110 hover:border-transparent hover:bg-[var(--accent)] hover:text-void md:right-5 md:size-12"
+                  >
+                    <Arrow dir="right" />
+                  </button>
+                </div>
+
+                <div className="grid gap-5 px-4 py-5 md:grid-cols-[minmax(0,1fr)_auto] md:items-end md:px-6">
+                  <div className="min-w-0">
+                    <h3 id="tampilan-popup-title" className="font-display text-xl font-bold md:text-2xl">
+                      {active.title}
+                    </h3>
+                    <p className="mt-1.5 text-sm leading-relaxed text-stone md:text-base">{active.note}</p>
+                  </div>
+                  <div className="flex gap-2 overflow-x-auto pb-1">
+                    {tiles.map((tile, tileIndex) => (
+                      <button
+                        key={tile.id}
+                        type="button"
+                        onClick={() => jump(tileIndex)}
+                        aria-label={`Lihat ${tile.title}`}
+                        aria-current={tileIndex === index ? "true" : undefined}
+                        className={`relative h-12 w-[4.5rem] shrink-0 overflow-hidden rounded-lg transition-all duration-300 ${
+                          tileIndex === index
+                            ? "ring-2 ring-[var(--accent)] ring-offset-2 ring-offset-ink"
+                            : "opacity-50 hover:opacity-100"
+                        }`}
+                      >
+                        <img
+                          src={shotSrc(project, tile.mood)}
+                          alt=""
+                          className="size-full object-cover"
+                          style={{ objectPosition: CROPS[tile.mood % CROPS.length] }}
+                        />
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>,

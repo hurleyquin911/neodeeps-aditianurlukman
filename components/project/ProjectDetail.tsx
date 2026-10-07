@@ -6,8 +6,9 @@ import type { Project } from "@/lib/projects";
 import { adjacentProjects } from "@/lib/projects";
 import { scrollToId, useLiftHover, useReveal } from "@/lib/motion";
 import { TampilanGallery } from "@/components/project/TampilanGallery";
-import { FlowMap } from "@/components/project/FlowMap";
+import { FlowViews } from "@/components/project/FlowViews";
 import { Magnetic } from "@/components/ui/Magnetic";
+import { accentStyle } from "@/lib/accents";
 
 const tabs = [
   { id: "tampilan", label: "1. Tampilan" },
@@ -22,7 +23,7 @@ export function ProjectDetail({ project }: { project: Project }) {
   useLiftHover(rootRef);
 
   return (
-    <article ref={rootRef} className="pb-20">
+    <article ref={rootRef} className="pb-20" style={accentStyle(project.palette.accent)}>
       <header className="mx-auto max-w-6xl px-5 pt-10 pb-8 md:px-8 md:pt-14">
         <Link
           href="/portofolio"
@@ -30,7 +31,7 @@ export function ProjectDetail({ project }: { project: Project }) {
         >
           ← Semua portofolio
         </Link>
-        <p className="reveal mt-6 text-sm font-medium text-acid">
+        <p className="reveal mt-6 accent-text text-sm font-semibold">
           {project.category} · {project.year}
         </p>
         <h1 className="reveal font-display mt-3 text-[clamp(2rem,5vw,3.6rem)] font-extrabold tracking-[-0.04em]">
@@ -43,7 +44,7 @@ export function ProjectDetail({ project }: { project: Project }) {
           {project.tags.map((tag) => (
             <span
               key={tag}
-              className="rounded-full border border-line px-3 py-1 text-sm text-cream"
+              className="chip rounded-full px-3 py-1 text-sm"
             >
               {tag}
             </span>
@@ -72,7 +73,7 @@ export function ProjectDetail({ project }: { project: Project }) {
 
       <div className="mx-auto max-w-6xl space-y-20 px-5 py-14 md:px-8">
         <section id="tampilan" className="scroll-mt-32">
-          <p className="reveal text-sm font-medium text-acid">1. Tampilan</p>
+          <p className="reveal accent-text text-sm font-semibold">1. Tampilan</p>
           <h2 className="reveal font-display mt-2 text-3xl font-bold">
             Seperti apa produk ini terlihat
           </h2>
@@ -85,7 +86,7 @@ export function ProjectDetail({ project }: { project: Project }) {
           <ul className="reveal mt-8 space-y-3 text-base text-stone">
             {project.tampilan.points.map((point) => (
               <li key={point} className="flex gap-3">
-                <span className="mt-2 size-1.5 shrink-0 rounded-full bg-acid" />
+                <span className="mt-2 size-1.5 shrink-0 accent-bg rounded-full" />
                 <span>{point}</span>
               </li>
             ))}
@@ -94,7 +95,7 @@ export function ProjectDetail({ project }: { project: Project }) {
             {project.tampilan.screens.map((screen) => (
               <div
                 key={screen.name}
-                className="reveal js-lift rounded-2xl border border-line bg-ink p-5"
+                className="reveal js-lift tint rounded-2xl p-5"
               >
                 <p className="font-display text-lg font-bold">{screen.name}</p>
                 <p className="mt-2 text-sm leading-relaxed text-stone">
@@ -106,20 +107,20 @@ export function ProjectDetail({ project }: { project: Project }) {
         </section>
 
         <section id="flow" className="scroll-mt-32">
-          <p className="reveal text-sm font-medium text-acid">2. Flow</p>
+          <p className="reveal accent-text text-sm font-semibold">2. Flow</p>
           <h2 className="reveal font-display mt-2 text-3xl font-bold">
             Bagaimana orang memakainya
           </h2>
           <p className="reveal mt-3 max-w-2xl text-sm leading-relaxed text-stone md:text-base">
-            Flowchart pemakaian: ada cabang, keputusan, dan jalur yang bertemu
-            lagi. Klik simpul untuk membaca langkahnya; tarik peta untuk melihat
-            keseluruhan.
+            Lima sudut pandang dari sistem yang sama: flowchart pemakaian, DFD,
+            UML class, use case, dan sequence diagram. Pilih tab, lalu klik
+            elemen diagram untuk membaca detailnya.
           </p>
-          <FlowMap project={project} />
+          <FlowViews project={project} />
         </section>
 
         <section id="deskripsi" className="scroll-mt-32">
-          <p className="reveal text-sm font-medium text-acid">
+          <p className="reveal accent-text text-sm font-semibold">
             3. Deskripsi presentasi
           </p>
           <h2 className="reveal font-display mt-2 text-3xl font-bold">
@@ -129,26 +130,26 @@ export function ProjectDetail({ project }: { project: Project }) {
             {project.deskripsi.pitch}
           </p>
           <div className="mt-8 grid gap-6 md:grid-cols-2">
-            <section className="reveal js-lift rounded-2xl border border-line p-6">
-              <h3 className="text-sm font-medium text-acid">Masalah</h3>
+            <section className="reveal js-lift tint rounded-2xl p-6">
+              <h3 className="accent-text text-sm font-semibold">Masalah</h3>
               <p className="mt-3 text-base leading-relaxed text-stone">
                 {project.deskripsi.masalah}
               </p>
             </section>
-            <section className="reveal js-lift rounded-2xl border border-line p-6">
-              <h3 className="text-sm font-medium text-acid">Solusi</h3>
+            <section className="reveal js-lift tint rounded-2xl p-6">
+              <h3 className="accent-text text-sm font-semibold">Solusi</h3>
               <p className="mt-3 text-base leading-relaxed text-stone">
                 {project.deskripsi.solusi}
               </p>
             </section>
-            <section className="reveal js-lift rounded-2xl border border-line p-6">
-              <h3 className="text-sm font-medium text-acid">Peran</h3>
+            <section className="reveal js-lift tint rounded-2xl p-6">
+              <h3 className="accent-text text-sm font-semibold">Peran</h3>
               <p className="mt-3 text-base leading-relaxed text-stone">
                 {project.deskripsi.peran}
               </p>
             </section>
-            <section className="reveal js-lift rounded-2xl border border-line p-6">
-              <h3 className="text-sm font-medium text-acid">Hasil</h3>
+            <section className="reveal js-lift tint rounded-2xl p-6">
+              <h3 className="accent-text text-sm font-semibold">Hasil</h3>
               <p className="mt-3 text-base leading-relaxed text-stone">
                 {project.deskripsi.hasil}
               </p>
@@ -160,7 +161,7 @@ export function ProjectDetail({ project }: { project: Project }) {
                 href={project.href}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex rounded-full border border-line px-5 py-3 text-sm font-medium text-cream transition-colors hover:border-acid hover:text-acid"
+                className="inline-flex rounded-full border border-line px-5 py-3 text-sm font-medium text-cream transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
               >
                 {project.href.includes("github.com")
                   ? "Lihat di GitHub"

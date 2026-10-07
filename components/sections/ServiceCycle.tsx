@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { serviceCycle } from "@/lib/data";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { finePointer, reducedMotion } from "@/lib/motion";
+import { accentAt, accentStyle } from "@/lib/accents";
 import { CycleRocketModal } from "@/components/ui/CycleRocketModal";
 
 function CycleCard({
@@ -19,6 +20,7 @@ function CycleCard({
   onRelease: () => void;
   onOpen: () => void;
 }) {
+  const color = accentAt(Number(step.id) - 1);
   return (
     <button
       type="button"
@@ -27,18 +29,22 @@ function CycleCard({
       onMouseLeave={onRelease}
       onFocus={onHold}
       onBlur={onRelease}
-      className="cycle-node flex h-full min-h-44 w-full cursor-pointer flex-col rounded-2xl border bg-void/90 p-4 text-left"
+      className="cycle-node flex h-full min-h-44 w-full cursor-pointer flex-col rounded-2xl border p-4 text-left transition-[background,border-color,box-shadow] duration-300"
       style={{
-        borderColor: current ? "rgba(212,255,63,0.75)" : "rgba(246,244,239,0.14)",
+        ...accentStyle(color),
+        borderColor: current ? color : "rgba(246,244,239,0.14)",
+        background: current
+          ? `linear-gradient(160deg, ${color}22, rgba(12,12,14,0.92) 70%)`
+          : "rgba(12,12,14,0.9)",
         boxShadow: current
-          ? "0 0 0 1px rgba(212,255,63,0.22), 0 14px 36px rgba(0,0,0,0.32)"
+          ? `0 0 0 1px ${color}40, 0 18px 44px -14px ${color}90`
           : "none",
       }}
     >
-      <p className="font-mono text-xs text-acid">{step.id}</p>
+      <p className="accent-text font-mono text-xs font-bold">{step.id}</p>
       <h3 className="font-display mt-1 text-lg font-bold">{step.title}</h3>
       <p className="mt-2 text-sm leading-relaxed text-stone">{step.body}</p>
-      <p className="mt-auto pt-3 text-xs font-medium text-acid">Detail →</p>
+      <p className="accent-text mt-auto pt-3 text-xs font-medium">Detail →</p>
     </button>
   );
 }
@@ -54,7 +60,7 @@ function Mark({
   return (
     <span
       className={`cycle-mark flex items-center justify-center font-mono text-lg ${
-        lit ? "text-acid" : "text-stone/45"
+        lit ? "text-spectrum" : "text-stone/45"
       }`}
     >
       {symbol}
@@ -139,7 +145,10 @@ export function ServiceCycle() {
 
   return (
     <section ref={rootRef} className="mt-12">
-      <h2 className="reveal font-display text-xl font-bold md:text-2xl">
+      <p className="reveal kicker" style={accentStyle(1)}>
+        Proses
+      </p>
+      <h2 className="reveal font-display mt-4 text-2xl font-bold md:text-3xl">
         Siklus kerja
       </h2>
       <p className="reveal mt-2 max-w-2xl text-sm leading-relaxed text-stone">
@@ -147,7 +156,7 @@ export function ServiceCycle() {
         bukan menutup proyek. Klik kartu untuk melihat detail langkahnya.
       </p>
 
-      <div className="cycle-board relative mt-8 rounded-[1.6rem] border border-line bg-ink p-5 md:p-7">
+      <div className="cycle-board tint tint-static relative mt-8 rounded-[1.6rem] p-5 md:p-7">
         <div
           className="pointer-events-none absolute inset-0 rounded-[1.6rem] opacity-25"
           style={{
@@ -199,18 +208,20 @@ export function ServiceCycle() {
           <button
             type="button"
             onClick={() => openDetail(active)}
-            className="flex h-full min-h-44 cursor-pointer flex-col items-center justify-center rounded-2xl border border-acid/30 bg-void/70 px-4 text-center"
+            style={accentStyle(active)}
+            className="relative flex h-full min-h-44 cursor-pointer flex-col items-center justify-center overflow-hidden rounded-2xl border border-[color-mix(in_oklab,var(--accent)_45%,transparent)] bg-void/70 px-4 text-center transition-colors duration-300"
           >
-            <p className="font-mono text-xs tracking-[0.2em] text-acid uppercase">
+            <span className="accent-bg pointer-events-none absolute size-32 rounded-full opacity-25 blur-3xl transition-colors duration-300" />
+            <p className="accent-text relative font-mono text-xs tracking-[0.2em] uppercase">
               Siklus
             </p>
-            <p className="font-display mt-2 text-2xl font-extrabold">
+            <p className="font-display relative mt-2 text-2xl font-extrabold">
               {serviceCycle[active].title}
             </p>
-            <p className="mt-1 font-mono text-xs text-stone">
+            <p className="relative mt-1 font-mono text-xs text-stone">
               {serviceCycle[active].id} / 05
             </p>
-            <p className="mt-3 text-xs text-acid">Buka detail →</p>
+            <p className="accent-text relative mt-3 text-xs">Buka detail →</p>
           </button>
           <Mark dir="left" lit={active === 4} />
           <CycleCard
@@ -225,12 +236,13 @@ export function ServiceCycle() {
         <ol className="relative space-y-4 lg:hidden">
           {serviceCycle.map((item, index) => {
             const current = active === index;
+            const color = accentAt(index);
             return (
-              <li key={item.id} className="flex gap-4">
+              <li key={item.id} className="flex gap-4" style={accentStyle(color)}>
                 <div className="flex w-6 flex-col items-center">
                   <span
                     className={`size-3 rounded-full ${
-                      current ? "bg-acid" : "bg-cream/25"
+                      current ? "accent-bg shadow-[0_0_10px_var(--accent)]" : "bg-cream/25"
                     }`}
                   />
                   {index < serviceCycle.length - 1 ? (
@@ -244,15 +256,11 @@ export function ServiceCycle() {
                   onClick={() => openDetail(index)}
                   className="cycle-node flex-1 rounded-2xl border p-4 text-left"
                   style={{
-                    borderColor: current
-                      ? "rgba(212,255,63,0.7)"
-                      : "rgba(246,244,239,0.14)",
-                    background: current
-                      ? "rgba(212,255,63,0.04)"
-                      : "transparent",
+                    borderColor: current ? color : "rgba(246,244,239,0.14)",
+                    background: current ? `${color}12` : "transparent",
                   }}
                 >
-                  <p className="font-mono text-xs text-acid">{item.id}</p>
+                  <p className="accent-text font-mono text-xs font-bold">{item.id}</p>
                   <h3 className="font-display mt-1 text-lg font-bold">
                     {item.title}
                   </h3>

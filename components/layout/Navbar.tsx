@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { nav, site } from "@/lib/data";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { reducedMotion } from "@/lib/motion";
+import { accentStyle } from "@/lib/accents";
 import { Magnetic } from "@/components/ui/Magnetic";
 
 function JakartaClock() {
@@ -78,15 +79,18 @@ export function Navbar() {
     <>
       <header
         ref={barRef}
-        className="sticky top-0 z-50 border-b border-line bg-void/90 backdrop-blur-md"
+        className="sticky top-0 z-50 border-b border-line bg-void/70 backdrop-blur-xl"
       >
         <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 md:px-8">
           <Magnetic strength={0.18}>
             <Link
               href="/"
-              className="nav-anim font-display text-sm font-extrabold tracking-[0.18em] uppercase"
+              className="nav-anim font-display flex items-center gap-2.5 text-sm font-extrabold tracking-[0.18em] uppercase"
               onClick={() => setOpen(false)}
             >
+              <span className="bg-spectrum grid size-7 place-items-center rounded-lg text-[11px] tracking-normal text-void">
+                N
+              </span>
               {site.brand}
             </Link>
           </Magnetic>
@@ -103,7 +107,7 @@ export function Navbar() {
                 >
                   {item.label}
                   <span
-                    className={`absolute -bottom-1 left-0 h-px w-full origin-left bg-acid transition-transform ${
+                    className={`bg-spectrum absolute -bottom-1.5 left-0 h-0.5 w-full origin-left rounded-full transition-transform ${
                       isActive(item.href) ? "scale-x-100" : "scale-x-0"
                     }`}
                   />
@@ -119,7 +123,7 @@ export function Navbar() {
             <Magnetic strength={0.22}>
               <Link
                 href="/kontak"
-                className="nav-anim hidden rounded-full bg-cream px-4 py-2 text-sm font-medium text-void md:inline-flex"
+                className="nav-anim bg-spectrum hidden rounded-full px-4 py-2 text-sm font-semibold text-void shadow-[0_8px_30px_-10px_rgba(167,139,250,0.8)] md:inline-flex"
                 onClick={onNav}
               >
                 Hubungi
@@ -143,16 +147,20 @@ export function Navbar() {
       </header>
 
       {open ? (
-        <div className="fixed inset-0 z-40 bg-void px-6 pt-24 md:hidden">
+        <div className="fixed inset-0 z-40 bg-void/95 px-6 pt-24 backdrop-blur-xl md:hidden">
           <nav className="flex flex-col gap-2">
-            {nav.map((item) => (
+            {nav.map((item, index) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="font-display border-b border-line py-4 text-3xl font-bold"
+                style={accentStyle(index)}
+                className="font-display flex items-center justify-between border-b border-line py-4 text-3xl font-bold"
                 onClick={onNav}
               >
-                {item.label}
+                <span className={isActive(item.href) ? "accent-text" : undefined}>
+                  {item.label}
+                </span>
+                <span className="accent-bg size-2.5 rounded-full" />
               </Link>
             ))}
           </nav>

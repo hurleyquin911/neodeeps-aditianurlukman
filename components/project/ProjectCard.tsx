@@ -5,6 +5,7 @@ import Link from "next/link";
 import type { Project } from "@/lib/projects";
 import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap";
 import { finePointer, reducedMotion } from "@/lib/motion";
+import { accentStyle } from "@/lib/accents";
 
 function CoverScene({ project }: { project: Project }) {
   const kind = project.category;
@@ -238,7 +239,8 @@ export function ProjectCard({
       onMouseEnter={onEnter}
       onMouseMove={onMove}
       onMouseLeave={onLeave}
-      className={`group relative flex h-full flex-col overflow-hidden rounded-[1.4rem] border border-line bg-ink transition-colors hover:border-cream/25 ${
+      style={accentStyle(project.palette.accent)}
+      className={`tint group relative flex h-full flex-col overflow-hidden rounded-[1.4rem] ${
         wide ? "md:flex-row" : ""
       }`}
     >
@@ -311,13 +313,13 @@ export function ProjectCard({
           {project.tags.map((tag) => (
             <span
               key={tag}
-              className="rounded-full border border-line px-2.5 py-1 text-xs text-cream"
+              className="chip rounded-full px-2.5 py-1 text-xs"
             >
               {tag}
             </span>
           ))}
         </div>
-        <p className="mt-auto pt-5 text-sm font-medium text-acid">
+        <p className="accent-text mt-auto pt-5 text-sm font-semibold">
           Buka studi kasus{" "}
           <span ref={arrowRef} className="inline-block">
             →

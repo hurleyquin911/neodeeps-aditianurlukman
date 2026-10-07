@@ -3,8 +3,17 @@
 import { useRef } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { reducedMotion } from "@/lib/motion";
+import { accentStyle } from "@/lib/accents";
 
-export function StatCard({ value, label }: { value: string; label: string }) {
+export function StatCard({
+  value,
+  label,
+  accent = 0,
+}: {
+  value: string;
+  label: string;
+  accent?: number;
+}) {
   const numRef = useRef<HTMLParagraphElement>(null);
   const number = Number.parseInt(value, 10);
   const suffix = value.replace(/[0-9]/g, "");
@@ -29,14 +38,19 @@ export function StatCard({ value, label }: { value: string; label: string }) {
   }, []);
 
   return (
-    <div className="js-lift rounded-2xl border border-line bg-ink px-5 py-6">
+    <div
+      className="js-lift tint relative overflow-hidden rounded-2xl px-5 py-6"
+      style={accentStyle(accent)}
+    >
+      <span className="accent-bg pointer-events-none absolute -top-10 -right-10 size-28 rounded-full opacity-20 blur-2xl" />
       <p
         ref={numRef}
-        className="font-display text-4xl font-extrabold tracking-tight"
+        className="font-display accent-text text-5xl font-extrabold tracking-tight"
       >
         {value}
       </p>
-      <p className="mt-2 text-sm text-stone">{label}</p>
+      <p className="mt-2 text-sm text-cream/80">{label}</p>
+      <span className="accent-bg mt-4 block h-1 w-10 rounded-full" />
     </div>
   );
 }
