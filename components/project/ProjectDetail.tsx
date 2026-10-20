@@ -52,7 +52,7 @@ export function ProjectDetail({ project }: { project: Project }) {
         </div>
       </header>
 
-      <nav className="sticky top-[57px] z-40 border-y border-line bg-void/95 backdrop-blur-md">
+      <nav className="sticky top-[57px] z-40 border-y border-line bg-ink/90 backdrop-blur-md">
         <div className="mx-auto flex max-w-6xl gap-1 overflow-x-auto px-5 md:px-8">
           {tabs.map((tab) => (
             <Magnetic key={tab.id} strength={0.18}>
@@ -161,7 +161,7 @@ export function ProjectDetail({ project }: { project: Project }) {
                 href={project.href}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex rounded-full border border-line px-5 py-3 text-sm font-medium text-cream transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                className="btn-secondary px-5 py-3 text-sm"
               >
                 {project.href.includes("github.com")
                   ? "Lihat di GitHub"

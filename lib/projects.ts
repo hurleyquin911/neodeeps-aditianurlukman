@@ -909,10 +909,10 @@ export const projects: Project[] = [
     tags: ["Next.js", "TypeScript", "Product"],
     href: "https://github.com/hurleyquin911/neodeeps-frontend",
     palette: {
-      from: "#111806",
-      via: "#3f6212",
-      to: "#d4ff3f",
-      accent: "#d4ff3f",
+      from: "#0f1a12",
+      via: "#14532d",
+      to: "#86efac",
+      accent: "#16a34a",
     },
     tampilan: {
       headline:

@@ -16,11 +16,11 @@ function bucket(category: string) {
 }
 
 const COLORS: Record<string, string> = {
-  Mobile: "#34d399",
-  AI: "#d4ff3f",
-  Motion: "#fbbf24",
-  Web: "#38bdf8",
-  Komunitas: "#fb7185",
+  Mobile: "#047857",
+  AI: "#0f766e",
+  Motion: "#a16207",
+  Web: "#0369a1",
+  Komunitas: "#be123c",
 };
 
 
@@ -48,7 +48,7 @@ function Donut() {
 
   return (
     <svg viewBox="0 0 160 160" className="mx-auto size-40" aria-hidden>
-      <circle cx="80" cy="80" r={R} fill="none" stroke="rgba(246,244,239,0.08)" strokeWidth="16" />
+      <circle cx="80" cy="80" r={R} fill="none" stroke="rgba(18,20,26,0.08)" strokeWidth="16" />
       <g transform="rotate(-90 80 80)">
         {slices.map((slice) => (
           <circle
@@ -66,10 +66,10 @@ function Donut() {
           />
         ))}
       </g>
-      <text x="80" y="76" textAnchor="middle" fill="#f6f4ef" fontSize="22" fontWeight="800">
+      <text x="80" y="76" textAnchor="middle" fill="#12141a" fontSize="22" fontWeight="800">
         {String(total).padStart(2, "0")}
       </text>
-      <text x="80" y="94" textAnchor="middle" fill="#c5c0b6" fontSize="10">
+      <text x="80" y="94" textAnchor="middle" fill="#6b7280" fontSize="10">
         karya
       </text>
     </svg>
@@ -174,16 +174,16 @@ export function HomeCharts() {
           <svg viewBox="0 0 240 120" className="mt-6 w-full" aria-hidden>
             <defs>
               <linearGradient id="spark-stroke" x1="0" x2="1" y1="0" y2="0">
-                <stop offset="0%" stopColor="#38bdf8" />
-                <stop offset="50%" stopColor="#a78bfa" />
-                <stop offset="100%" stopColor="#fb7185" />
+                <stop offset="0%" stopColor="#0369a1" />
+                <stop offset="50%" stopColor="#0f766e" />
+                <stop offset="100%" stopColor="#047857" />
               </linearGradient>
               <linearGradient id="spark-fill" x1="0" x2="0" y1="0" y2="1">
-                <stop offset="0%" stopColor="#a78bfa" stopOpacity="0.35" />
-                <stop offset="100%" stopColor="#a78bfa" stopOpacity="0" />
+                <stop offset="0%" stopColor="#0f766e" stopOpacity="0.22" />
+                <stop offset="100%" stopColor="#0f766e" stopOpacity="0" />
               </linearGradient>
             </defs>
-            <line x1="8" y1="100" x2="232" y2="100" stroke="rgba(246,244,239,0.12)" />
+            <line x1="8" y1="100" x2="232" y2="100" stroke="rgba(18,20,26,0.1)" />
             <polygon
               fill="url(#spark-fill)"
               points={`16,100 ${spark
@@ -210,8 +210,8 @@ export function HomeCharts() {
                 cx={16 + i * 30}
                 cy={100 - y}
                 r="3.5"
-                fill="#0c0c0e"
-                stroke={i < spark.length / 2 ? "#38bdf8" : "#fb7185"}
+                fill="#ffffff"
+                stroke={i < spark.length / 2 ? "#0369a1" : "#0f766e"}
                 strokeWidth="1.8"
               />
             ))}

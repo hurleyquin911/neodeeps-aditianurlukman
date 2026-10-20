@@ -1,12 +1,13 @@
 import type { CSSProperties } from "react";
 
+/** Palet netral — satu aksen gelap untuk kesan profesional. */
 export const accents = [
-  "#d4ff3f",
-  "#38bdf8",
-  "#a78bfa",
-  "#fb7185",
-  "#fbbf24",
-  "#34d399",
+  "#171717",
+  "#404040",
+  "#525252",
+  "#57534e",
+  "#737373",
+  "#44403c",
 ] as const;
 
 export function accentAt(index: number) {

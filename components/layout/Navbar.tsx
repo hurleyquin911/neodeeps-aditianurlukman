@@ -85,10 +85,10 @@ export function Navbar() {
           <Magnetic strength={0.18}>
             <Link
               href="/"
-              className="nav-anim font-display flex items-center gap-2.5 text-sm font-extrabold tracking-[0.18em] uppercase"
+              className="nav-anim font-display flex items-center gap-2.5 text-sm font-semibold tracking-[0.12em] uppercase"
               onClick={() => setOpen(false)}
             >
-              <span className="bg-spectrum grid size-7 place-items-center rounded-lg text-[11px] tracking-normal text-void">
+              <span className="grid size-7 place-items-center rounded-md bg-[#171717] text-[11px] font-semibold tracking-normal text-white">
                 N
               </span>
               {site.brand}
@@ -107,7 +107,7 @@ export function Navbar() {
                 >
                   {item.label}
                   <span
-                    className={`bg-spectrum absolute -bottom-1.5 left-0 h-0.5 w-full origin-left rounded-full transition-transform ${
+                    className={`absolute -bottom-1.5 left-0 h-px w-full origin-left bg-cream transition-transform ${
                       isActive(item.href) ? "scale-x-100" : "scale-x-0"
                     }`}
                   />
@@ -123,7 +123,7 @@ export function Navbar() {
             <Magnetic strength={0.22}>
               <Link
                 href="/kontak"
-                className="nav-anim bg-spectrum hidden rounded-full px-4 py-2 text-sm font-semibold text-void shadow-[0_8px_30px_-10px_rgba(167,139,250,0.8)] md:inline-flex"
+                className="btn-primary nav-anim hidden px-4 py-2 text-sm md:inline-flex"
                 onClick={onNav}
               >
                 Hubungi

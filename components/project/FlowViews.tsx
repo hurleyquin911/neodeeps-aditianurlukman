@@ -14,35 +14,35 @@ const views = [
   {
     id: "flowchart",
     label: "Flowchart",
-    color: "#d4ff3f",
+    color: "#171717",
     title: "Alur pemakaian",
     text: "Langkah demi langkah dari sisi pengguna, termasuk cabang keputusan dan jalur yang bertemu lagi.",
   },
   {
     id: "dfd",
     label: "DFD",
-    color: "#38bdf8",
+    color: "#262626",
     title: "Data Flow Diagram",
     text: "Ke mana data bergerak: dari entitas luar, diolah oleh proses, lalu disimpan ke penyimpanan data.",
   },
   {
     id: "uml",
     label: "UML Class",
-    color: "#a78bfa",
+    color: "#404040",
     title: "UML Class Diagram",
     text: "Struktur objek di dalam sistem: atribut, method, dan bagaimana kelas saling terhubung.",
   },
   {
     id: "usecase",
     label: "Use Case",
-    color: "#fb7185",
+    color: "#525252",
     title: "Use Case Diagram",
     text: "Siapa saja aktornya dan apa yang bisa masing-masing lakukan di dalam batas sistem.",
   },
   {
     id: "sequence",
     label: "Sequence",
-    color: "#fbbf24",
+    color: "#57534e",
     title: "Sequence Diagram",
     text: "Urutan pesan antar komponen dalam satu skenario, dari permintaan pertama sampai balasan terakhir.",
   },
@@ -61,7 +61,7 @@ export function FlowViews({ project }: { project: Project }) {
       <div
         role="tablist"
         aria-label="Jenis diagram"
-        className="flex gap-2 overflow-x-auto rounded-2xl border border-line bg-ink/70 p-1.5 [scrollbar-width:none]"
+        className="flex gap-2 overflow-x-auto rounded-2xl border border-line bg-ink p-1.5 shadow-[0_1px_2px_rgba(18,20,26,0.04)] [scrollbar-width:none]"
       >
         {available.map((item, index) => {
           const on = item.id === current.id;
@@ -73,13 +73,13 @@ export function FlowViews({ project }: { project: Project }) {
               aria-selected={on}
               onClick={() => setView(item.id)}
               className={`group flex shrink-0 items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition ${
-                on ? "text-void" : "text-stone hover:bg-white/5 hover:text-cream"
+                on ? "text-white" : "text-stone hover:bg-void hover:text-cream"
               }`}
               style={on ? { background: item.color } : undefined}
             >
               <span
                 className={`grid size-5 place-items-center rounded-full font-mono text-[10px] ${
-                  on ? "bg-void/15" : "border border-white/15"
+                  on ? "bg-white/20" : "border border-line"
                 }`}
                 style={on ? undefined : { color: item.color }}
               >

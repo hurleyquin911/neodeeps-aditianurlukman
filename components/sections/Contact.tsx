@@ -41,7 +41,7 @@ export function Contact() {
       <p className="reveal kicker" style={accentStyle(5)}>
         {site.availability}
       </p>
-      <h1 className="reveal font-display mt-5 max-w-4xl text-[clamp(2rem,4.6vw,3.6rem)] leading-[1.08] font-extrabold tracking-[-0.03em]">
+      <h1 className="reveal font-display mt-5 max-w-4xl text-[clamp(2rem,4.4vw,3.25rem)] leading-[1.12] font-semibold tracking-[-0.03em]">
         Mulai diskusikan proyek <span className="text-spectrum">digital</span> Anda
       </h1>
       <Magnetic>
@@ -61,39 +61,36 @@ export function Contact() {
       <div className="mt-12 grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)]">
         <form className="reveal space-y-6" onSubmit={onSubmit}>
           <label className="block">
-            <span className="text-sm text-stone">Nama</span>
+            <span className="text-sm font-medium text-stone">Nama</span>
             <input
               required
               name="name"
               autoComplete="name"
-              className="mt-2 w-full rounded-xl border border-line bg-ink/70 px-4 py-3 text-base outline-none backdrop-blur-sm transition-[border-color,box-shadow] focus:border-aqua focus:shadow-[0_0_0_4px_rgba(56,189,248,0.15)]"
+              className="field mt-2"
             />
           </label>
           <label className="block">
-            <span className="text-sm text-stone">Email</span>
+            <span className="text-sm font-medium text-stone">Email</span>
             <input
               required
               type="email"
               name="email"
               autoComplete="email"
-              className="mt-2 w-full rounded-xl border border-line bg-ink/70 px-4 py-3 text-base outline-none backdrop-blur-sm transition-[border-color,box-shadow] focus:border-aqua focus:shadow-[0_0_0_4px_rgba(56,189,248,0.15)]"
+              className="field mt-2"
             />
           </label>
           <label className="block">
-            <span className="text-sm text-stone">Cerita proyek</span>
+            <span className="text-sm font-medium text-stone">Cerita proyek</span>
             <textarea
               required
               name="message"
               rows={7}
               placeholder="Siapa penggunanya, apa yang sudah ada, dan kapan dibutuhkan."
-              className="mt-2 w-full resize-y rounded-xl border border-line bg-ink/70 px-4 py-3 text-base outline-none backdrop-blur-sm transition-[border-color,box-shadow] focus:border-grape focus:shadow-[0_0_0_4px_rgba(167,139,250,0.15)]"
+              className="field mt-2 min-h-40 resize-y"
             />
           </label>
           <Magnetic>
-            <button
-              type="submit"
-              className="bg-spectrum rounded-full px-6 py-3 text-sm font-bold text-void shadow-[0_12px_40px_-12px_rgba(167,139,250,0.9)]"
-            >
+            <button type="submit" className="btn-primary px-6 py-3 text-sm">
               Kirim pesan
             </button>
           </Magnetic>

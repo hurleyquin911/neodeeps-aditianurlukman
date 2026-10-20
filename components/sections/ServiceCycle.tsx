@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { serviceCycle } from "@/lib/data";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { finePointer, reducedMotion } from "@/lib/motion";
-import { accentAt, accentStyle } from "@/lib/accents";
+import { accentStyle } from "@/lib/accents";
 import { CycleRocketModal } from "@/components/ui/CycleRocketModal";
 
 function CycleCard({
@@ -20,7 +20,6 @@ function CycleCard({
   onRelease: () => void;
   onOpen: () => void;
 }) {
-  const color = accentAt(Number(step.id) - 1);
   return (
     <button
       type="button"
@@ -29,22 +28,36 @@ function CycleCard({
       onMouseLeave={onRelease}
       onFocus={onHold}
       onBlur={onRelease}
-      className="cycle-node flex h-full min-h-44 w-full cursor-pointer flex-col rounded-2xl border p-4 text-left transition-[background,border-color,box-shadow] duration-300"
-      style={{
-        ...accentStyle(color),
-        borderColor: current ? color : "rgba(246,244,239,0.14)",
-        background: current
-          ? `linear-gradient(160deg, ${color}22, rgba(12,12,14,0.92) 70%)`
-          : "rgba(12,12,14,0.9)",
-        boxShadow: current
-          ? `0 0 0 1px ${color}40, 0 18px 44px -14px ${color}90`
-          : "none",
-      }}
+      className={`cycle-node flex h-full min-h-44 w-full cursor-pointer flex-col rounded-2xl border p-4 text-left transition-[background,border-color,box-shadow,transform] duration-300 ${
+        current
+          ? "border-cream/30 bg-cream text-white shadow-[0_18px_40px_-24px_rgba(23,23,23,0.45)]"
+          : "border-line bg-ink text-cream hover:border-cream/25 hover:shadow-[0_12px_28px_-22px_rgba(23,23,23,0.3)]"
+      }`}
     >
-      <p className="accent-text font-mono text-xs font-bold">{step.id}</p>
-      <h3 className="font-display mt-1 text-lg font-bold">{step.title}</h3>
-      <p className="mt-2 text-sm leading-relaxed text-stone">{step.body}</p>
-      <p className="accent-text mt-auto pt-3 text-xs font-medium">Detail →</p>
+      <p
+        className={`font-mono text-xs font-bold ${
+          current ? "text-white/70" : "text-stone"
+        }`}
+      >
+        {step.id}
+      </p>
+      <h3 className="font-display mt-1 text-lg font-semibold tracking-tight">
+        {step.title}
+      </h3>
+      <p
+        className={`mt-2 text-sm leading-relaxed ${
+          current ? "text-white/70" : "text-stone"
+        }`}
+      >
+        {step.body}
+      </p>
+      <p
+        className={`mt-auto pt-3 text-xs font-medium ${
+          current ? "text-white" : "text-cream"
+        }`}
+      >
+        Detail →
+      </p>
     </button>
   );
 }
@@ -60,7 +73,7 @@ function Mark({
   return (
     <span
       className={`cycle-mark flex items-center justify-center font-mono text-lg ${
-        lit ? "text-spectrum" : "text-stone/45"
+        lit ? "text-cream" : "text-stone/40"
       }`}
     >
       {symbol}
@@ -148,7 +161,7 @@ export function ServiceCycle() {
       <p className="reveal kicker" style={accentStyle(1)}>
         Proses
       </p>
-      <h2 className="reveal font-display mt-4 text-2xl font-bold md:text-3xl">
+      <h2 className="reveal font-display mt-4 text-2xl font-semibold md:text-3xl">
         Siklus kerja
       </h2>
       <p className="reveal mt-2 max-w-2xl text-sm leading-relaxed text-stone">
@@ -158,10 +171,10 @@ export function ServiceCycle() {
 
       <div className="cycle-board tint tint-static relative mt-8 rounded-[1.6rem] p-5 md:p-7">
         <div
-          className="pointer-events-none absolute inset-0 rounded-[1.6rem] opacity-25"
+          className="pointer-events-none absolute inset-0 rounded-[1.6rem] opacity-40"
           style={{
             backgroundImage:
-              "radial-gradient(rgba(246,244,239,0.14) 1px, transparent 1px)",
+              "radial-gradient(rgba(23,23,23,0.08) 1px, transparent 1px)",
             backgroundSize: "18px 18px",
           }}
         />
@@ -208,20 +221,20 @@ export function ServiceCycle() {
           <button
             type="button"
             onClick={() => openDetail(active)}
-            style={accentStyle(active)}
-            className="relative flex h-full min-h-44 cursor-pointer flex-col items-center justify-center overflow-hidden rounded-2xl border border-[color-mix(in_oklab,var(--accent)_45%,transparent)] bg-void/70 px-4 text-center transition-colors duration-300"
+            className="relative flex h-full min-h-44 cursor-pointer flex-col items-center justify-center overflow-hidden rounded-2xl border border-line bg-void px-4 text-center transition-colors duration-300 hover:border-cream/25"
           >
-            <span className="accent-bg pointer-events-none absolute size-32 rounded-full opacity-25 blur-3xl transition-colors duration-300" />
-            <p className="accent-text relative font-mono text-xs tracking-[0.2em] uppercase">
+            <p className="relative font-mono text-xs tracking-[0.2em] text-stone uppercase">
               Siklus
             </p>
-            <p className="font-display relative mt-2 text-2xl font-extrabold">
+            <p className="font-display relative mt-2 text-2xl font-semibold tracking-tight text-cream">
               {serviceCycle[active].title}
             </p>
             <p className="relative mt-1 font-mono text-xs text-stone">
               {serviceCycle[active].id} / 05
             </p>
-            <p className="accent-text relative mt-3 text-xs">Buka detail →</p>
+            <p className="relative mt-3 text-xs font-medium text-cream">
+              Buka detail →
+            </p>
           </button>
           <Mark dir="left" lit={active === 4} />
           <CycleCard
@@ -236,42 +249,53 @@ export function ServiceCycle() {
         <ol className="relative space-y-4 lg:hidden">
           {serviceCycle.map((item, index) => {
             const current = active === index;
-            const color = accentAt(index);
             return (
-              <li key={item.id} className="flex gap-4" style={accentStyle(color)}>
+              <li key={item.id} className="flex gap-4">
                 <div className="flex w-6 flex-col items-center">
                   <span
                     className={`size-3 rounded-full ${
-                      current ? "accent-bg shadow-[0_0_10px_var(--accent)]" : "bg-cream/25"
+                      current ? "bg-cream" : "bg-stone/30"
                     }`}
                   />
                   {index < serviceCycle.length - 1 ? (
                     <span className="mt-1 w-px flex-1 bg-line" />
                   ) : (
-                    <span className="mt-1 h-8 w-px bg-acid/50" />
+                    <span className="mt-1 h-8 w-px bg-line" />
                   )}
                 </div>
                 <button
                   type="button"
                   onClick={() => openDetail(index)}
-                  className="cycle-node flex-1 rounded-2xl border p-4 text-left"
-                  style={{
-                    borderColor: current ? color : "rgba(246,244,239,0.14)",
-                    background: current ? `${color}12` : "transparent",
-                  }}
+                  className={`cycle-node flex-1 rounded-2xl border p-4 text-left transition-colors ${
+                    current
+                      ? "border-cream/30 bg-cream text-white"
+                      : "border-line bg-ink text-cream"
+                  }`}
                 >
-                  <p className="accent-text font-mono text-xs font-bold">{item.id}</p>
-                  <h3 className="font-display mt-1 text-lg font-bold">
+                  <p
+                    className={`font-mono text-xs font-bold ${
+                      current ? "text-white/70" : "text-stone"
+                    }`}
+                  >
+                    {item.id}
+                  </p>
+                  <h3 className="font-display mt-1 text-lg font-semibold">
                     {item.title}
                   </h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-stone">
+                  <p
+                    className={`mt-1.5 text-sm leading-relaxed ${
+                      current ? "text-white/70" : "text-stone"
+                    }`}
+                  >
                     {item.body}
                   </p>
                 </button>
               </li>
             );
           })}
-          <li className="pl-10 text-sm text-acid">Kembali ke Pahami →</li>
+          <li className="pl-10 text-sm font-medium text-cream">
+            Kembali ke Pahami →
+          </li>
         </ol>
       </div>
 

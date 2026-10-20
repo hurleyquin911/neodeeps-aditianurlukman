@@ -16,8 +16,8 @@ const shortcuts = [
   {
     href: "/layanan",
     kicker: "Layanan",
-    title: "Empat fokus",
-    body: "Fullstack, Android, desain, dan renewal sistem. Bisa dipisah, lebih kuat jika digabung.",
+    title: "Lima fokus",
+    body: "Fullstack, Android, desain, renewal, dan software development. Bisa dipisah, lebih kuat jika digabung.",
     accent: 4,
   },
   {
@@ -78,7 +78,7 @@ export function HomeBoard() {
           </div>
           <Link
             href="/portofolio"
-            className="rounded-full border border-aqua/40 bg-aqua/10 px-4 py-2 text-sm font-medium text-aqua transition-colors hover:bg-aqua hover:text-void"
+            className="btn-secondary px-4 py-2 text-sm"
           >
             Semua {projects.length} karya →
           </Link>
@@ -139,25 +139,23 @@ export function HomeBoard() {
             <p className="text-sm font-semibold text-cream">Indeks karya</p>
             <Link
               href="/portofolio"
-              className="text-sm text-acid hover:underline"
+              className="text-sm font-medium text-acid hover:underline"
             >
               Semua
             </Link>
           </div>
           <ul>
             {projects.map((project) => (
-              <li
-                key={project.slug}
-                style={accentStyle(project.palette.accent)}
-                className="border-b border-line last:border-b-0"
-              >
+              <li key={project.slug} className="border-b border-line last:border-b-0">
                 <Link
                   href={`/portofolio/${project.slug}`}
-                  className="group grid grid-cols-[auto_1fr_auto] items-center gap-4 px-5 py-3.5 text-sm transition-colors hover:bg-[color-mix(in_oklab,var(--accent)_10%,transparent)]"
+                  className="group grid grid-cols-[auto_1fr_auto] items-center gap-4 px-5 py-3.5 text-sm transition-colors hover:bg-void"
                 >
-                  <span className="accent-text font-mono font-semibold">{project.id}</span>
+                  <span className="font-mono font-semibold text-stone transition-colors group-hover:text-cream">
+                    {project.id}
+                  </span>
                   <span>
-                    <span className="font-medium text-cream transition-colors group-hover:text-[var(--accent)]">
+                    <span className="font-medium text-cream">
                       {project.title}
                     </span>
                     <span className="mt-0.5 block text-stone">
@@ -166,7 +164,7 @@ export function HomeBoard() {
                   </span>
                   <span className="flex items-center gap-3 text-stone">
                     {project.year}
-                    <span className="accent-bg size-2 rounded-full opacity-60 transition-opacity group-hover:opacity-100" />
+                    <span className="size-1.5 rounded-full bg-stone/40 transition-colors group-hover:bg-cream" />
                   </span>
                 </Link>
               </li>
@@ -205,7 +203,7 @@ export function HomeBoard() {
             className="js-lift reveal tint relative overflow-hidden rounded-2xl p-5"
             style={accentStyle(0)}
           >
-            <span className="bg-spectrum pointer-events-none absolute inset-x-0 top-0 h-1" />
+            <span className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-acid" />
             <p className="accent-text flex items-center gap-2 text-sm font-semibold">
               <span className="accent-bg size-2 animate-pulse rounded-full" />
               Sekarang
@@ -214,12 +212,12 @@ export function HomeBoard() {
               {site.availability}
             </p>
             <p className="mt-2 text-sm leading-relaxed text-stone">
-              {site.location}. Proyek terpilih: web, Android, dan perawatan sistem.
+              {site.location}. Proyek terpilih: web, Android, software, dan perawatan sistem.
             </p>
             <Magnetic className="mt-4 inline-block">
               <Link
                 href="/kontak"
-                className="bg-spectrum inline-flex rounded-full px-4 py-2 text-sm font-bold text-void"
+                className="btn-primary px-4 py-2 text-sm"
               >
                 Mulai percakapan
               </Link>

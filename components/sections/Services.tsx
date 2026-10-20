@@ -22,13 +22,14 @@ export function Services() {
       <p className="reveal kicker" style={accentStyle(4)}>
         Layanan
       </p>
-      <h1 className="reveal font-display mt-5 text-[clamp(2rem,4.6vw,3.6rem)] font-extrabold tracking-[-0.03em]">
+      <h1 className="reveal font-display mt-5 text-[clamp(2rem,4.4vw,3.25rem)] font-semibold tracking-[-0.03em]">
         Yang saya <span className="text-spectrum">kerjakan</span>
       </h1>
       <p className="reveal mt-4 max-w-2xl text-base leading-relaxed text-stone md:text-lg">
-        Fullstack dari desain sampai backend, aplikasi Android, dan perawatan
-        setelah rilis. Paket di bawah ini bisa berdiri sendiri, atau digabung
-        jika proyeknya butuh dari konsep sampai pembaruan berkelanjutan.
+        Fullstack dari desain sampai backend, aplikasi Android, pengembangan
+        perangkat lunak, dan perawatan setelah rilis. Paket di bawah ini bisa
+        berdiri sendiri, atau digabung jika proyeknya butuh dari konsep sampai
+        pembaruan berkelanjutan.
       </p>
       <p className="reveal mt-4 max-w-2xl text-sm leading-relaxed text-stone">
         Yang tidak saya tawarkan: template cepat tanpa alur, aplikasi yang
@@ -90,7 +91,7 @@ export function Services() {
         className="reveal tint tint-static relative mt-12 overflow-hidden rounded-3xl p-6 md:p-8"
         style={accentStyle(2)}
       >
-        <span className="bg-spectrum pointer-events-none absolute inset-x-0 top-0 h-1" />
+        <span className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-acid" />
         <h2 className="font-display text-2xl font-bold">Cocok untuk siapa</h2>
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-stone md:text-base">
           Tim atau founder yang butuh seseorang memegang produk digital sampai
@@ -101,7 +102,7 @@ export function Services() {
           <Magnetic>
             <Link
               href="/kontak"
-              className="bg-spectrum inline-flex rounded-full px-6 py-3 text-sm font-bold text-void"
+              className="btn-primary px-6 py-3 text-sm"
             >
               Ceritakan proyeknya
             </Link>

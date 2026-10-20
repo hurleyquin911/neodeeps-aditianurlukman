@@ -404,7 +404,7 @@ export function FlowMap({ project }: { project: Project }) {
                   markerHeight="7"
                   orient="auto-start-reverse"
                 >
-                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#d4ff3f" />
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#2dd4bf" />
                 </marker>
               </defs>
               {paths.map((path) => {
@@ -422,7 +422,7 @@ export function FlowMap({ project }: { project: Project }) {
                       className="flow-wire"
                       d={path.d}
                       fill="none"
-                      stroke={lit ? "#d4ff3f" : "#7dd3fc"}
+                      stroke={lit ? "#2dd4bf" : "#7dd3fc"}
                       strokeWidth="1.4"
                       strokeDasharray="7 12"
                     />
@@ -496,7 +496,7 @@ export function FlowMap({ project }: { project: Project }) {
                         <polygon
                           points="50,3 97,50 50,97 3,50"
                           fill={on ? "#2a220f" : "#1a160e"}
-                          stroke={on ? "#d4ff3f" : "rgba(253,230,138,0.45)"}
+                          stroke={on ? "#2dd4bf" : "rgba(253,230,138,0.45)"}
                           strokeWidth="1.8"
                         />
                       </svg>
@@ -552,8 +552,8 @@ export function FlowMap({ project }: { project: Project }) {
             })}
           </div>
         </div>
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-10 rounded-l-3xl bg-gradient-to-r from-[#07080b] to-transparent" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-10 rounded-r-3xl bg-gradient-to-l from-[#07080b] to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-10 rounded-l-3xl bg-gradient-to-r from-[#0f1218] to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-10 rounded-r-3xl bg-gradient-to-l from-[#0f1218] to-transparent" />
       </div>
       {canPan.left || canPan.right ? (
         <div className="mt-3 h-1 overflow-hidden rounded-full bg-white/8">

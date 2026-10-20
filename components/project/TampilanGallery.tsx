@@ -175,7 +175,7 @@ export function TampilanGallery({ project }: { project: Project }) {
             }}
             onMouseEnter={onTileEnter}
             onMouseLeave={onTileLeave}
-            className={`${tile.span} group relative overflow-hidden rounded-[1.4rem] text-left shadow-[0_8px_30px_rgba(0,0,0,0.35)]`}
+            className={`${tile.span} group relative overflow-hidden rounded-[1.4rem] text-left shadow-[0_8px_24px_rgba(18,20,26,0.08)]`}
             style={{ border: `4px solid ${accent}` }}
           >
             <img
@@ -235,7 +235,7 @@ export function TampilanGallery({ project }: { project: Project }) {
                       type="button"
                       onClick={close}
                       aria-label="Tutup"
-                      className="grid size-9 place-items-center rounded-full border border-line text-cream transition-colors hover:border-[var(--accent)] hover:bg-[var(--accent)] hover:text-void"
+                      className="grid size-9 place-items-center rounded-full border border-line text-cream transition-colors hover:border-cream hover:bg-cream hover:text-white"
                     >
                       <svg viewBox="0 0 20 20" className="size-4" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
                         <path d="M5 5l10 10M15 5 5 15" strokeLinecap="round" />
@@ -263,7 +263,7 @@ export function TampilanGallery({ project }: { project: Project }) {
                     type="button"
                     onClick={() => go(-1)}
                     aria-label="Gambar sebelumnya"
-                    className="absolute top-1/2 left-3 grid size-11 -translate-y-1/2 place-items-center rounded-full border border-white/15 bg-black/50 text-white backdrop-blur-md transition-all hover:scale-110 hover:border-transparent hover:bg-[var(--accent)] hover:text-void md:left-5 md:size-12"
+                    className="absolute top-1/2 left-3 grid size-11 -translate-y-1/2 place-items-center rounded-full border border-white/20 bg-black/55 text-white backdrop-blur-md transition-all hover:scale-110 hover:border-transparent hover:bg-white hover:text-cream md:left-5 md:size-12"
                   >
                     <Arrow dir="left" />
                   </button>
@@ -271,7 +271,7 @@ export function TampilanGallery({ project }: { project: Project }) {
                     type="button"
                     onClick={() => go(1)}
                     aria-label="Gambar berikutnya"
-                    className="absolute top-1/2 right-3 grid size-11 -translate-y-1/2 place-items-center rounded-full border border-white/15 bg-black/50 text-white backdrop-blur-md transition-all hover:scale-110 hover:border-transparent hover:bg-[var(--accent)] hover:text-void md:right-5 md:size-12"
+                    className="absolute top-1/2 right-3 grid size-11 -translate-y-1/2 place-items-center rounded-full border border-white/20 bg-black/55 text-white backdrop-blur-md transition-all hover:scale-110 hover:border-transparent hover:bg-white hover:text-cream md:right-5 md:size-12"
                   >
                     <Arrow dir="right" />
                   </button>

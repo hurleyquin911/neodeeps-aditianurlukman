@@ -54,7 +54,7 @@ export function PortfolioList() {
         Portofolio
       </p>
       <div className="mt-5 flex flex-wrap items-end justify-between gap-4">
-        <h1 className="folio-title font-display text-[clamp(2.2rem,5.4vw,3.8rem)] font-extrabold tracking-[-0.04em]">
+        <h1 className="folio-title font-display text-[clamp(2.1rem,5vw,3.4rem)] font-semibold tracking-[-0.03em]">
           Semua <span className="text-spectrum">proyek</span>
         </h1>
         <p className="folio-copy chip rounded-full px-3 py-1 font-mono text-sm" style={accentStyle(2)}>
@@ -65,7 +65,7 @@ export function PortfolioList() {
         Daftar lengkap studi kasus. Buka salah satu proyek untuk melihat
         tampilan, alur pemakaian, dan deskripsi presentasi.
       </p>
-      <div className="folio-rule bg-spectrum mt-8 h-0.5 origin-left rounded-full opacity-70" />
+      <div className="folio-rule mt-8 h-0.5 origin-left rounded-full bg-acid opacity-70" />
 
       <div className="mt-10 grid gap-5 md:grid-cols-2 md:gap-6">
         {projects.map((project, index) => (

@@ -10,11 +10,11 @@ export const INK = {
   sun: "#fbbf24",
   coral: "#fb7185",
   mint: "#34d399",
-  lit: "#d4ff3f",
-  cream: "#f6f4ef",
-  stone: "#c5c0b6",
-  wire: "rgba(148,163,184,0.5)",
-  bg: "#0c0c0e",
+  lit: "#2dd4bf",
+  cream: "#f8fafc",
+  stone: "#94a3b8",
+  wire: "rgba(148,163,184,0.45)",
+  bg: "#0f1218",
 };
 
 export function wrapText(text: string, max: number) {
@@ -196,8 +196,8 @@ export function DiagramShell({
             </svg>
           </div>
         </div>
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-8 rounded-l-3xl bg-gradient-to-r from-[#07080b] to-transparent" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-8 rounded-r-3xl bg-gradient-to-l from-[#07080b] to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-8 rounded-l-3xl bg-gradient-to-r from-[#0f1218] to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-8 rounded-r-3xl bg-gradient-to-l from-[#0f1218] to-transparent" />
       </div>
       {hint ? <p className="mt-3 text-xs text-stone">{hint}</p> : null}
     </div>

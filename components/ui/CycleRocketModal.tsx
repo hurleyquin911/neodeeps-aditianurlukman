@@ -233,27 +233,20 @@ export function CycleRocketModal({
           role="dialog"
           aria-modal="true"
           aria-labelledby="cycle-void-title"
-          className="relative z-10 overflow-hidden rounded-[1.6rem] border border-line bg-ink shadow-[0_28px_80px_rgba(0,0,0,0.55)]"
+          className="relative z-10 overflow-hidden rounded-[1.6rem] border border-line bg-ink shadow-[0_24px_60px_-28px_rgba(23,23,23,0.45)]"
         >
-          <div className="absolute inset-y-0 left-0 w-1.5 bg-acid" />
-          <div
-            className="pointer-events-none absolute -top-20 right-0 size-56 rounded-full opacity-25"
-            style={{
-              background:
-                "radial-gradient(circle, rgba(212,255,63,0.22), transparent 68%)",
-            }}
-          />
+          <div className="absolute inset-y-0 left-0 w-1.5 bg-cream" />
 
           <div className="relative px-6 pt-6 pb-6 pl-7 md:px-8 md:pt-7 md:pb-7 md:pl-9">
             <div className="flex items-start justify-between gap-4">
-              <p className="font-mono text-xs tracking-[0.18em] text-acid uppercase">
+              <p className="font-mono text-xs tracking-[0.18em] text-stone uppercase">
                 Siklus {step.id} / 05
               </p>
               <button
                 ref={closeBtnRef}
                 type="button"
                 onClick={close}
-                className="shrink-0 rounded-full border border-line px-3 py-1 text-xs text-stone transition-colors hover:border-acid hover:text-acid"
+                className="btn-secondary shrink-0 px-3 py-1 text-xs"
               >
                 Tutup
               </button>
@@ -261,7 +254,7 @@ export function CycleRocketModal({
 
             <h2
               id="cycle-void-title"
-              className="font-display mt-3 text-3xl font-extrabold tracking-[-0.03em]"
+              className="font-display mt-3 text-3xl font-semibold tracking-[-0.03em]"
             >
               {step.title}
             </h2>
@@ -282,8 +275,8 @@ export function CycleRocketModal({
               ))}
             </ul>
 
-            <div className="mt-5 rounded-2xl border border-line bg-void/70 px-4 py-3">
-              <p className="text-xs tracking-wide text-acid uppercase">
+            <div className="mt-5 rounded-2xl border border-line bg-void px-4 py-3">
+              <p className="text-xs font-medium tracking-wide text-stone uppercase">
                 Hasil langkah
               </p>
               <p className="mt-1 text-sm leading-relaxed text-cream/90">
@@ -302,7 +295,7 @@ export function CycleRocketModal({
               <button
                 type="button"
                 onClick={() => onChange(nextIndex)}
-                className="rounded-full bg-acid px-4 py-2 text-sm font-semibold text-void"
+                className="btn-primary px-4 py-2 text-sm"
               >
                 Lanjut ke {serviceCycle[nextIndex].title}
               </button>

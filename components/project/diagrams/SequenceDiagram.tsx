@@ -105,7 +105,7 @@ export function SequenceDiagram({
           <button
             type="button"
             onClick={play}
-            className="rounded-full bg-sun px-4 py-2 text-sm font-semibold text-void transition hover:brightness-110"
+            className="btn-primary px-4 py-2 text-sm"
           >
             {playing ? "Jeda" : active >= total - 1 ? "Putar ulang" : "Putar"}
           </button>

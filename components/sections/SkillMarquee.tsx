@@ -20,7 +20,7 @@ function Track({ hidden = false }: { hidden?: boolean }) {
 
 export function SkillMarquee() {
   return (
-    <div className="border-y border-line bg-void/40 py-5 backdrop-blur-sm">
+    <div className="border-y border-line bg-ink/80 py-5 backdrop-blur-sm">
       <div className="marquee">
         <Track />
         <Track hidden />

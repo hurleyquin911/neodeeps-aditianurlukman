@@ -36,7 +36,7 @@ export function Work() {
         <Magnetic>
           <Link
             href="/portofolio"
-            className="inline-flex rounded-full border border-line px-6 py-3 text-sm font-semibold text-cream transition-colors hover:border-acid hover:text-acid"
+            className="btn-secondary px-6 py-3 text-sm"
           >
             Lihat semua portofolio
           </Link>

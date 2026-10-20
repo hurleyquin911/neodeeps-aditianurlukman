@@ -200,7 +200,7 @@ export function BusinessCardModal({ open, onClose }: BusinessCardModalProps) {
               <p className="text-sm text-stone">{site.availability}</p>
               <Link
                 href="/tentang"
-                className="inline-flex rounded-full bg-acid px-4 py-2 text-sm font-semibold text-void"
+                className="btn-primary px-4 py-2 text-sm"
               >
                 Halaman tentang
               </Link>

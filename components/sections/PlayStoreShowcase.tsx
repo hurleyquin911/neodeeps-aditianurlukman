@@ -29,7 +29,7 @@ export function PlayStoreShowcase() {
 
       <header className="relative flex flex-wrap items-start justify-between gap-4">
         <div className="flex items-center gap-3">
-          <span className="grid size-11 place-items-center rounded-xl border border-white/10 bg-white/[0.04]">
+          <span className="grid size-11 place-items-center rounded-xl border border-line bg-void">
             <GooglePlayIcon />
           </span>
           <div>
@@ -50,7 +50,7 @@ export function PlayStoreShowcase() {
               href={`https://play.google.com/store/apps/details?id=${app.packageId}`}
               target="_blank"
               rel="noreferrer"
-              className="group relative grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-4 overflow-hidden rounded-2xl border border-white/[0.06] bg-white/[0.02] p-3 pr-4 transition-[border-color,transform] duration-300 hover:-translate-y-0.5 hover:border-[color-mix(in_oklab,var(--accent)_45%,transparent)]"
+              className="group relative grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-4 overflow-hidden rounded-2xl border border-line bg-void/70 p-3 pr-4 transition-[border-color,transform,background-color] duration-300 hover:-translate-y-0.5 hover:border-[color-mix(in_oklab,var(--accent)_40%,transparent)] hover:bg-ink"
             >
               <span
                 aria-hidden
@@ -87,7 +87,7 @@ export function PlayStoreShowcase() {
                 </span>
               </span>
 
-              <span className="relative grid size-9 shrink-0 place-items-center rounded-full border border-white/10 text-cream transition-all duration-300 group-hover:rotate-45 group-hover:border-transparent group-hover:bg-[var(--accent)] group-hover:text-void">
+              <span className="relative grid size-9 shrink-0 place-items-center rounded-full border border-line bg-ink text-cream transition-all duration-300 group-hover:rotate-45 group-hover:border-transparent group-hover:bg-[#171717] group-hover:text-white">
                 <svg viewBox="0 0 16 16" className="size-3.5" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
                   <path d="M4 12 12 4M5.5 4H12v6.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>

@@ -2,7 +2,7 @@ export const site = {
   name: "Aditia Nur Lukman",
   brand: "NEODEEPS",
   role: "Fullstack Developer & Creative UI Designer",
-  tagline: "Make Better than Visual",
+  tagline: "Make better than Visual",
   location: "Jakarta, Indonesia",
   timezone: "Asia/Jakarta",
   email: "hurleyquin890@gmail.com",
@@ -38,6 +38,8 @@ export const skills = [
   "TypeScript",
   "React Native",
   "Expo",
+  "Java",
+  "Electron",
   "Node.js",
   "GSAP",
   "Tailwind CSS",
@@ -260,6 +262,26 @@ export const services = [
       "Ulangi siklus. Renewal adalah kerja rutin, bukan proyek sekali jadi",
     ],
   },
+  {
+    id: "05",
+    title: "Software Developer",
+    body: "Pengembangan perangkat lunak dengan Java dan Electron: aplikasi desktop, alat internal, serta solusi kustom yang bisa dijalankan di mesin pengguna. Fokusnya ke perangkat lunak yang dipakai sehari-hari - bukan sekadar skrip sekali pakai.",
+    deliverables: [
+      "Aplikasi desktop berbasis Electron yang siap dipasang dan dipakai",
+      "Modul atau logika bisnis dengan Java sesuai kebutuhan sistem",
+      "Integrasi data, API, atau alur kerja yang sudah ada",
+      "Dokumentasi singkat dan serah terima yang bisa dilanjutkan",
+    ],
+    process: [
+      "Klarifikasi masalah teknis dan hasil yang diharapkan di desktop",
+      "Petakan data, sistem terkait, dan batasan lingkungan (OS, Java, runtime)",
+      "Susun pendekatan: UI Electron, logika Java, dan titik integrasinya",
+      "Bangun dan uji di kondisi yang mendekati pemakaian nyata",
+      "Rapikan kode, error handling, packaging, dan catatan keputusan",
+      "Serah terima: cara instal, cara jalan, cara rawat",
+      "Dampingan awal setelah dipakai, lalu opsi perawatan lanjutan",
+    ],
+  },
 ] as const;
 
 export const experience = [
@@ -317,6 +339,10 @@ export const toolGroups = [
   {
     group: "Mobile",
     items: ["React Native", "Expo"],
+  },
+  {
+    group: "Desktop & software",
+    items: ["Java", "Electron"],
   },
   {
     group: "Desain",
