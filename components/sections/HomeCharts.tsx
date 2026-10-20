@@ -4,7 +4,6 @@ import { useRef } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { reducedMotion } from "@/lib/motion";
 import { projects } from "@/lib/projects";
-import { accentStyle } from "@/lib/accents";
 import { PlayStoreShowcase } from "@/components/sections/PlayStoreShowcase";
 
 function bucket(category: string) {
@@ -15,14 +14,8 @@ function bucket(category: string) {
   return "Web";
 }
 
-const COLORS: Record<string, string> = {
-  Mobile: "#047857",
-  AI: "#0f766e",
-  Motion: "#a16207",
-  Web: "#0369a1",
-  Komunitas: "#be123c",
-};
-
+/** Skala abu — tetap bisa dibedakan, tetap hitam-putih. */
+const GRAYS = ["#171717", "#3f3f46", "#71717a", "#a1a1aa", "#d4d4d8"];
 
 const mix = Object.entries(
   projects.reduce<Record<string, number>>((acc, project) => {
@@ -30,7 +23,11 @@ const mix = Object.entries(
     acc[key] = (acc[key] ?? 0) + 1;
     return acc;
   }, {}),
-).map(([label, value]) => ({ label, value, color: COLORS[label] ?? "#c5c0b6" }));
+).map(([label, value], index) => ({
+  label,
+  value,
+  color: GRAYS[index % GRAYS.length],
+}));
 
 const total = mix.reduce((sum, item) => sum + item.value, 0);
 
@@ -48,7 +45,7 @@ function Donut() {
 
   return (
     <svg viewBox="0 0 160 160" className="mx-auto size-40" aria-hidden>
-      <circle cx="80" cy="80" r={R} fill="none" stroke="rgba(18,20,26,0.08)" strokeWidth="16" />
+      <circle cx="80" cy="80" r={R} fill="none" stroke="rgba(23,23,23,0.08)" strokeWidth="16" />
       <g transform="rotate(-90 80 80)">
         {slices.map((slice) => (
           <circle
@@ -66,10 +63,10 @@ function Donut() {
           />
         ))}
       </g>
-      <text x="80" y="76" textAnchor="middle" fill="#12141a" fontSize="22" fontWeight="800">
+      <text x="80" y="76" textAnchor="middle" fill="#171717" fontSize="22" fontWeight="700">
         {String(total).padStart(2, "0")}
       </text>
-      <text x="80" y="94" textAnchor="middle" fill="#6b7280" fontSize="10">
+      <text x="80" y="94" textAnchor="middle" fill="#737373" fontSize="10">
         karya
       </text>
     </svg>
@@ -134,11 +131,8 @@ export function HomeCharts() {
       className="mt-8 grid gap-4 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.7fr)]"
     >
       <div className="flex flex-col gap-4">
-        <article
-          className="reveal tint tint-static rounded-2xl p-5"
-          style={accentStyle(1)}
-        >
-          <p className="accent-text text-sm font-semibold">Komposisi karya</p>
+        <article className="reveal tint tint-static rounded-2xl p-5">
+          <p className="text-sm font-semibold text-cream">Komposisi karya</p>
           <p className="mt-1 text-sm text-stone">
             Pembagian dari {total} studi kasus di portofolio.
           </p>
@@ -163,27 +157,19 @@ export function HomeCharts() {
           </ul>
         </article>
 
-        <article
-          className="reveal tint tint-static rounded-2xl p-5"
-          style={accentStyle(2)}
-        >
-          <p className="accent-text text-sm font-semibold">Ritme eksplorasi</p>
+        <article className="reveal tint tint-static rounded-2xl p-5">
+          <p className="text-sm font-semibold text-cream">Ritme eksplorasi</p>
           <p className="mt-1 text-sm text-stone">
             Intensitas percobaan, bukan metrik produksi.
           </p>
           <svg viewBox="0 0 240 120" className="mt-6 w-full" aria-hidden>
             <defs>
-              <linearGradient id="spark-stroke" x1="0" x2="1" y1="0" y2="0">
-                <stop offset="0%" stopColor="#0369a1" />
-                <stop offset="50%" stopColor="#0f766e" />
-                <stop offset="100%" stopColor="#047857" />
-              </linearGradient>
               <linearGradient id="spark-fill" x1="0" x2="0" y1="0" y2="1">
-                <stop offset="0%" stopColor="#0f766e" stopOpacity="0.22" />
-                <stop offset="100%" stopColor="#0f766e" stopOpacity="0" />
+                <stop offset="0%" stopColor="#171717" stopOpacity="0.12" />
+                <stop offset="100%" stopColor="#171717" stopOpacity="0" />
               </linearGradient>
             </defs>
-            <line x1="8" y1="100" x2="232" y2="100" stroke="rgba(18,20,26,0.1)" />
+            <line x1="8" y1="100" x2="232" y2="100" stroke="rgba(23,23,23,0.12)" />
             <polygon
               fill="url(#spark-fill)"
               points={`16,100 ${spark
@@ -193,7 +179,7 @@ export function HomeCharts() {
             <polyline
               className="chart-line"
               fill="none"
-              stroke="url(#spark-stroke)"
+              stroke="#171717"
               strokeWidth="2.5"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -211,7 +197,7 @@ export function HomeCharts() {
                 cy={100 - y}
                 r="3.5"
                 fill="#ffffff"
-                stroke={i < spark.length / 2 ? "#0369a1" : "#0f766e"}
+                stroke="#171717"
                 strokeWidth="1.8"
               />
             ))}
