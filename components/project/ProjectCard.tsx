@@ -252,24 +252,42 @@ export function ProjectCard({
         <div
           ref={coverRef}
           className="absolute inset-0 origin-center"
-          style={{
-            background: `linear-gradient(148deg, ${project.palette.from}, ${project.palette.via}, ${project.palette.to})`,
-          }}
-        />
-        <div
-          className="pointer-events-none absolute inset-0 opacity-30"
-          style={{
-            backgroundImage:
-              "radial-gradient(rgba(255,255,255,0.22) 1px, transparent 1px)",
-            backgroundSize: "16px 16px",
-          }}
-        />
-        <div
-          className="pointer-events-none absolute -top-10 -right-8 size-44 rounded-full opacity-50"
-          style={{
-            background: `radial-gradient(circle, ${project.palette.accent}66, transparent 68%)`,
-          }}
-        />
+          style={
+            project.cover
+              ? undefined
+              : {
+                  background: `linear-gradient(148deg, ${project.palette.from}, ${project.palette.via}, ${project.palette.to})`,
+                }
+          }
+        >
+          {project.cover ? (
+            <img
+              src={project.cover}
+              alt=""
+              className="absolute inset-0 size-full object-cover object-top"
+            />
+          ) : null}
+        </div>
+        {project.cover ? (
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-black/25" />
+        ) : (
+          <>
+            <div
+              className="pointer-events-none absolute inset-0 opacity-30"
+              style={{
+                backgroundImage:
+                  "radial-gradient(rgba(255,255,255,0.22) 1px, transparent 1px)",
+                backgroundSize: "16px 16px",
+              }}
+            />
+            <div
+              className="pointer-events-none absolute -top-10 -right-8 size-44 rounded-full opacity-50"
+              style={{
+                background: `radial-gradient(circle, ${project.palette.accent}66, transparent 68%)`,
+              }}
+            />
+          </>
+        )}
         <div
           ref={glowRef}
           className="pointer-events-none absolute inset-0 opacity-0 mix-blend-screen"
@@ -279,12 +297,16 @@ export function ProjectCard({
           className="pointer-events-none absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-transparent via-white/25 to-transparent opacity-70"
           style={{ transform: "translateX(-120%)" }}
         />
-        <div
-          ref={mockRef}
-          className="absolute inset-0 flex items-center justify-center p-5"
-        >
-          <CoverScene project={project} />
-        </div>
+        {!project.cover ? (
+          <div
+            ref={mockRef}
+            className="absolute inset-0 flex items-center justify-center p-5"
+          >
+            <CoverScene project={project} />
+          </div>
+        ) : (
+          <div ref={mockRef} className="absolute inset-0" aria-hidden />
+        )}
         <div className="absolute inset-x-0 top-0 flex items-start justify-between p-4">
           <span className="font-mono text-xs tracking-wider text-white/80">
             {project.id}

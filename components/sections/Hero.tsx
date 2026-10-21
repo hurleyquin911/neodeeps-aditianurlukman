@@ -19,12 +19,6 @@ export function Hero() {
     () => {
       if (reducedMotion()) return;
 
-      gsap.from(".hero-kicker", {
-        y: 10,
-        opacity: 0,
-        duration: 0.55,
-        ease: "power3.out",
-      });
       gsap.from(".hero-word", {
         yPercent: 55,
         duration: 0.9,
@@ -66,9 +60,7 @@ export function Hero() {
       className="relative mx-auto grid max-w-6xl items-center gap-14 px-5 py-16 md:px-8 md:py-24 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.95fr)] lg:gap-16"
     >
       <div>
-        <p className="hero-kicker kicker">{site.availability}</p>
-
-        <h1 className="font-display mt-7 max-w-[13ch] text-[clamp(2.35rem,5.2vw,4rem)] leading-[1.1] font-semibold tracking-[-0.035em] text-cream">
+        <h1 className="font-display max-w-[13ch] text-[clamp(2.35rem,5.2vw,4rem)] leading-[1.1] font-semibold tracking-[-0.035em] text-cream">
           <span className="inline-block overflow-hidden">
             <span className="hero-word inline-block">{first}</span>
           </span>

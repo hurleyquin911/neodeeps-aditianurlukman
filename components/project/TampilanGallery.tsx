@@ -47,6 +47,13 @@ function tilesFrom(project: Project): Tile[] {
 const CROPS = ["center", "left center", "right center", "center top", "center bottom", "30% center"];
 
 function shotSrc(project: Project, index: number) {
+  const shots =
+    project.shots?.length
+      ? project.shots
+      : project.cover
+        ? [project.cover]
+        : null;
+  if (shots) return shots[index % shots.length];
   const count = Math.max(project.tampilan.screens.length, 1);
   return `/dummy/${project.slug}-${index % count}.svg`;
 }

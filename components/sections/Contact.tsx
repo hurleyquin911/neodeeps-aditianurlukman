@@ -38,10 +38,7 @@ export function Contact() {
       id="contact"
       className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24"
     >
-      <p className="reveal kicker" style={accentStyle(5)}>
-        {site.availability}
-      </p>
-      <h1 className="reveal font-display mt-5 max-w-4xl text-[clamp(2rem,4.4vw,3.25rem)] leading-[1.12] font-semibold tracking-[-0.03em]">
+      <h1 className="reveal font-display max-w-4xl text-[clamp(2rem,4.4vw,3.25rem)] leading-[1.12] font-semibold tracking-[-0.03em]">
         Mulai diskusikan proyek <span className="text-spectrum">digital</span> Anda
       </h1>
       <Magnetic>

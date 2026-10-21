@@ -47,7 +47,7 @@ function ChatMock() {
         Informasi perikanan apa yang bisa saya tanyakan?
       </div>
       <div className="ml-auto max-w-[80%] rounded-2xl rounded-br-md bg-white/15 px-4 py-3 text-sm text-white">
-        Musim, lokasi, atau praktik di Danau Maninjau.
+        Ringkasan relevan untuk pertanyaan Anda.
       </div>
       <div className="max-w-[80%] rounded-2xl rounded-bl-md bg-black/25 px-4 py-3 text-sm text-white/90">
         Berikut ringkasan yang relevan untuk pertanyaan Anda.

@@ -23,7 +23,7 @@ const shortcuts = [
   {
     href: "/kontak",
     kicker: "Kontak",
-    title: site.availability,
+    title: "Mari diskusikan",
     body: site.email,
     accent: 5,
   },
@@ -209,10 +209,10 @@ export function HomeBoard() {
               Sekarang
             </p>
             <p className="font-display mt-2 text-lg font-bold">
-              {site.availability}
+              {site.location}
             </p>
             <p className="mt-2 text-sm leading-relaxed text-stone">
-              {site.location}. Proyek terpilih: web, Android, software, dan perawatan sistem.
+              Fokus: web, Android, software, dan perawatan sistem.
             </p>
             <Magnetic className="mt-4 inline-block">
               <Link

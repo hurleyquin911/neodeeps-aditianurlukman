@@ -6,7 +6,6 @@ export const site = {
   location: "Jakarta, Indonesia",
   timezone: "Asia/Jakarta",
   email: "hurleyquin890@gmail.com",
-  availability: "Tersedia untuk proyek terpilih",
   bio: "Membangun produk digital yang intuitif dan scalable dari desain UI/UX hingga arsitektur sistem backend.",
   about: [
     "NEODEEPS adalah ruang kerja Aditia Nur Lukman: creative developer dan UI designer berbasis di Jakarta. Saya menggabungkan desain, interaksi, dan engineering dalam satu alur - supaya setiap layar punya ritme, dan setiap transisi punya alasan.",
