@@ -11,7 +11,9 @@ import {
 } from "@/lib/data";
 import { accentStyle } from "@/lib/accents";
 import { useLiftHover, useReveal } from "@/lib/motion";
-import { StatCard } from "@/components/ui/StatCard";
+import { StatPanel } from "@/components/ui/StatPanel";
+
+const aboutLabels = ["Yang saya bangun", "Cara berpikir", "Proyek yang cocok"];
 
 function SectionHead({
   kicker,
@@ -69,27 +71,36 @@ export function About() {
         ))}
       </p>
 
-      <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
-        <div className="space-y-4 text-base leading-relaxed text-cream/85 md:text-lg">
-          {site.about.map((paragraph, index) => (
-            <p
-              key={paragraph}
-              style={accentStyle(index + 1)}
-              className="reveal border-l-2 border-[var(--accent)] pl-5"
-            >
-              {paragraph}
-            </p>
-          ))}
+      <div className="mt-12 grid items-start gap-12 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] lg:gap-14">
+        <div>
+          <p className="reveal font-display text-[clamp(1.35rem,2.4vw,1.85rem)] leading-[1.4] tracking-[-0.015em] text-cream">
+            {site.about[0]}
+          </p>
+
+          <dl className="mt-10 divide-y divide-line border-y border-line">
+            {site.about.slice(1).map((paragraph, index) => (
+              <div
+                key={paragraph}
+                className="reveal grid gap-2 py-6 md:grid-cols-[8.5rem_minmax(0,1fr)] md:gap-8"
+              >
+                <dt className="flex items-center gap-3 md:items-start md:pt-1">
+                  <span className="font-mono text-xs font-bold text-stone">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <span className="text-xs font-semibold tracking-[0.14em] text-cream uppercase">
+                    {aboutLabels[index] ?? "Catatan"}
+                  </span>
+                </dt>
+                <dd className="text-[0.95rem] leading-relaxed text-stone md:text-base">
+                  {paragraph}
+                </dd>
+              </div>
+            ))}
+          </dl>
         </div>
-        <div className="reveal grid content-start gap-4">
-          {stats.map((stat, index) => (
-            <StatCard
-              key={stat.label}
-              value={stat.value}
-              label={stat.label}
-              accent={index * 2}
-            />
-          ))}
+
+        <div className="reveal lg:sticky lg:top-28">
+          <StatPanel stats={stats} caption={site.tagline} />
         </div>
       </div>
 

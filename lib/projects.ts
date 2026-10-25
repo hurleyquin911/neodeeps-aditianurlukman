@@ -55,14 +55,14 @@ export type Project = {
 
 export const projects: Project[] = [
 {
-    slug: "aruna",
+    slug: "ecommerce-showcase",
     id: "01",
-    title: "ARUNA",
+    title: "E-Commerce Showcase",
     year: "2026",
     category: "Ecommerce",
     featured: true,
     description:
-      "Fashion kontemporer yang tenang untuk iklim tropis — koleksi, lookbook, dan belanja dari beranda sampai checkout di ecommerce.neodeeps.com.",
+      "E-commerce tentang Fashion, koleksi, lookbook, dan belanja dari beranda sampai checkout",
     tags: ["Next.js", "Ecommerce", "UI"],
     href: "https://ecommerce.neodeeps.com/",
     cover: "/porto/aruna/1.png",
@@ -190,7 +190,7 @@ export const projects: Project[] = [
     ],
     deskripsi: {
       pitch:
-        "ARUNA adalah toko fashion kontemporer yang tenang: pakaian untuk iklim tropis, dipotong di studio Bandung, dengan etalase editorial yang bisa dibeli — bukan katalog yang berisik.",
+        "E-Commerce Showcase adalah contoh toko fashion kontemporer yang tenang: pakaian untuk iklim tropis, dengan etalase editorial yang bisa dibeli — bukan katalog yang berisik.",
       masalah:
         "Banyak toko daring menumpuk diskon, banner, dan popup sampai produknya sendiri sulit dilihat. Untuk merek yang ingin terasa editorial, itu merusak kepercayaan sebelum harga sempat dibaca.",
       solusi:

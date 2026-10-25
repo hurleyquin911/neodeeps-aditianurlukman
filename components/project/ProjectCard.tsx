@@ -169,20 +169,22 @@ export function ProjectCard({
             once: true,
           },
         });
-        const idle = gsap.to(".cover-mock", {
-          y: -7,
-          duration: 2.6,
-          yoyo: true,
-          repeat: -1,
-          ease: "sine.inOut",
-          paused: true,
-        });
-        ScrollTrigger.create({
-          trigger: card,
-          start: "top 92%",
-          once: true,
-          onEnter: () => idle.play(),
-        });
+        if (card.querySelector(".cover-mock")) {
+          const idle = gsap.to(".cover-mock", {
+            y: -7,
+            duration: 2.6,
+            yoyo: true,
+            repeat: -1,
+            ease: "sine.inOut",
+            paused: true,
+          });
+          ScrollTrigger.create({
+            trigger: card,
+            start: "top 92%",
+            once: true,
+            onEnter: () => idle.play(),
+          });
+        }
       }
     },
     { scope: ref, dependencies: [index] },

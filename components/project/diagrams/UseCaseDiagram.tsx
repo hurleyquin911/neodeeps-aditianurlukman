@@ -32,6 +32,18 @@ function Actor({ x, y, label, on, color }: { x: number; y: number; label: string
   const stroke = on ? INK.lit : color;
   return (
     <g>
+      {on ? (
+        <rect
+          x={x - 54}
+          y={y - 56}
+          width={108}
+          height={126}
+          rx={18}
+          fill="rgba(23,23,23,0.06)"
+          stroke={INK.lit}
+          strokeDasharray="3 4"
+        />
+      ) : null}
       <circle cx={x} cy={y - 34} r={12} fill={INK.bg} stroke={stroke} strokeWidth={1.8} />
       <path
         d={`M ${x} ${y - 22} V ${y + 8} M ${x - 20} ${y - 10} H ${x + 20} M ${x} ${y + 8} L ${x - 15} ${y + 32} M ${x} ${y + 8} L ${x + 15} ${y + 32}`}
@@ -130,24 +142,76 @@ export function UseCaseDiagram({
   const label = (id: string) =>
     layout.actors.get(id)?.label ?? layout.cases.get(id)?.label ?? id;
 
+  const legend = (
+    <ul className="mb-3 flex flex-wrap gap-x-5 gap-y-1.5 text-xs text-stone">
+      <li className="flex items-center gap-2">
+        <span className="text-base leading-none text-cream">웃</span> Aktor
+      </li>
+      <li className="flex items-center gap-2">
+        <span className="h-3.5 w-7 rounded-[50%] border border-cream/70 bg-ink" /> Use case
+      </li>
+      <li className="flex items-center gap-2">
+        <span className="w-6 border-t border-dashed border-cream/70" /> «include» / «extend»
+      </li>
+    </ul>
+  );
+
+  const relationsOfSelected = data.relations.filter(
+    ([from, to]) => from === selected || to === selected,
+  );
+
+  const detail = (
+    <DetailCard
+      kicker={isActor ? "Aktor" : "Use case"}
+      title={label(selected)}
+      accent={INK.cream}
+    >
+      <div className="mt-3 text-sm text-cream/90">
+        {isActor ? (
+          <>
+            <p className="text-xs font-semibold tracking-wide text-stone uppercase">Bisa melakukan</p>
+            <div className="mt-2 flex flex-wrap gap-2">
+              {[...litCases].map((id) => (
+                <span key={id} className="chip">{label(id)}</span>
+              ))}
+            </div>
+          </>
+        ) : (
+          <div className="grid gap-4 md:grid-cols-2">
+            <div>
+              <p className="text-xs font-semibold tracking-wide text-stone uppercase">Dijalankan oleh</p>
+              <p className="mt-2">
+                {[...litActors].map(label).join(", ") || "Dipicu dari use case lain"}
+              </p>
+            </div>
+            <div>
+              <p className="text-xs font-semibold tracking-wide text-stone uppercase">Relasi</p>
+              <ul className="mt-2 space-y-1">
+                {relationsOfSelected.length ? (
+                  relationsOfSelected.map(([from, to, kind]) => (
+                    <li key={`${from}-${to}`}>
+                      {label(from)} <span className="font-semibold text-cream italic">«{kind}»</span> {label(to)}
+                    </li>
+                  ))
+                ) : (
+                  <li className="text-stone">Tidak ada</li>
+                )}
+              </ul>
+            </div>
+          </div>
+        )}
+      </div>
+    </DetailCard>
+  );
+
   return (
     <div>
-      <ul className="mb-3 flex flex-wrap gap-x-5 gap-y-1.5 text-xs text-stone">
-        <li className="flex items-center gap-1.5">
-          <span className="text-base leading-none text-aqua">웃</span> Aktor
-        </li>
-        <li className="flex items-center gap-1.5">
-          <span className="h-3.5 w-7 rounded-[50%] border border-coral/70 bg-[#2a1018]" /> Use case
-        </li>
-        <li className="flex items-center gap-1.5">
-          <span className="w-6 border-t border-dashed border-cream/70" /> «include» / «extend»
-        </li>
-      </ul>
-
       <DiagramShell
         width={WIDTH}
         height={layout.height}
         hint="Klik aktor untuk melihat apa saja yang bisa ia lakukan, atau klik use case untuk melihat relasinya."
+        legend={legend}
+        footer={detail}
       >
         <defs>
           {(["dim", "lit"] as const).map((state) => (
@@ -162,7 +226,7 @@ export function UseCaseDiagram({
               markerUnits="userSpaceOnUse"
               orient="auto"
             >
-              <path d="M 1 1 L 9 5 L 1 9" fill="none" stroke={state === "lit" ? INK.lit : "rgba(214,220,230,0.9)"} strokeWidth="1.5" />
+              <path d="M 1 1 L 9 5 L 1 9" fill="none" stroke={state === "lit" ? INK.lit : INK.dim} strokeWidth="1.5" />
             </marker>
           ))}
         </defs>
@@ -174,8 +238,8 @@ export function UseCaseDiagram({
             width={SYS_W}
             height={layout.sysH}
             rx={22}
-            fill="rgba(251,113,133,0.04)"
-            stroke="rgba(251,113,133,0.45)"
+            fill="rgba(23,23,23,0.03)"
+            stroke="rgba(23,23,23,0.35)"
             strokeWidth={1.4}
           />
           <text x={SYS_X + 22} y={TOP - 26} fontSize={13} fontWeight={700} fill={INK.coral}>
@@ -234,13 +298,13 @@ export function UseCaseDiagram({
                 className="dg-wire"
                 d={d}
                 fill="none"
-                stroke={lit ? INK.lit : "rgba(214,220,230,0.75)"}
+                stroke={lit ? INK.lit : INK.dim}
                 strokeWidth={lit ? 1.8 : 1.3}
                 strokeDasharray="6 8"
                 markerEnd={`url(#${markerId}-${lit ? "lit" : "dim"})`}
               />
               <g className="dg-node">
-                <rect x={mx - 32} y={my - 10} width={64} height={20} rx={10} fill={INK.bg} stroke={lit ? INK.lit : "rgba(246,244,239,0.16)"} />
+                <rect x={mx - 32} y={my - 10} width={64} height={20} rx={10} fill={INK.bg} stroke={lit ? INK.lit : INK.soft} />
                 <text x={mx} y={my + 4} textAnchor="middle" fontSize={10.5} fontStyle="italic" fill={lit ? INK.lit : INK.stone}>
                   {text}
                 </text>
@@ -259,11 +323,11 @@ export function UseCaseDiagram({
                 cy={uc.y}
                 rx={RX}
                 ry={RY}
-                fill={on ? "rgba(212,255,63,0.1)" : "#2a1018"}
-                stroke={on ? INK.lit : "rgba(251,113,133,0.7)"}
-                strokeWidth={id === selected ? 2.2 : 1.4}
+                fill={on ? INK.lit : INK.bg}
+                stroke={on ? INK.lit : "rgba(23,23,23,0.55)"}
+                strokeWidth={id === selected ? 2.4 : 1.4}
               />
-              <text x={uc.x} y={uc.y + 5 - ((lines.length - 1) * 15) / 2} textAnchor="middle" fontSize={13} fontWeight={600} fill={INK.cream}>
+              <text x={uc.x} y={uc.y + 5 - ((lines.length - 1) * 15) / 2} textAnchor="middle" fontSize={13} fontWeight={600} fill={on ? "#ffffff" : INK.cream}>
                 {lines.map((line, index) => (
                   <tspan key={`${line}-${index}`} x={uc.x} dy={index === 0 ? 0 : 15}>
                     {line}
@@ -281,50 +345,6 @@ export function UseCaseDiagram({
           </g>
         ))}
       </DiagramShell>
-
-      <DetailCard
-        kicker={isActor ? "Aktor" : "Use case"}
-        title={label(selected)}
-        accent={INK.coral}
-      >
-        <div className="mt-3 text-sm text-cream/90">
-          {isActor ? (
-            <>
-              <p className="text-xs font-semibold tracking-wide text-stone uppercase">Bisa melakukan</p>
-              <div className="mt-2 flex flex-wrap gap-2">
-                {[...litCases].map((id) => (
-                  <span key={id} className="chip">{label(id)}</span>
-                ))}
-              </div>
-            </>
-          ) : (
-            <div className="grid gap-4 md:grid-cols-2">
-              <div>
-                <p className="text-xs font-semibold tracking-wide text-stone uppercase">Dijalankan oleh</p>
-                <p className="mt-2">
-                  {[...litActors].map(label).join(", ") || "Dipicu dari use case lain"}
-                </p>
-              </div>
-              <div>
-                <p className="text-xs font-semibold tracking-wide text-stone uppercase">Relasi</p>
-                <ul className="mt-2 space-y-1">
-                  {data.relations.filter(([from, to]) => from === selected || to === selected).length ? (
-                    data.relations
-                      .filter(([from, to]) => from === selected || to === selected)
-                      .map(([from, to, kind]) => (
-                        <li key={`${from}-${to}`}>
-                          {label(from)} <span className="text-coral italic">«{kind}»</span> {label(to)}
-                        </li>
-                      ))
-                  ) : (
-                    <li className="text-stone">Tidak ada</li>
-                  )}
-                </ul>
-              </div>
-            </div>
-          )}
-        </div>
-      </DetailCard>
     </div>
   );
 }

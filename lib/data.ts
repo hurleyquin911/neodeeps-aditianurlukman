@@ -19,6 +19,11 @@ export const site = {
       label: "LinkedIn",
       href: "https://www.linkedin.com/in/aditia-lukman-49a16327a",
     },
+    {
+      label: "Upwork",
+      href: "https://www.upwork.com/freelancers/~01b532aa21fbc0a3eb?mp_source=share",
+    },
+    { label: "YouTube", href: "https://www.youtube.com/@WakeUpDev_091" },
     { label: "Email", href: "mailto:hurleyquin890@gmail.com" },
   ],
 } as const;

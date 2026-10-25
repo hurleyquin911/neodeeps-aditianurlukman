@@ -103,6 +103,8 @@ export function BusinessCardModal({ open, onClose }: BusinessCardModalProps) {
   const handle = (label: string) => {
     if (label === "Email") return site.email;
     if (label === "GitHub") return "hurleyquin911";
+    if (label === "Upwork") return "Freelancer profile";
+    if (label === "YouTube") return "@WakeUpDev_091";
     return "aditia-lukman";
   };
 
@@ -173,7 +175,7 @@ export function BusinessCardModal({ open, onClose }: BusinessCardModalProps) {
               </p>
             </div>
 
-            <div className="mt-5 grid shrink-0 gap-2 sm:grid-cols-3">
+            <div className="mt-5 grid shrink-0 gap-2 sm:grid-cols-2">
               {site.socials.map((social) => (
                 <a
                   key={social.label}
@@ -184,7 +186,7 @@ export function BusinessCardModal({ open, onClose }: BusinessCardModalProps) {
                       ? "noopener noreferrer"
                       : undefined
                   }
-                  className="rounded-xl border border-line bg-void/80 px-3 py-2.5 text-sm text-cream transition-colors hover:border-acid/50 hover:text-acid"
+                  className="rounded-xl border border-line bg-void/80 px-3 py-2.5 text-sm text-cream transition-colors hover:border-acid/50 hover:text-acid sm:[&:last-child:nth-child(odd)]:col-span-2"
                 >
                   <span className="block text-[0.65rem] tracking-wide text-stone uppercase">
                     {social.label}

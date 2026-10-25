@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import Link from "next/link";
 import {
   formatPrice,
   productKinds,
@@ -83,6 +84,7 @@ export function Products() {
   useLiftHover(rootRef);
 
   const list = productsByKind(kind);
+  const isEmpty = products.length === 0;
 
   return (
     <>
@@ -102,7 +104,9 @@ export function Products() {
             className="reveal chip rounded-full px-3 py-1 font-mono text-sm"
             style={accentStyle(3)}
           >
-            {String(products.length).padStart(2, "0")} produk
+            {isEmpty
+              ? "Segera hadir"
+              : `${String(products.length).padStart(2, "0")} produk`}
           </p>
         </div>
         <p className="reveal mt-4 max-w-2xl text-base leading-relaxed text-stone md:text-lg">
@@ -113,43 +117,80 @@ export function Products() {
           portofolio.
         </p>
 
-        <div className="reveal mt-8 flex flex-wrap gap-2">
-          {productKinds.map((item, index) => {
-            const active = kind === item;
-            return (
-              <button
-                key={item}
-                type="button"
-                onClick={() => setKind(item)}
-                style={accentStyle(index)}
-                className={`rounded-full px-3.5 py-1.5 text-sm transition-colors ${
-                  active
-                    ? "bg-cream text-white"
-                    : "chip hover:border-cream/40 hover:text-cream"
-                }`}
+        {isEmpty ? (
+          <div className="reveal mt-12 rounded-[1.75rem] border border-dashed border-[color-mix(in_oklab,var(--cream)_28%,transparent)] bg-ink/60 px-6 py-16 text-center md:py-24">
+            <span className="mx-auto grid size-12 place-items-center rounded-2xl border border-line bg-void">
+              <svg
+                viewBox="0 0 24 24"
+                className="size-5 text-cream"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.7"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden
               >
-                {item}
-              </button>
-            );
-          })}
-        </div>
+                <path d="M3.5 8 12 3.5 20.5 8v8L12 20.5 3.5 16V8Z" />
+                <path d="m3.5 8 8.5 4.5L20.5 8M12 12.5v8" />
+              </svg>
+            </span>
+            <h2 className="font-serif mt-6 text-[clamp(1.8rem,3.6vw,2.6rem)] leading-[1.1] text-cream">
+              Produk sedang <span className="italic">disiapkan.</span>
+            </h2>
+            <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-stone md:text-base">
+              Katalog produk digital NEODEEPS belum dibuka. Sambil menunggu,
+              lihat hasil kerja sebelumnya atau ceritakan kebutuhan Anda.
+            </p>
+            <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
+              <Link href="/portofolio" className="btn-primary px-5 py-2.5 text-sm">
+                Lihat portofolio
+              </Link>
+              <Link href="/kontak" className="btn-secondary px-5 py-2.5 text-sm">
+                Hubungi saya
+              </Link>
+            </div>
+          </div>
+        ) : (
+          <>
+            <div className="reveal mt-8 flex flex-wrap gap-2">
+              {productKinds.map((item, index) => {
+                const active = kind === item;
+                return (
+                  <button
+                    key={item}
+                    type="button"
+                    onClick={() => setKind(item)}
+                    style={accentStyle(index)}
+                    className={`rounded-full px-3.5 py-1.5 text-sm transition-colors ${
+                      active
+                        ? "bg-cream text-white"
+                        : "chip hover:border-cream/40 hover:text-cream"
+                    }`}
+                  >
+                    {item}
+                  </button>
+                );
+              })}
+            </div>
 
-        <div className="mt-10 grid gap-5 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
-          {list.map((product, index) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              index={index}
-              onOpen={setSelected}
-            />
-          ))}
-        </div>
+            <div className="mt-10 grid gap-5 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
+              {list.map((product, index) => (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  index={index}
+                  onOpen={setSelected}
+                />
+              ))}
+            </div>
 
-        {list.length === 0 ? (
-          <p className="reveal mt-10 text-sm text-stone">
-            Belum ada produk di kategori ini.
-          </p>
-        ) : null}
+            {list.length === 0 ? (
+              <p className="reveal mt-10 text-sm text-stone">
+                Belum ada produk di kategori ini.
+              </p>
+            ) : null}
+          </>
+        )}
       </article>
 
       <ProductDetailModal

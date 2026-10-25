@@ -42,7 +42,7 @@ export type ProjectDiagrams = {
 };
 
 export const diagrams: Record<string, ProjectDiagrams> = {
-  aruna: {
+  "ecommerce-showcase": {
     dfd: {
       entities: [
         ["pelanggan", "Pelanggan"],
@@ -101,7 +101,7 @@ export const diagrams: Record<string, ProjectDiagrams> = {
       ],
     },
     useCase: {
-      system: "Toko ARUNA",
+      system: "E-Commerce Showcase",
       actors: [
         ["pelanggan", "Pelanggan", "left"],
         ["admin", "Admin Toko", "right"],

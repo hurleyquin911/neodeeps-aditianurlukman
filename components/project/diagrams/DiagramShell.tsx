@@ -1,20 +1,28 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, type ReactNode } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { reducedMotion } from "@/lib/motion";
+import { PanZoomCanvas } from "@/components/project/PanZoomCanvas";
 
+/** Palet hitam-putih untuk semua diagram. */
 export const INK = {
-  aqua: "#38bdf8",
-  grape: "#a78bfa",
-  sun: "#fbbf24",
-  coral: "#fb7185",
-  mint: "#34d399",
-  lit: "#2dd4bf",
-  cream: "#f8fafc",
-  stone: "#94a3b8",
-  wire: "rgba(148,163,184,0.45)",
-  bg: "#0f1218",
+  aqua: "#171717",
+  grape: "#404040",
+  sun: "#525252",
+  coral: "#262626",
+  mint: "#404040",
+  /** Warna elemen terpilih. */
+  lit: "#171717",
+  /** Teks utama di atas kanvas terang. */
+  cream: "#171717",
+  stone: "#525252",
+  wire: "rgba(23,23,23,0.4)",
+  /** Garis redup & isi putih kartu. */
+  dim: "rgba(23,23,23,0.55)",
+  soft: "rgba(23,23,23,0.22)",
+  bg: "#ffffff",
+  paper: "#fbfbfa",
 };
 
 export function wrapText(text: string, max: number) {
@@ -58,14 +66,15 @@ export function EdgeLabel({
         height={20}
         rx={10}
         fill={INK.bg}
-        stroke={lit ? INK.lit : "rgba(246,244,239,0.16)"}
+        stroke={lit ? INK.lit : INK.soft}
       />
       <text
         x={x}
         y={y + 4}
         textAnchor="middle"
         fontSize={11}
-        fill={lit ? INK.lit : INK.cream}
+        fontWeight={lit ? 700 : 500}
+        fill={lit ? INK.lit : INK.stone}
       >
         {text}
       </text>
@@ -87,7 +96,7 @@ export function ArrowMarkers({ id }: { id: string }) {
           markerHeight="7"
           orient="auto-start-reverse"
         >
-          <path d="M 0 0 L 10 5 L 0 10 z" fill={state === "lit" ? INK.lit : "rgba(186,198,214,0.9)"} />
+          <path d="M 0 0 L 10 5 L 0 10 z" fill={state === "lit" ? INK.lit : INK.dim} />
         </marker>
       ))}
     </>
@@ -98,16 +107,18 @@ export function DiagramShell({
   width,
   height,
   hint,
+  legend,
+  footer,
   children,
 }: {
   width: number;
   height: number;
-  hint?: string;
-  children: React.ReactNode;
+  hint?: ReactNode;
+  legend?: ReactNode;
+  footer?: ReactNode;
+  children: ReactNode;
 }) {
   const wrapRef = useRef<HTMLDivElement>(null);
-  const scrollerRef = useRef<HTMLDivElement>(null);
-  const drag = useRef({ down: false, captured: false, id: 0, x: 0, y: 0, left: 0, top: 0 });
 
   useGSAP(
     () => {
@@ -124,82 +135,29 @@ export function DiagramShell({
         { strokeDashoffset: 1 },
         { strokeDashoffset: 0, duration: 0.9, stagger: 0.03, delay: 0.15, ease: "power2.inOut" },
       );
-      gsap.fromTo(
-        ".dg-wire",
-        { strokeDashoffset: 28 },
-        { strokeDashoffset: 0, duration: 1.1, ease: "none", repeat: -1 },
-      );
     },
     { scope: wrapRef },
   );
 
-  const onPointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
-    const el = scrollerRef.current;
-    if (!el || event.pointerType !== "mouse") return;
-    drag.current = {
-      down: true,
-      captured: false,
-      id: event.pointerId,
-      x: event.clientX,
-      y: event.clientY,
-      left: el.scrollLeft,
-      top: el.scrollTop,
-    };
-  };
-
-  const onPointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
-    const el = scrollerRef.current;
-    const state = drag.current;
-    if (!el || !state.down) return;
-    const dx = event.clientX - state.x;
-    const dy = event.clientY - state.y;
-    if (!state.captured && Math.abs(dx) + Math.abs(dy) > 5) {
-      state.captured = true;
-      el.setPointerCapture(state.id);
-    }
-    if (state.captured) {
-      el.scrollLeft = state.left - dx;
-      el.scrollTop = state.top - dy;
-    }
-  };
-
-  const onPointerUp = () => {
-    const el = scrollerRef.current;
-    const state = drag.current;
-    if (el && state.captured && el.hasPointerCapture(state.id)) {
-      el.releasePointerCapture(state.id);
-    }
-    state.down = false;
-    state.captured = false;
-  };
-
   return (
     <div ref={wrapRef}>
-      <div className="relative">
-        <div
-          ref={scrollerRef}
-          className="flow-grid relative cursor-grab overflow-auto rounded-3xl border border-line select-none active:cursor-grabbing"
-          onPointerDown={onPointerDown}
-          onPointerMove={onPointerMove}
-          onPointerUp={onPointerUp}
-          onPointerCancel={onPointerUp}
+      <PanZoomCanvas
+        width={width}
+        height={height}
+        hint={hint}
+        legend={legend}
+        footer={footer}
+      >
+        <svg
+          width={width}
+          height={height}
+          viewBox={`0 0 ${width} ${height}`}
+          className="block"
+          fontFamily="var(--font-geist-sans), system-ui, sans-serif"
         >
-          <div className="mx-auto" style={{ width }}>
-            <svg
-              width={width}
-              height={height}
-              viewBox={`0 0 ${width} ${height}`}
-              className="block"
-              fontFamily="var(--font-geist-sans), system-ui, sans-serif"
-            >
-              {children}
-            </svg>
-          </div>
-        </div>
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-8 rounded-l-3xl bg-gradient-to-r from-[#0f1218] to-transparent" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-8 rounded-r-3xl bg-gradient-to-l from-[#0f1218] to-transparent" />
-      </div>
-      {hint ? <p className="mt-3 text-xs text-stone">{hint}</p> : null}
+          {children}
+        </svg>
+      </PanZoomCanvas>
     </div>
   );
 }
@@ -217,7 +175,7 @@ export function DetailCard({
 }) {
   return (
     <div
-      className="tint tint-static mt-4 rounded-2xl p-5"
+      className="tint tint-static rounded-2xl p-5"
       style={{ ["--accent" as string]: accent } as React.CSSProperties}
     >
       <p className="accent-text text-sm font-semibold">{kicker}</p>

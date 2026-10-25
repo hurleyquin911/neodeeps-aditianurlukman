@@ -67,7 +67,7 @@ export function SequenceDiagram({
     return { start: rows[0], end: rows[rows.length - 1] };
   };
 
-  return (
+  const legend = (
     <div>
       <p className="mb-3 text-sm text-cream">
         <span className="font-semibold text-sun">Skenario:</span> {data.title}
@@ -123,15 +123,47 @@ export function SequenceDiagram({
           </button>
         </div>
       </div>
+    </div>
+  );
 
+  const detail = current ? (
+    <DetailCard
+      kicker={`Langkah ${active + 1} dari ${total} · ${current[3] ? "Balasan" : "Panggilan"}`}
+      title={current[2]}
+      accent={INK.cream}
+    >
+      <p className="mt-2 text-sm text-cream/85">
+        <span className="font-semibold text-cream">{nameOf(current[0])}</span>
+        {current[0] === current[1] ? (
+          " memproses sendiri"
+        ) : (
+          <>
+            {" "}
+            → <span className="font-semibold text-cream">{nameOf(current[1])}</span>
+          </>
+        )}
+      </p>
+      <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-cream/10">
+        <div
+          className="h-full rounded-full bg-spectrum transition-[width] duration-500"
+          style={{ width: `${((active + 1) / total) * 100}%` }}
+        />
+      </div>
+    </DetailCard>
+  ) : null;
+
+  return (
+    <div>
       <DiagramShell
         width={width}
         height={height}
         hint="Klik pesan untuk membacanya, atau tekan Putar untuk menjalankan alurnya dari awal."
+        legend={legend}
+        footer={detail}
       >
         <defs>
           {(["dim", "lit"] as const).map((state) => {
-            const color = state === "lit" ? INK.lit : "rgba(214,220,230,0.9)";
+            const color = state === "lit" ? INK.lit : INK.dim;
             return (
               <g key={state}>
                 <marker
@@ -191,11 +223,11 @@ export function SequenceDiagram({
                   width={164}
                   height={HEAD_H}
                   rx={12}
-                  fill="#1f1709"
-                  stroke={involved ? INK.lit : "rgba(251,191,36,0.6)"}
+                  fill={involved ? INK.lit : INK.bg}
+                  stroke={involved ? INK.lit : "rgba(23,23,23,0.55)"}
                   strokeWidth={involved ? 2 : 1.3}
                 />
-                <text x={x} y={y + HEAD_H / 2 + 5 - ((lines.length - 1) * 15) / 2} textAnchor="middle" fontSize={12.5} fontWeight={600} fill={INK.cream}>
+                <text x={x} y={y + HEAD_H / 2 + 5 - ((lines.length - 1) * 15) / 2} textAnchor="middle" fontSize={12.5} fontWeight={600} fill={involved ? "#ffffff" : INK.cream}>
                   {lines.map((line, index) => (
                     <tspan key={`${line}-${index}`} x={x} dy={index === 0 ? 0 : 15}>
                       {line}
@@ -211,7 +243,7 @@ export function SequenceDiagram({
                 x2={x}
                 y1={HEAD_Y + HEAD_H + (actor ? 16 : 0)}
                 y2={bottom + 8}
-                stroke="rgba(246,244,239,0.22)"
+                stroke="rgba(23,23,23,0.28)"
                 strokeDasharray="5 6"
               />
               {span ? (
@@ -221,8 +253,8 @@ export function SequenceDiagram({
                   width={12}
                   height={(span.end - span.start) * STEP + 28}
                   rx={3}
-                  fill={involved ? "rgba(212,255,63,0.18)" : "rgba(246,244,239,0.08)"}
-                  stroke={involved ? INK.lit : "rgba(246,244,239,0.25)"}
+                  fill={involved ? INK.lit : "rgba(23,23,23,0.07)"}
+                  stroke={involved ? INK.lit : "rgba(23,23,23,0.32)"}
                 />
               ) : null}
               {head(HEAD_Y, "top")}
@@ -237,7 +269,7 @@ export function SequenceDiagram({
           const x2 = xOf(to);
           const lit = index === active;
           const done = index < active;
-          const color = lit ? INK.lit : done ? "rgba(214,220,230,0.85)" : "rgba(148,163,184,0.45)";
+          const color = lit ? INK.lit : done ? "rgba(23,23,23,0.65)" : "rgba(23,23,23,0.3)";
           const marker = `url(#${markerId}-${reply ? "reply" : "call"}-${lit ? "lit" : "dim"})`;
           const self = from === to;
           const dir = x2 >= x1 ? 1 : -1;
@@ -265,7 +297,7 @@ export function SequenceDiagram({
                   width={lw + 12}
                   height={20}
                   rx={10}
-                  fill="rgba(212,255,63,0.12)"
+                  fill="rgba(23,23,23,0.08)"
                 />
               ) : null}
               <path
@@ -287,7 +319,7 @@ export function SequenceDiagram({
                 {label}
               </text>
               <g>
-                <circle cx={x1 + (self ? -18 : dir * -18)} cy={y} r={9} fill={lit ? INK.lit : INK.bg} stroke={lit ? INK.lit : "rgba(246,244,239,0.3)"} />
+                <circle cx={x1 + (self ? -18 : dir * -18)} cy={y} r={9} fill={lit ? INK.lit : INK.bg} stroke={lit ? INK.lit : "rgba(23,23,23,0.3)"} />
                 <text
                   x={x1 + (self ? -18 : dir * -18)}
                   y={y + 3.5}
@@ -303,25 +335,6 @@ export function SequenceDiagram({
           );
         })}
       </DiagramShell>
-
-      {current ? (
-        <DetailCard
-          kicker={`Langkah ${active + 1} dari ${total} · ${current[3] ? "Balasan" : "Panggilan"}`}
-          title={current[2]}
-          accent={INK.sun}
-        >
-          <p className="mt-2 text-sm text-cream/85">
-            <span className="text-aqua">{nameOf(current[0])}</span>
-            {current[0] === current[1] ? " memproses sendiri" : <> → <span className="text-sun">{nameOf(current[1])}</span></>}
-          </p>
-          <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-white/10">
-            <div
-              className="h-full rounded-full bg-spectrum transition-[width] duration-500"
-              style={{ width: `${((active + 1) / total) * 100}%` }}
-            />
-          </div>
-        </DetailCard>
-      ) : null}
     </div>
   );
 }

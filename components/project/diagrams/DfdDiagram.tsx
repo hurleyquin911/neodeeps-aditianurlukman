@@ -159,31 +159,74 @@ export function DfdDiagram({
   const incoming = data.flows.filter(([, to]) => to === current?.id);
   const outgoing = data.flows.filter(([from]) => from === current?.id);
 
+  const legend = (
+    <ul className="mb-3 flex flex-wrap gap-x-5 gap-y-1.5 text-xs text-stone">
+      <li className="flex items-center gap-2">
+        <span className="h-3 w-5 rounded-sm border border-cream/70 bg-ink" />
+        Entitas eksternal
+      </li>
+      <li className="flex items-center gap-2">
+        <span className="size-3.5 rounded-full border border-cream/70 bg-ink" />
+        Proses
+      </li>
+      <li className="flex items-center gap-2">
+        <span className="h-3 w-6 border-y border-l border-cream/70 bg-ink" />
+        Penyimpanan data
+      </li>
+      <li className="flex items-center gap-2">
+        <span className="h-px w-6 bg-cream/60" />
+        Aliran data
+      </li>
+    </ul>
+  );
+
+  const detail = current ? (
+    <DetailCard
+      kicker={`${KIND_LABEL[current.kind]}${current.no ? ` · ${current.no}` : ""}`}
+      title={current.label}
+      accent={INK.cream}
+    >
+      <div className="mt-3 grid gap-4 text-sm md:grid-cols-2">
+        <div>
+          <p className="text-xs font-semibold tracking-wide text-stone uppercase">Data masuk</p>
+          <ul className="mt-2 space-y-1.5">
+            {incoming.length ? (
+              incoming.map(([from, , label]) => (
+                <li key={`${from}-${label}`} className="text-cream/90">
+                  <span className="font-semibold text-cream">{nameOf(from)}</span> → {label}
+                </li>
+              ))
+            ) : (
+              <li className="text-stone">Tidak ada</li>
+            )}
+          </ul>
+        </div>
+        <div>
+          <p className="text-xs font-semibold tracking-wide text-stone uppercase">Data keluar</p>
+          <ul className="mt-2 space-y-1.5">
+            {outgoing.length ? (
+              outgoing.map(([, to, label]) => (
+                <li key={`${to}-${label}`} className="text-cream/90">
+                  {label} → <span className="font-semibold text-cream">{nameOf(to)}</span>
+                </li>
+              ))
+            ) : (
+              <li className="text-stone">Tidak ada</li>
+            )}
+          </ul>
+        </div>
+      </div>
+    </DetailCard>
+  ) : null;
+
   return (
     <div>
-      <ul className="mb-3 flex flex-wrap gap-x-5 gap-y-1.5 text-xs text-stone">
-        <li className="flex items-center gap-1.5">
-          <span className="h-3 w-5 rounded-sm border border-aqua/70 bg-[#0b1b2c]" />
-          Entitas eksternal
-        </li>
-        <li className="flex items-center gap-1.5">
-          <span className="size-3.5 rounded-full border border-grape/70 bg-[#191330]" />
-          Proses
-        </li>
-        <li className="flex items-center gap-1.5">
-          <span className="h-3 w-6 border-y border-l border-sun/70 bg-[#1f1709]" />
-          Penyimpanan data
-        </li>
-        <li className="flex items-center gap-1.5">
-          <span className="h-px w-6 bg-cream/60" />
-          Aliran data
-        </li>
-      </ul>
-
       <DiagramShell
         width={WIDTH}
         height={height}
         hint="Klik entitas, proses, atau penyimpanan untuk melihat data yang masuk dan keluar. Tarik untuk menggeser."
+        legend={legend}
+        footer={detail}
       >
         <defs>
           <ArrowMarkers id={markerId} />
@@ -208,7 +251,7 @@ export function DfdDiagram({
                   className="dg-wire"
                   d={edge.d}
                   fill="none"
-                  stroke={INK.lit}
+                  stroke={INK.paper}
                   strokeWidth="1.2"
                   strokeDasharray="6 8"
                 />
@@ -248,7 +291,7 @@ export function DfdDiagram({
                     width={node.w}
                     height={node.h}
                     rx={10}
-                    fill="#0b1b2c"
+                    fill={on ? INK.lit : INK.bg}
                     stroke={on ? INK.lit : stroke}
                     strokeWidth={on ? 2 : 1.4}
                   />
@@ -259,7 +302,7 @@ export function DfdDiagram({
                     cx={node.cx}
                     cy={node.cy}
                     r={node.w / 2}
-                    fill="#191330"
+                    fill={on ? INK.lit : INK.bg}
                     stroke={on ? INK.lit : stroke}
                     strokeWidth={on ? 2.2 : 1.5}
                   />
@@ -268,7 +311,7 @@ export function DfdDiagram({
                     x2={node.cx + 40}
                     y1={node.cy - 24}
                     y2={node.cy - 24}
-                    stroke={stroke}
+                    stroke={on ? "#ffffff" : stroke}
                     strokeOpacity={0.4}
                   />
                   <text
@@ -277,14 +320,14 @@ export function DfdDiagram({
                     textAnchor="middle"
                     fontSize={12}
                     fontWeight={700}
-                    fill={stroke}
+                    fill={on ? "#ffffffcc" : stroke}
                   >
                     {node.no}
                   </text>
                 </>
               ) : (
                 <>
-                  <rect x={node.x} y={node.y} width={node.w} height={node.h} fill="#1f1709" />
+                  <rect x={node.x} y={node.y} width={node.w} height={node.h} fill={on ? INK.lit : INK.bg} />
                   <path
                     d={`M ${node.x + node.w} ${node.y} H ${node.x} V ${node.y + node.h} H ${node.x + node.w}`}
                     fill="none"
@@ -296,7 +339,7 @@ export function DfdDiagram({
                     x2={node.x + 46}
                     y1={node.y}
                     y2={node.y + node.h}
-                    stroke={stroke}
+                    stroke={on ? "#ffffff" : stroke}
                     strokeOpacity={0.6}
                   />
                   <text
@@ -305,7 +348,7 @@ export function DfdDiagram({
                     textAnchor="middle"
                     fontSize={12}
                     fontWeight={700}
-                    fill={stroke}
+                    fill={on ? "#ffffffcc" : stroke}
                   >
                     {node.no}
                   </text>
@@ -321,7 +364,7 @@ export function DfdDiagram({
                 textAnchor="middle"
                 fontSize={13}
                 fontWeight={600}
-                fill={INK.cream}
+                fill={on ? "#ffffff" : INK.cream}
               >
                 {lines.map((line, index) => (
                   <tspan
@@ -342,45 +385,6 @@ export function DfdDiagram({
           return <EdgeLabel key={`${edge.id}-label`} x={edge.mx} y={edge.my} text={edge.label} lit={lit} />;
         })}
       </DiagramShell>
-
-      {current ? (
-        <DetailCard
-          kicker={`${KIND_LABEL[current.kind]}${current.no ? ` · ${current.no}` : ""}`}
-          title={current.label}
-          accent={current.kind === "entity" ? INK.aqua : current.kind === "process" ? INK.grape : INK.sun}
-        >
-          <div className="mt-3 grid gap-4 text-sm md:grid-cols-2">
-            <div>
-              <p className="text-xs font-semibold tracking-wide text-stone uppercase">Data masuk</p>
-              <ul className="mt-2 space-y-1.5">
-                {incoming.length ? (
-                  incoming.map(([from, , label]) => (
-                    <li key={`${from}-${label}`} className="text-cream/90">
-                      <span className="text-aqua">{nameOf(from)}</span> → {label}
-                    </li>
-                  ))
-                ) : (
-                  <li className="text-stone">Tidak ada</li>
-                )}
-              </ul>
-            </div>
-            <div>
-              <p className="text-xs font-semibold tracking-wide text-stone uppercase">Data keluar</p>
-              <ul className="mt-2 space-y-1.5">
-                {outgoing.length ? (
-                  outgoing.map(([, to, label]) => (
-                    <li key={`${to}-${label}`} className="text-cream/90">
-                      {label} → <span className="text-grape">{nameOf(to)}</span>
-                    </li>
-                  ))
-                ) : (
-                  <li className="text-stone">Tidak ada</li>
-                )}
-              </ul>
-            </div>
-          </div>
-        </DetailCard>
-      ) : null}
     </div>
   );
 }
