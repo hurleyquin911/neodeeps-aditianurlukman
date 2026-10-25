@@ -56,7 +56,7 @@ export type Project = {
 export const projects: Project[] = [
 {
     slug: "aruna",
-    id: "08",
+    id: "01",
     title: "ARUNA",
     year: "2026",
     category: "Ecommerce",
@@ -203,7 +203,7 @@ export const projects: Project[] = [
   },
 {
     slug: "studio-kaos",
-    id: "09",
+    id: "02",
     title: "Studio Kaos",
     year: "2026",
     category: "3D Studio",
@@ -312,108 +312,8 @@ export const projects: Project[] = [
     },
   },
 {
-    slug: "mikrotik-panel",
-    id: "06",
-    title: "MikroTik Login Panel",
-    year: "2024",
-    category: "Interface Design",
-    featured: false,
-    description:
-      "Halaman login hotspot yang dirancang ulang: jelas, cepat dibaca, dan tidak terasa seperti form bawaan perangkat.",
-    tags: ["CSS", "UI", "Hotspot"],
-    href: "https://github.com/hurleyquin911/mikrotik_panel-login.v12",
-    palette: {
-      from: "#0b1220",
-      via: "#1e3a5f",
-      to: "#93c5fd",
-      accent: "#60a5fa",
-    },
-    tampilan: {
-      headline:
-        "Satu layar, satu tugas: masuk ke jaringan. Form besar, instruksi singkat, status yang tidak tersembunyi.",
-      points: [
-        "Fokus pada field login - bukan wallpaper yang menelan tombol.",
-        "Tipografi dan kontras disetel untuk dibaca cepat di ruang publik.",
-        "Identitas visual menggantikan tampilan default yang terasa teknis dan dingin.",
-      ],
-      screens: [
-        { name: "Login", note: "Username, kata sandi, dan tombol masuk dalam satu kolom." },
-        { name: "Status", note: "Pesan gagal atau berhasil yang langsung terbaca." },
-        { name: "Branding", note: "Nama jaringan atau tempat tampil tanpa mengganggu form." },
-      ],
-    },
-    flow: [
-      {
-        step: "01",
-        title: "Tersambung ke hotspot",
-        body: "Perangkat membuka portal. Pengguna tidak boleh bingung ini halaman apa.",
-        column: 1,
-        lane: 1,
-        from: [{ id: "start" }],
-        inner: [{ title: "Portal", note: "Satu tugas" }],
-      },
-      {
-        step: "02",
-        title: "Isi kredensial",
-        body: "Field sedikit, label jelas. Tidak ada opsi yang tidak relevan di layar pertama.",
-        column: 2,
-        lane: 1,
-        from: [{ id: "01" }, { id: "06", label: "Coba lagi" }],
-        inner: [{ title: "Form", note: "Sedikit field" }],
-      },
-      {
-        step: "03",
-        title: "Kirim",
-        body: "Tombol utama mencolok. Setelah dikirim, umpan balik muncul tanpa reload yang terasa putus.",
-        column: 3,
-        lane: 1,
-        from: [{ id: "02" }],
-        inner: [{ title: "Masuk", note: "Aksi utama" }],
-      },
-      {
-        step: "04",
-        title: "Berhasil?",
-        body: "Portal membedakan sukses dan gagal dengan bahasa manusia, bukan kode perangkat.",
-        kind: "decision",
-        column: 4,
-        lane: 1,
-        from: [{ id: "03" }],
-      },
-      {
-        step: "05",
-        title: "Masuk jaringan",
-        body: "Jika berhasil, pengguna lanjut ke internet. Layar login selesai.",
-        kind: "end",
-        column: 5,
-        lane: 2,
-        from: [{ id: "04", label: "Ya" }],
-      },
-      {
-        step: "06",
-        title: "Pesan error",
-        body: "Kesalahan disebutkan dengan jelas, lalu pengguna kembali mengisi. Tidak ada jalan buntu.",
-        column: 5,
-        lane: 0,
-        from: [{ id: "04", label: "Tidak" }],
-        inner: [{ title: "Status", note: "Bahasa manusia" }],
-      },
-    ],
-    deskripsi: {
-      pitch:
-        "MikroTik Login Panel adalah wajah pertama sebuah jaringan: layar yang harus selesai dalam hitungan detik, tanpa membuat orang merasa sedang mengisi formulir teknis.",
-      masalah:
-        "Portal hotspot bawaan sering kaku, sulit dibaca, dan terasa seperti halaman administrator. Tamu ragu menekan tombol yang salah.",
-      solusi:
-        "Saya merancang ulang fokus ke satu aksi. Visual, spasi, dan pesan error disusun agar orang awam bisa masuk tanpa bantuan.",
-      peran:
-        "Saya merancang antarmuka login, menyesuaikan hierarki visual, dan merapikan CSS agar panel terasa seperti produk, bukan template perangkat.",
-      hasil:
-        "Halaman masuk yang lebih ramah: cepat dipahami, mudah diisi, dan layak dipakai di ruang tamu maupun ruang publik.",
-    },
-  },
-{
     slug: "neodeeps-platform",
-    id: "07",
+    id: "03",
     title: "NEODEEPS Platform",
     year: "2025",
     category: "Community Product",

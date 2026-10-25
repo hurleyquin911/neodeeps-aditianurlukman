@@ -150,7 +150,7 @@ export function About() {
         <SectionHead
           accent={4}
           kicker="Toolkit"
-          title="Alat yang dipakai"
+          title="Tools yang digunakan"
           body="Stack mengikuti masalah, bukan sebaliknya. Yang di bawah ini yang paling sering ada di meja."
         />
         <div className="mt-8 grid gap-4 sm:grid-cols-2">
@@ -174,26 +174,37 @@ export function About() {
       </section>
 
       <section className="mt-20 mb-4">
-        <SectionHead accent={3} kicker="Kolaborasi" title="Cara kerja sama" />
-        <div className="mt-8 grid gap-4 sm:grid-cols-2">
+        <SectionHead
+          accent={3}
+          kicker="Kolaborasi"
+          title="Dari brief sampai dirawat"
+          body="Bukan metodologi powerpoint. Ini urutan yang saya pakai supaya desain tidak lepas dari kode, dan rilis tidak berarti ditinggal."
+        />
+        <ol className="reveal relative mt-10 space-y-0 border-l border-line md:ml-2">
           {workingNotes.map((item, index) => (
-            <article
+            <li
               key={item.title}
               style={accentStyle(index + 3)}
-              className="js-lift reveal tint rounded-2xl p-5"
+              className="relative grid gap-3 py-6 pl-8 last:pb-0 md:grid-cols-[5.5rem_minmax(0,1fr)] md:gap-8 md:pl-10"
             >
-              <div className="flex items-center gap-3">
-                <span className="accent-text grid size-8 place-items-center rounded-lg bg-[color-mix(in_oklab,var(--accent)_14%,transparent)] font-mono text-xs font-bold">
-                  {index + 1}
-                </span>
-                <h3 className="font-display text-lg font-bold">{item.title}</h3>
-              </div>
-              <p className="mt-3 text-sm leading-relaxed text-stone">
-                {item.body}
+              <span
+                aria-hidden
+                className="accent-bg absolute top-7 -left-[5px] size-2.5 rounded-full ring-4 ring-[var(--bg)]"
+              />
+              <p className="font-mono text-xs font-bold tracking-widest text-stone uppercase md:pt-1">
+                Langkah {String(index + 1).padStart(2, "0")}
               </p>
-            </article>
+              <div>
+                <h3 className="font-display text-xl font-bold tracking-[-0.02em] md:text-2xl">
+                  {item.title}
+                </h3>
+                <p className="mt-2 max-w-2xl text-sm leading-relaxed text-stone md:text-base">
+                  {item.body}
+                </p>
+              </div>
+            </li>
           ))}
-        </div>
+        </ol>
       </section>
     </article>
   );

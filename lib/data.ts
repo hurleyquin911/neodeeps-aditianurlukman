@@ -26,6 +26,7 @@ export const site = {
 export const nav = [
   { label: "Beranda", href: "/" },
   { label: "Portofolio", href: "/portofolio" },
+  { label: "Products", href: "/products" },
   { label: "Tentang", href: "/tentang" },
   { label: "Layanan", href: "/layanan" },
   { label: "Kontak", href: "/kontak" },
@@ -351,20 +352,20 @@ export const toolGroups = [
 
 export const workingNotes = [
   {
-    title: "Awal kerja",
-    body: "Saya mulai dari masalah dan orang yang memakainya, bukan dari palet. Kalau alurnya belum jelas, visual ditunda.",
+    title: "Bedah masalah dulu",
+    body: "Siapa yang bingung, di mana alur putus, apa yang harus selesai minggu ini. Palet dan tipografi menunggu sampai itu jelas — bukan sebaliknya.",
   },
   {
-    title: "Selama pengerjaan",
-    body: "Iterasi pendek. Yang berubah dijelaskan. Yang belum selesai tidak disamarkan seolah sudah produksi.",
+    title: "Desain sambil dibangun",
+    body: "Wireframe langsung jadi komponen. Motion hanya untuk hierarki. Setiap iterasi punya catatan: apa yang berubah, apa yang masih prototipe.",
   },
   {
-    title: "Penyerahan",
-    body: "Kode, struktur halaman, dan catatan keputusan ikut. Supaya proyek tidak berhenti di saya.",
+    title: "Serah terima yang bisa dilanjut",
+    body: "Yang ikut: kode, struktur halaman, environment, dan keputusan yang sudah diambil. Bukan file Figma yang ditinggal sendirian di meja.",
   },
   {
-    title: "Setelah rilis",
-    body: "Ada perbaikan, pembaruan, dan renewal. Sistem yang sudah dipakai orang lain tetap saya jaga supaya tidak mengering.",
+    title: "Jaga setelah dipakai",
+    body: "Bug, pembaruan, renewal. Kalau orang sudah bergantung pada sistemnya, rilis bukan titik selesai — itu titik mulai merawat.",
   },
 ] as const;
 
