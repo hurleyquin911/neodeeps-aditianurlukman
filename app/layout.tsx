@@ -28,13 +28,13 @@ const instrument = Instrument_Serif({
 export const metadata: Metadata = {
   metadataBase: new URL("https://neodeeps.com"),
   title: {
-    default: "NEODEEPS - Aditia Nur Lukman",
-    template: "%s - NEODEEPS",
+    default: "jobosrv - Aditia Nur Lukman",
+    template: "%s - jobosrv",
   },
   description:
     "Portofolio Aditia Nur Lukman. Creative developer & UI designer di Jakarta. Make better than Visual.",
   keywords: [
-    "NEODEEPS",
+    "jobosrv",
     "Aditia Nur Lukman",
     "Fullstack Developer",
     "UI Designer",
@@ -45,11 +45,11 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Aditia Nur Lukman" }],
   openGraph: {
-    title: "NEODEEPS - Aditia Nur Lukman",
+    title: "jobosrv - Aditia Nur Lukman",
     description:
       "Creative developer & UI designer. Portofolio digital experiences, motion, dan product UI.",
     url: "https://neodeeps.com",
-    siteName: "NEODEEPS",
+    siteName: "jobosrv",
     locale: "id_ID",
     type: "website",
   },

@@ -112,14 +112,14 @@ export function Hero() {
             <div className="flex items-start justify-between">
               <div>
                 <p className="text-[11px] font-medium tracking-[0.16em] text-stone uppercase">
-                  NEODEEPS
+                  jobosrv
                 </p>
                 <p className="font-serif mt-2 text-2xl text-cream italic md:text-3xl">
                   Portfolio
                 </p>
               </div>
               <span className="grid size-9 place-items-center rounded-full border border-line text-xs font-semibold tracking-wide">
-                N
+                J
               </span>
             </div>
 

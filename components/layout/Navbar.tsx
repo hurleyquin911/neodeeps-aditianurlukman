@@ -90,7 +90,7 @@ export function Navbar() {
               onClick={() => setOpen(false)}
             >
               <span className="grid size-7 place-items-center rounded-md bg-[#171717] text-[11px] font-semibold tracking-normal text-white">
-                N
+                J
               </span>
               {site.brand}
             </Link>
