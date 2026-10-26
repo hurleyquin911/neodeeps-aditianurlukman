@@ -89,9 +89,6 @@ export function Navbar() {
               className="nav-anim font-display flex items-center gap-2.5 text-sm font-semibold tracking-[0.12em] uppercase"
               onClick={() => setOpen(false)}
             >
-              <span className="grid size-7 place-items-center rounded-md bg-[#171717] text-[11px] font-semibold tracking-normal text-white">
-                J
-              </span>
               {site.brand}
             </Link>
           </Magnetic>
